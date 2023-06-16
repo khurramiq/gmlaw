@@ -2,8 +2,39 @@ import { useState } from 'react';
 import sideImg from '../../assets/images/side-img.jpg';
 import CowLevelHeaderWithLinks from '../../components/CowLevelHeaderWithLinks';
 import Step1 from './components/step1';
+import Step2 from './components/step2';
+import Step3 from './components/step3';
+import Step4 from './components/step4';
+import Step5 from './components/step5';
+import Step6 from './components/step6';
+import Step7 from './components/step7';
 const Home = () => {
   const [step, setStep] = useState(1);
+  const [data, setData] = useState({
+    personalInfo: {
+      yourInfo: {
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        email: '',
+        gender: 'Male',
+        stateOfResidency: 'Arizona',
+        countyOfResidency: 'King',
+        countryOfCitizenship: 'United States',
+      },
+    },
+    documentMenu: {},
+    preliminaryTrustInfo: {},
+    familyInfo: {},
+    successorTrustees: {},
+    specialDistributions: {},
+    remainingDistributions: {},
+  });
   return (
     <div>
       <CowLevelHeaderWithLinks />
@@ -280,154 +311,22 @@ const Home = () => {
           onSubmit={(e) => {
             e.preventDefault();
           }}
-          // style={{ border: '1px solid red' }}
         >
           <div className="">
-            {step === 1 && <Step1 step={step} setStep={setStep} />}
-            {step === 2 && (
-              <div>
-                <h1>Step 2</h1>
-                <div className="flex justify-end">
-                  <button
-                    class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-                    disabled={step === 1}
-                    onClick={() => setStep((prev) => prev - 1)}
-                  >
-                    Back
-                  </button>
-                  <button
-                    class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => {
-                      if (step <= 6) {
-                        setStep((prev) => prev + 1);
-                      }
-                    }}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
+            {step === 1 && (
+              <Step1
+                step={step}
+                setStep={setStep}
+                data={data}
+                setData={setData}
+              />
             )}
-            {step === 3 && (
-              <div>
-                <h1>Step 3</h1>
-                <div className="flex justify-end">
-                  <button
-                    class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-                    disabled={step === 1}
-                    onClick={() => setStep((prev) => prev - 1)}
-                  >
-                    Back
-                  </button>
-                  <button
-                    class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => {
-                      if (step <= 6) {
-                        setStep((prev) => prev + 1);
-                      }
-                    }}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            )}
-            {step === 4 && (
-              <div>
-                <h1>Step 4</h1>
-                <div className="flex justify-end">
-                  <button
-                    class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-                    disabled={step === 1}
-                    onClick={() => setStep((prev) => prev - 1)}
-                  >
-                    Back
-                  </button>
-                  <button
-                    class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => {
-                      if (step <= 6) {
-                        setStep((prev) => prev + 1);
-                      }
-                    }}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            )}
-            {step === 5 && (
-              <div>
-                <h1>Step 5</h1>
-                <div className="flex justify-end">
-                  <button
-                    class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-                    disabled={step === 1}
-                    onClick={() => setStep((prev) => prev - 1)}
-                  >
-                    Back
-                  </button>
-                  <button
-                    class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => {
-                      if (step <= 6) {
-                        setStep((prev) => prev + 1);
-                      }
-                    }}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            )}
-            {step === 6 && (
-              <div>
-                <h1>Step 6</h1>
-                <div className="flex justify-end">
-                  <button
-                    class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-                    disabled={step === 1}
-                    onClick={() => setStep((prev) => prev - 1)}
-                  >
-                    Back
-                  </button>
-                  <button
-                    class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => {
-                      if (step <= 6) {
-                        setStep((prev) => prev + 1);
-                      }
-                    }}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            )}
-            {step === 7 && (
-              <div>
-                <h1>Step 7</h1>
-                <div className="flex justify-end">
-                  <button
-                    class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-                    disabled={step === 1}
-                    onClick={() => setStep((prev) => prev - 1)}
-                  >
-                    Back
-                  </button>
-                  <button
-                    class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => {
-                      if (step <= 6) {
-                        setStep((prev) => prev + 1);
-                      }
-                    }}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            )}
+            {step === 2 && <Step2 step={step} setStep={setStep} />}
+            {step === 3 && <Step3 step={step} setStep={setStep} />}
+            {step === 4 && <Step4 step={step} setStep={setStep} />}
+            {step === 5 && <Step5 step={step} setStep={setStep} />}
+            {step === 6 && <Step6 step={step} setStep={setStep} />}
+            {step === 7 && <Step7 step={step} setStep={setStep} />}
           </div>
         </form>
       </div>

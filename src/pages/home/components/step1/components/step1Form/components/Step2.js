@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Step2 = () => {
+const Step2 = ({ data, setData }) => {
+  console.log('data', data);
   return (
     <div>
       <h1 className="mb-3 font-bold">

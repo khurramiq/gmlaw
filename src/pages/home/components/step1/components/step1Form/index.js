@@ -5,11 +5,11 @@ import Step3 from './components/Step3';
 import Step4 from './components/Step4';
 import Step5 from './components/Step5';
 
-const Step1Form = ({ activeStep, setActiveStep, setStep }) => {
+const Step1Form = ({ activeStep, setActiveStep, setStep, data, setData }) => {
   return (
     <div className="p-5">
-      {activeStep === 0 && <Step1 />}
-      {activeStep === 1 && <Step2 />}
+      {activeStep === 0 && <Step1 data={data} setData={setData} />}
+      {activeStep === 1 && <Step2 data={data} setData={setData} />}
       {activeStep === 2 && <Step3 />}
       {activeStep === 3 && <Step4 />}
       {activeStep === 4 && <Step5 />}
