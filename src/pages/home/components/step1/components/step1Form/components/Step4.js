@@ -1,6 +1,55 @@
 import React from 'react';
 
-const Step4 = () => {
+const Step4 = ({ data, setData }) => {
+  const creatingTrustType = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        creatingTrustType: {
+          ...data.personalInfo.creatingTrustType,
+          options: data.personalInfo.creatingTrustType.options.map(
+            (item, index) => {
+              if (index === i) {
+                return {
+                  label: item.label,
+                  value: !item.value,
+                };
+              } else {
+                return item;
+              }
+            }
+          ),
+        },
+      },
+    });
+  };
+  const initialTrustee = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        initialTrustee: {
+          ...data.personalInfo.initialTrustee,
+          options: data.personalInfo.initialTrustee.options.map(
+            (item, index) => {
+              if (index === i) {
+                return {
+                  label: item.label,
+                  value: true,
+                };
+              } else {
+                return {
+                  label: item.label,
+                  value: false,
+                };
+              }
+            }
+          ),
+        },
+      },
+    });
+  };
   return (
     <div>
       <h1 className="mb-1 font-bold text-center">LIVING TRUST PACKAGE</h1>
@@ -32,62 +81,75 @@ const Step4 = () => {
       </p>
       <h1 className="mb-1 font-bold">SECTION ONE: TYPE OF TRUST</h1>
       <h3 className="mb-1 font-bold">
-        First,what type of trust are you creating?
+        {/* First,what type of trust are you creating? */}
+        {data.personalInfo.creatingTrustType.question}
       </h3>
       <div className="space-y-4">
         <label className="flex items-center">
           <input
             type="checkbox"
+            checked={data.personalInfo.creatingTrustType.options[0].value}
+            onChange={() => creatingTrustType(0)}
             className="form-checkbox h-5 w-5 text-blue-500"
           />
           <span className="ml-2 text-gray-700">
-            I am starting from scratch. I do not have an existing trust
+            {data.personalInfo.creatingTrustType.options[0].label}
           </span>
         </label>
         <label className="flex items-center">
           <input
             type="checkbox"
+            checked={data.personalInfo.creatingTrustType.options[1].value}
+            onChange={() => creatingTrustType(1)}
             className="form-checkbox h-5 w-5 text-blue-500"
           />
           <span className="ml-2 text-gray-700">
-            I have an exising trust but I want to completely update it
+            {data.personalInfo.creatingTrustType.options[1].label}
           </span>
         </label>
       </div>
       <h1 className="mb-1 font-bold text-center">INITIAL TRUSTEE</h1>
-      <h3 className="mb-1 font-bold">Select the initial Trustee</h3>
+      <h3 className="mb-1 font-bold">
+        {data.personalInfo.initialTrustee.question}
+      </h3>
       <div className="space-y-4">
         <label className="flex items-center">
           <input
             type="radio"
+            checked={data.personalInfo.initialTrustee.options[0].value}
+            onChange={() => initialTrustee(0)}
             className="form-radio h-5 w-5 text-blue-500"
             name="radio-option"
             value="option1"
           />
           <span className="ml-2 text-gray-700">
-            You will serve as the initial sole Trustee
+            {data.personalInfo.initialTrustee.options[0].label}
           </span>
         </label>
         <label className="flex items-center">
           <input
             type="radio"
+            checked={data.personalInfo.initialTrustee.options[1].value}
+            onChange={() => initialTrustee(1)}
             className="form-radio h-5 w-5 text-blue-500"
             name="radio-option"
             value="option2"
           />
           <span className="ml-2 text-gray-700">
-            You and one other person will serve as initial co-Trustees
+            {data.personalInfo.initialTrustee.options[1].label}
           </span>
         </label>
         <label className="flex items-center">
           <input
             type="radio"
+            checked={data.personalInfo.initialTrustee.options[2].value}
+            onChange={() => initialTrustee(2)}
             className="form-radio h-5 w-5 text-blue-500"
             name="radio-option"
             value="option3"
           />
           <span className="ml-2 text-gray-700">
-            You and more than one other person will serve as initial co-Trustees
+            {data.personalInfo.initialTrustee.options[2].label}
           </span>
         </label>
       </div>

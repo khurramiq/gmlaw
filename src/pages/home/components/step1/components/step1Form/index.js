@@ -10,9 +10,9 @@ const Step1Form = ({ activeStep, setActiveStep, setStep, data, setData }) => {
     <div className="p-5">
       {activeStep === 0 && <Step1 data={data} setData={setData} />}
       {activeStep === 1 && <Step2 data={data} setData={setData} />}
-      {activeStep === 2 && <Step3 />}
-      {activeStep === 3 && <Step4 />}
-      {activeStep === 4 && <Step5 />}
+      {activeStep === 2 && <Step3 data={data} setData={setData} />}
+      {activeStep === 3 && <Step4 data={data} setData={setData} />}
+      {activeStep === 4 && <Step5 data={data} setData={setData} />}
       <div className="flex justify-end">
         <button
           class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}

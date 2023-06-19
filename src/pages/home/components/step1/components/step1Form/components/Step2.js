@@ -1,7 +1,53 @@
 import React from 'react';
 
 const Step2 = ({ data, setData }) => {
-  console.log('data', data);
+  const estatePlanningPackages = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        estatePlanningPackages: {
+          ...data.personalInfo.estatePlanningPackages,
+          options: data.personalInfo.estatePlanningPackages.options.map(
+            (item, index) => {
+              if (index === i) {
+                return {
+                  label: item.label,
+                  value: !item.value,
+                };
+              } else {
+                return item;
+              }
+            }
+          ),
+        },
+      },
+    });
+  };
+  const individualEstatePlanningDocuments = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        individualEstatePlanningDocuments: {
+          ...data.personalInfo.individualEstatePlanningDocuments,
+          options:
+            data.personalInfo.individualEstatePlanningDocuments.options.map(
+              (item, index) => {
+                if (index === i) {
+                  return {
+                    label: item.label,
+                    value: !item.value,
+                  };
+                } else {
+                  return item;
+                }
+              }
+            ),
+        },
+      },
+    });
+  };
   return (
     <div>
       <h1 className="mb-3 font-bold">
@@ -14,57 +60,89 @@ const Step2 = ({ data, setData }) => {
         follow.{' '}
       </p>
       <h3 className="mb-1 font-bold">
-        ESTATE PLANNING PACKAGES (insert prices for each set of documents)
+        {/* ESTATE PLANNING PACKAGES (insert prices for each set of documents) */}
+        {data.personalInfo.estatePlanningPackages.question}
       </h3>
       <div className="space-y-4">
         <div className="flex">
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.estatePlanningPackages.options[0].value
+              }
+              onChange={() => estatePlanningPackages(0)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
-            <span className="ml-2 text-gray-700">Revocable Trust Package</span>
+            <span className="ml-2 text-gray-700">
+              {data.personalInfo.estatePlanningPackages.options[0].label}
+            </span>
           </label>
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.estatePlanningPackages.options[1].value
+              }
+              onChange={() => estatePlanningPackages(1)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              Power of Attorney Package
+              {data.personalInfo.estatePlanningPackages.options[1].label}
             </span>
           </label>
         </div>
         <label className="flex items-center">
           <input
             type="checkbox"
+            checked={data.personalInfo.estatePlanningPackages.options[2].value}
+            onChange={() => estatePlanningPackages(2)}
             className="form-checkbox h-5 w-5 text-blue-500"
           />
           <span className="ml-2 text-gray-700">
-            Last Will and Testament Package
+            {data.personalInfo.estatePlanningPackages.options[2].label}
           </span>
         </label>
       </div>
       <p>Only select one. The package will determine the documents created.</p>
-      <h3 className="mb-1 font-bold">INDIVIDUAL ESTATE PLANNING DOCUMENTS</h3>
+      <h3 className="mb-1 font-bold">
+        {/* INDIVIDUAL ESTATE PLANNING DOCUMENTS */}
+        {data.personalInfo.individualEstatePlanningDocuments.question}
+      </h3>
       <div className="space-y-4">
         <div className="flex">
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[0]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(0)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              Revocable Trust Agreement
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[0]
+                  .label
+              }
             </span>
           </label>
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[1]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(1)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              Durable Power of Attorney for Property & Finances
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[1]
+                  .label
+              }
             </span>
           </label>
         </div>
@@ -72,20 +150,35 @@ const Step2 = ({ data, setData }) => {
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[2]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(2)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              Amendment to Revocable Trust
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[2]
+                  .label
+              }
             </span>
           </label>
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[3]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(3)}
               className="form-checkbox h-5 w-[30px] text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              Power of Attorney for Health Care and Living Will (aka Advance
-              health care directive)
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[3]
+                  .label
+              }
             </span>
           </label>
         </div>
@@ -93,17 +186,35 @@ const Step2 = ({ data, setData }) => {
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[4]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(4)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
-            <span className="ml-2 text-gray-700">Schedule "A" to Trust</span>
+            <span className="ml-2 text-gray-700">
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[4]
+                  .label
+              }
+            </span>
           </label>
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[5]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(5)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              HIPAA Waiver of Confidentiality
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[5]
+                  .label
+              }
             </span>
           </label>
         </div>
@@ -111,57 +222,35 @@ const Step2 = ({ data, setData }) => {
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[6]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(6)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              Schedule of Gifts of Personal Property from Trust
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[6]
+                  .label
+              }
             </span>
           </label>
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[7]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(7)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              Nomination of Guardian/​Conservator for Adults
-            </span>
-          </label>
-        </div>
-        <div className="flex">
-          <label className="flex items-center w-[50%]">
-            <input
-              type="checkbox"
-              className="form-checkbox h-5 w-5 text-blue-500"
-            />
-            <span className="ml-2 text-gray-700">Certification of Trust</span>
-          </label>
-          <label className="flex items-center w-[50%]">
-            <input
-              type="checkbox"
-              className="form-checkbox h-5 w-5 text-blue-500"
-            />
-            <span className="ml-2 text-gray-700">
-              Nomination of Guardian/​Conservator for Minor Children
-            </span>
-          </label>
-        </div>
-        <div className="flex">
-          <label className="flex items-center w-[50%]">
-            <input
-              type="checkbox"
-              className="form-checkbox h-5 w-5 text-blue-500"
-            />
-            <span className="ml-2 text-gray-700">
-              Pour-Over-Will (only used in conjunction with a trust)
-            </span>
-          </label>
-          <label className="flex items-center w-[50%]">
-            <input
-              type="checkbox"
-              className="form-checkbox h-5 w-5 text-blue-500"
-            />
-            <span className="ml-2 text-gray-700">
-              Appointment of Pet Caregiver
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[7]
+                  .label
+              }
             </span>
           </label>
         </div>
@@ -169,19 +258,126 @@ const Step2 = ({ data, setData }) => {
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[8]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(8)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              Will Codicil (amendment to a Will)
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[8]
+                  .label
+              }
             </span>
           </label>
           <label className="flex items-center w-[50%]">
             <input
               type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[9]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(9)}
               className="form-checkbox h-5 w-5 text-blue-500"
             />
             <span className="ml-2 text-gray-700">
-              Last Will and Testament (used if no trust)
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[9]
+                  .label
+              }
+            </span>
+          </label>
+        </div>
+        <div className="flex">
+          <label className="flex items-center w-[50%]">
+            <input
+              type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[10]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(10)}
+              className="form-checkbox h-5 w-5 text-blue-500"
+            />
+            <span className="ml-2 text-gray-700">
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[10]
+                  .label
+              }
+            </span>
+          </label>
+          <label className="flex items-center w-[50%]">
+            <input
+              type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[11]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(11)}
+              className="form-checkbox h-5 w-5 text-blue-500"
+            />
+            <span className="ml-2 text-gray-700">
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[11]
+                  .label
+              }
+            </span>
+          </label>
+        </div>
+        <div className="flex">
+          <label className="flex items-center w-[50%]">
+            <input
+              type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[12]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(12)}
+              className="form-checkbox h-5 w-5 text-blue-500"
+            />
+            <span className="ml-2 text-gray-700">
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[12]
+                  .label
+              }
+            </span>
+          </label>
+          <label className="flex items-center w-[50%]">
+            <input
+              type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[13]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(13)}
+              className="form-checkbox h-5 w-5 text-blue-500"
+            />
+            <span className="ml-2 text-gray-700">
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[13]
+                  .label
+              }
+            </span>
+          </label>
+        </div>
+        <div className="flex">
+          <label className="flex items-center w-[50%]">
+            <input
+              type="checkbox"
+              checked={
+                data.personalInfo.individualEstatePlanningDocuments.options[14]
+                  .value
+              }
+              onChange={() => individualEstatePlanningDocuments(14)}
+              className="form-checkbox h-5 w-5 text-blue-500"
+            />
+            <span className="ml-2 text-gray-700">
+              {
+                data.personalInfo.individualEstatePlanningDocuments.options[14]
+                  .label
+              }
             </span>
           </label>
         </div>
