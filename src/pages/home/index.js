@@ -413,6 +413,70 @@ const Home = () => {
           makeAnyCommentsRemarksOrYourReasonForTheGift: '',
         },
       ],
+      first_do_you_want_to_make_any_charitable_donations: {
+        question: 'First, do you want to make any charitable donations?',
+        options: [
+          {
+            label: 'Yes',
+            value: false,
+          },
+          {
+            label: 'No',
+            value: true,
+          },
+        ],
+      },
+      beneficiaries: [
+        {
+          firstName: '',
+          lastName: '',
+          city: '',
+          state: '',
+          Beneficiary_relationship_to_you: '',
+          percentageShare: '',
+          any_statements_that_you_wish_to_make: '',
+          what_happens_if_this_person_predeceases_you: [
+            {
+              label:
+                "The deceased beneficiary's share goes to his issue (by right of representation)",
+              value: false,
+            },
+            {
+              label:
+                'The gift lapses and is divided equally among the remaining living beneficiaries',
+              value: false,
+            },
+          ],
+          will_this_beneficiarys_share_be_given_outright: '',
+          pick_your_age_for_disbursement: '',
+        },
+      ],
+      contingent_Residue_Distribution: [
+        {
+          label: 'My heirs at law',
+          value: false,
+        },
+        {
+          label: 'the individual(s) named below',
+          value: false,
+        },
+        {
+          label: 'the charitable organization(s) named below',
+          value: false,
+        },
+      ],
+      charitableDonations: [
+        {
+          nameOfCharity: '',
+          percentageOfResidue: '',
+          addressLine1: '',
+          addressLine2: '',
+          city: '',
+          status: '',
+          zipCode: '',
+          purposeForTheGift: '',
+        },
+      ],
     },
     documentMenu: {},
     preliminaryTrustInfo: {},

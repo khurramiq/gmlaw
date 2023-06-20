@@ -342,30 +342,32 @@ const Step5 = ({ data, setData }) => {
     });
   };
   const do_you_want_to_make_any_specific_gifts = (i) => {
-    setData({
-      ...data,
-      personalInfo: {
-        ...data.personalInfo,
-        do_you_want_to_make_any_specific_gifts: {
-          ...data.personalInfo.do_you_want_to_make_any_specific_gifts,
-          options:
-            data.personalInfo.do_you_want_to_make_any_specific_gifts.options.map(
-              (item, index) => {
-                if (index === i) {
-                  return {
-                    label: item.label,
-                    value: true,
-                  };
-                } else {
-                  return {
-                    label: item.label,
-                    value: false,
-                  };
+    setData((prev) => {
+      return {
+        ...prev,
+        personalInfo: {
+          ...prev.personalInfo,
+          do_you_want_to_make_any_specific_gifts: {
+            ...prev.personalInfo.do_you_want_to_make_any_specific_gifts,
+            options:
+              prev.personalInfo.do_you_want_to_make_any_specific_gifts.options.map(
+                (item, index) => {
+                  if (index === i) {
+                    return {
+                      label: item.label,
+                      value: true,
+                    };
+                  } else {
+                    return {
+                      label: item.label,
+                      value: false,
+                    };
+                  }
                 }
-              }
-            ),
+              ),
+          },
         },
-      },
+      };
     });
   };
   const handleGifts = (i, name, value) => {
@@ -383,6 +385,43 @@ const Step5 = ({ data, setData }) => {
             return item;
           }
         }),
+      },
+    });
+  };
+  const removeGift = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        gifts: data.personalInfo.gifts.filter((item, index) => i !== index),
+      },
+    });
+  };
+  const addGift = () => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        gifts: [
+          ...data.personalInfo.gifts,
+          {
+            giftType: '',
+            nameOfIndividual: '',
+            typeOfGift: [
+              {
+                label: 'Cash',
+                value: false,
+              },
+              {
+                label: 'Item of personal property',
+                value: true,
+              },
+            ],
+            cashGiftAmount: '',
+            describeTheItemOfPersonalProperty: '',
+            makeAnyCommentsRemarksOrYourReasonForTheGift: '',
+          },
+        ],
       },
     });
   };
@@ -416,7 +455,208 @@ const Step5 = ({ data, setData }) => {
       },
     });
   };
-  console.log('data', data);
+  const first_do_you_want_to_make_any_charitable_donations = (i) => {
+    setData((prev) => {
+      return {
+        ...prev,
+        personalInfo: {
+          ...prev.personalInfo,
+          first_do_you_want_to_make_any_charitable_donations: {
+            ...prev.personalInfo
+              .first_do_you_want_to_make_any_charitable_donations,
+            options:
+              prev.personalInfo.first_do_you_want_to_make_any_charitable_donations.options.map(
+                (item, index) => {
+                  if (index === i) {
+                    return {
+                      label: item.label,
+                      value: true,
+                    };
+                  } else {
+                    return {
+                      label: item.label,
+                      value: false,
+                    };
+                  }
+                }
+              ),
+          },
+        },
+      };
+    });
+  };
+  const handleBeneficiariesFields = (i, name, value) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        beneficiaries: data.personalInfo.beneficiaries.map((item, index) => {
+          if (i === index) {
+            return {
+              ...item,
+              [name]: value,
+            };
+          } else {
+            return item;
+          }
+        }),
+      },
+    });
+  };
+  const addBeneficiary = () => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        beneficiaries: [
+          ...data.personalInfo.beneficiaries,
+          {
+            firstName: '',
+            lastName: '',
+            city: '',
+            state: '',
+            Beneficiary_relationship_to_you: '',
+            percentageShare: '',
+            any_statements_that_you_wish_to_make: '',
+            what_happens_if_this_person_predeceases_you: [
+              {
+                label:
+                  "The deceased beneficiary's share goes to his issue (by right of representation)",
+                value: false,
+              },
+              {
+                label:
+                  'The gift lapses and is divided equally among the remaining living beneficiaries',
+                value: false,
+              },
+            ],
+            will_this_beneficiarys_share_be_given_outright: '',
+            pick_your_age_for_disbursement: '',
+          },
+        ],
+      },
+    });
+  };
+  const removeBeneficiary = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        beneficiaries: data.personalInfo.beneficiaries.filter(
+          (item, index) => i !== index
+        ),
+      },
+    });
+  };
+  const what_happens_if_this_person_predeceases_you = (i, j) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        beneficiaries: data.personalInfo.beneficiaries.map((item, index) => {
+          if (i === index) {
+            return {
+              ...item,
+              what_happens_if_this_person_predeceases_you:
+                item.what_happens_if_this_person_predeceases_you.map(
+                  (itm, ind) => {
+                    if (j === ind) {
+                      return {
+                        ...itm,
+                        value: true,
+                      };
+                    } else {
+                      return {
+                        ...itm,
+                        value: false,
+                      };
+                    }
+                  }
+                ),
+            };
+          } else {
+            return item;
+          }
+        }),
+      },
+    });
+  };
+  const contingent_Residue_Distribution = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        contingent_Residue_Distribution:
+          data.personalInfo.contingent_Residue_Distribution.map(
+            (item, index) => {
+              if (index === i) {
+                return {
+                  label: item.label,
+                  value: true,
+                };
+              } else {
+                return {
+                  label: item.label,
+                  value: false,
+                };
+              }
+            }
+          ),
+      },
+    });
+  };
+  const addCharity = () => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        charitableDonations: [
+          ...data.personalInfo.charitableDonations,
+          {
+            nameOfCharity: '',
+            percentageOfResidue: '',
+            addressLine1: '',
+            addressLine2: '',
+            city: '',
+            status: '',
+            zipCode: '',
+            purposeForTheGift: '',
+          },
+        ],
+      },
+    });
+  };
+  const removeCharity = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        charitableDonations: data.personalInfo.charitableDonations.filter(
+          (item, index) => i !== index
+        ),
+      },
+    });
+  };
+  const handleCharity = (i, name, value) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        charitableDonations: data.personalInfo.charitableDonations.map(
+          (item, index) => {
+            if (i === index) {
+              return {
+                ...item,
+                [name]: value,
+              };
+            } else {
+              return item;
+            }
+          }
+        ),
+      },
+    });
+  };
   return (
     <div>
       <h1 className="mb-1 font-bold">FAMILY</h1>
@@ -1100,8 +1340,7 @@ const Step5 = ({ data, setData }) => {
             }
             onChange={() => do_you_want_to_make_any_specific_gifts(0)}
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option1"
+            name="do_you_want_to_make_any_specific_gifts"
           />
           <span className="ml-2 text-gray-700">
             {
@@ -1119,8 +1358,7 @@ const Step5 = ({ data, setData }) => {
             }
             onChange={() => do_you_want_to_make_any_specific_gifts(1)}
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option2"
+            name="do_you_want_to_make_any_specific_gifts"
           />
           <span className="ml-2 text-gray-700">
             {
@@ -1152,7 +1390,7 @@ const Step5 = ({ data, setData }) => {
               <div>
                 <i
                   className="far fa-times-circle cursor-pointer"
-                  onClick={() => removeSuccessorTrustee(i)}
+                  onClick={() => removeGift(i)}
                 ></i>
                 <span className="font-bold ml-3">Gift {i + 1}</span>
               </div>
@@ -1203,8 +1441,6 @@ const Step5 = ({ data, setData }) => {
                         checked={item.typeOfGift[0].value}
                         onChange={() => handleTypeOfGifts(i, 0)}
                         className="form-radio h-5 w-5 text-blue-500"
-                        name="radio-option"
-                        value="option1"
                       />
                       <span className="ml-2 text-gray-700">
                         {/* Cash */}
@@ -1217,8 +1453,6 @@ const Step5 = ({ data, setData }) => {
                         checked={item.typeOfGift[1].value}
                         onChange={() => handleTypeOfGifts(i, 1)}
                         className="form-radio h-5 w-5 text-blue-500"
-                        name="radio-option"
-                        value="option2"
                       />
                       <span className="ml-2 text-gray-700">
                         {/* Item of personal property */}
@@ -1285,7 +1519,7 @@ const Step5 = ({ data, setData }) => {
           <div className="mt-2">
             <button
               className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
-              onClick={() => addSuccessorTrustee()}
+              onClick={() => addGift()}
             >
               Add Gift
             </button>
@@ -1304,32 +1538,265 @@ const Step5 = ({ data, setData }) => {
         will make things much easier to administer when the time comes.
       </p>
       <h3 className="mt-5 font-bold">
-        First, do you want to make any charitable donations?
+        {/* First, do you want to make any charitable donations? */}
+        {
+          data.personalInfo.first_do_you_want_to_make_any_charitable_donations
+            .question
+        }
       </h3>
       <div className="flex space-x-4">
         <label className="flex items-center">
           <input
             type="radio"
+            checked={
+              data.personalInfo
+                .first_do_you_want_to_make_any_charitable_donations.options[0]
+                .value
+            }
+            onChange={() =>
+              first_do_you_want_to_make_any_charitable_donations(0)
+            }
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option1"
           />
-          <span className="ml-2 text-gray-700">Yes</span>
+          <span className="ml-2 text-gray-700">
+            {
+              data.personalInfo
+                .first_do_you_want_to_make_any_charitable_donations.options[0]
+                .label
+            }
+          </span>
         </label>
         <label className="flex items-center">
           <input
             type="radio"
+            checked={
+              data.personalInfo
+                .first_do_you_want_to_make_any_charitable_donations.options[1]
+                .value
+            }
+            onChange={() =>
+              first_do_you_want_to_make_any_charitable_donations(1)
+            }
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option2"
           />
-          <span className="ml-2 text-gray-700">No</span>
+          <span className="ml-2 text-gray-700">
+            {
+              data.personalInfo
+                .first_do_you_want_to_make_any_charitable_donations.options[1]
+                .label
+            }
+          </span>
         </label>
       </div>
       <h1 className="mt-5 font-bold">REMAINDER BENEFICIARIES</h1>
       <i className="mt-2">Remember - the total must add up to 100%</i>
       <div className="mt-3">
-        <button class="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded">
+        {data.personalInfo.beneficiaries.map((item, i) => (
+          <div
+            key={i}
+            className={`${
+              i % 2 === 0 ? 'bg-slate-200' : ''
+            } p-5 rounded-lg mb-3`}
+          >
+            <div>
+              <i
+                className="far fa-times-circle cursor-pointer"
+                onClick={() => removeBeneficiary(i)}
+              ></i>
+              <span className="font-bold ml-3">Beneficiary {i + 1}</span>
+            </div>
+            <h3 className="mb-1 font-bold">Name</h3>
+            <div className="mb-2 flex">
+              <input
+                type="text"
+                name="firstName"
+                value={data?.personalInfo?.beneficiaries?.firstName}
+                onChange={(e) =>
+                  handleBeneficiariesFields(i, e.target.name, e.target.value)
+                }
+                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[50%]"
+                placeholder="First"
+              />
+              <input
+                type="text"
+                name="lastName"
+                value={data?.personalInfo?.beneficiaries?.lastName}
+                onChange={(e) =>
+                  handleBeneficiariesFields(i, e.target.name, e.target.value)
+                }
+                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[50%]"
+                placeholder="Middle"
+              />
+            </div>
+            <h3 className="mb-1 font-bold">
+              City and State where beneficiary lives
+            </h3>
+            <div className="mb-2 flex">
+              <input
+                type="text"
+                name="city"
+                value={item?.city}
+                onChange={(e) =>
+                  handleBeneficiariesFields(i, e.target.name, e.target.value)
+                }
+                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[50%]"
+                placeholder="City"
+              />
+              <input
+                type="text"
+                name="state"
+                value={item?.state}
+                onChange={(e) =>
+                  handleBeneficiariesFields(i, e.target.name, e.target.value)
+                }
+                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[50%]"
+                placeholder="State"
+              />
+            </div>
+            <div className="mb-2 flex">
+              <div className="w-[70%] mr-2">
+                <h3 className="mb-1 font-bold">
+                  Beneficiary's relationship to you
+                </h3>
+                <input
+                  type="text"
+                  name="Beneficiary_relationship_to_you"
+                  value={item?.Beneficiary_relationship_to_you}
+                  onChange={(e) =>
+                    handleBeneficiariesFields(i, e.target.name, e.target.value)
+                  }
+                  class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                />
+              </div>
+              <div className="w-[30%]">
+                <h3 className="mb-1 font-bold">Percentage Share</h3>
+                <input
+                  type="text"
+                  name="percentageShare"
+                  value={item?.percentageShare}
+                  onChange={(e) =>
+                    handleBeneficiariesFields(i, e.target.name, e.target.value)
+                  }
+                  class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                />
+              </div>
+            </div>
+            <div className="mb-2 flex">
+              <div className="w-full">
+                <h3 className="mb-1 font-bold">
+                  Any statements that you wish to make (optional)
+                </h3>
+                <input
+                  type="text"
+                  name="any_statements_that_you_wish_to_make"
+                  value={item?.any_statements_that_you_wish_to_make}
+                  onChange={(e) =>
+                    handleBeneficiariesFields(i, e.target.name, e.target.value)
+                  }
+                  class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                />
+              </div>
+            </div>
+            <div className="mb-2 flex">
+              <div className="w-full">
+                <h3 className="mb-1 mt-3 font-bold">Gift Structure</h3>
+                <h3 className="mb-1 mt-3 font-bold">
+                  What happens if this person predeceases you?
+                </h3>
+                <div className="space-y-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      checked={
+                        item.what_happens_if_this_person_predeceases_you[0]
+                          .value
+                      }
+                      onChange={() =>
+                        what_happens_if_this_person_predeceases_you(i, 0)
+                      }
+                      className="form-radio h-5 w-5 text-blue-500"
+                    />
+                    <span className="ml-2 text-gray-700">
+                      {/* The deceased beneficiary's share goes to his issue (by
+                      right of representation) */}
+                      {
+                        item.what_happens_if_this_person_predeceases_you[0]
+                          .label
+                      }
+                    </span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      checked={
+                        item.what_happens_if_this_person_predeceases_you[1]
+                          .value
+                      }
+                      onChange={() =>
+                        what_happens_if_this_person_predeceases_you(i, 1)
+                      }
+                      className="form-radio h-5 w-5 text-blue-500"
+                    />
+                    <span className="ml-2 text-gray-700">
+                      {/* The gift lapses and is divided equally among the remaining
+                      living beneficiaries */}
+                      {
+                        item.what_happens_if_this_person_predeceases_you[1]
+                          .label
+                      }
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div className="mb-1 flex">
+              <div className="w-full">
+                <h3 className="mb-1 font-bold">
+                  Will this beneficiary's share be given outright,distributed at
+                  certain time intervals, or held in trust for his or her life
+                </h3>
+                <input
+                  type="text"
+                  name="will_this_beneficiarys_share_be_given_outright"
+                  value={item?.will_this_beneficiarys_share_be_given_outright}
+                  onChange={(e) =>
+                    handleBeneficiariesFields(i, e.target.name, e.target.value)
+                  }
+                  class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                />
+              </div>
+            </div>
+            <i>
+              If a beneficiary is going to receive a sizable amount of money,
+              you may want to have their share held in trust.
+            </i>
+            <p>
+              Doing this will protect the gift (asset protection) and guard
+              against judgement creditors, or possible divorce attachment)
+            </p>
+
+            <div className="mb-1 mt-3 flex">
+              <div className="w-full">
+                <h3 className="mb-1 font-bold">
+                  Pick your age for disbursement
+                </h3>
+                <input
+                  type="text"
+                  name="pick_your_age_for_disbursement"
+                  value={item?.pick_your_age_for_disbursement}
+                  onChange={(e) =>
+                    handleBeneficiariesFields(i, e.target.name, e.target.value)
+                  }
+                  class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+        <button
+          class="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
+          onClick={() => addBeneficiary()}
+        >
           Add Beneficiary
         </button>
       </div>
@@ -1343,22 +1810,22 @@ const Step5 = ({ data, setData }) => {
         allocation to each will be an equal share.
       </p>
       <h3 className="mt-5 font-bold">Contingent Residue Distribution</h3>
-      <div className="space-y-4">
+      <div className="space-y-4 mb-3">
         <label className="flex items-center">
           <input
             type="radio"
+            checked={data.personalInfo.contingent_Residue_Distribution[0].value}
+            onChange={() => contingent_Residue_Distribution(0)}
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option1"
           />
           <span className="ml-2 text-gray-700">My heirs at law</span>
         </label>
         <label className="flex items-center">
           <input
             type="radio"
+            checked={data.personalInfo.contingent_Residue_Distribution[1].value}
+            onChange={() => contingent_Residue_Distribution(1)}
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option2"
           />
           <span className="ml-2 text-gray-700">
             the individual(s) named below
@@ -1367,20 +1834,152 @@ const Step5 = ({ data, setData }) => {
         <label className="flex items-center">
           <input
             type="radio"
+            checked={data.personalInfo.contingent_Residue_Distribution[2].value}
+            onChange={() => contingent_Residue_Distribution(2)}
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option3"
           />
           <span className="ml-2 text-gray-700">
             the charitable organization(s) named below
           </span>
         </label>
       </div>
-      <div className="mt-3">
-        <button class="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded">
-          Add Beneficiary
-        </button>
-      </div>
+      {data.personalInfo.contingent_Residue_Distribution[2].value && (
+        <div>
+          <h3 className="font-bold mb-3">Charitable Donations</h3>
+          {data.personalInfo.charitableDonations.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <i
+                  className="far fa-times-circle cursor-pointer"
+                  onClick={() => removeCharity(i)}
+                ></i>
+                <span className="font-bold ml-3">Charity {i + 1}</span>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <h3 className="mb-1 font-bold">Name of Charity</h3>
+                  <input
+                    type="text"
+                    name="nameOfCharity"
+                    value={item?.nameOfCharity}
+                    onChange={(e) =>
+                      handleCharity(i, e.target.name, e.target.value)
+                    }
+                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                  />
+                </div>
+                <div className="w-[50%]">
+                  <h3 className="mb-1 font-bold">Percentage of Residue</h3>
+                  <input
+                    type="text"
+                    name="percentageOfResidue"
+                    value={item?.percentageOfResidue}
+                    onChange={(e) =>
+                      handleCharity(i, e.target.name, e.target.value)
+                    }
+                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                  />
+                </div>
+              </div>
+              <div className="mb-2">
+                <h3 className="mb-1 font-bold">Charity's Address</h3>
+                <input
+                  type="text"
+                  name="addressLine1"
+                  value={item?.addressLine1}
+                  onChange={(e) =>
+                    handleCharity(i, e.target.name, e.target.value)
+                  }
+                  class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
+                  placeholder="Address Line 1"
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  name="addressLine2"
+                  value={item?.addressLine2}
+                  onChange={(e) =>
+                    handleCharity(i, e.target.name, e.target.value)
+                  }
+                  class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
+                  placeholder="Address Line 2"
+                />
+              </div>
+              <div className="mb-2 flex">
+                <input
+                  type="text"
+                  name="city"
+                  value={item?.city}
+                  onChange={(e) =>
+                    handleCharity(i, e.target.name, e.target.value)
+                  }
+                  class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
+                  placeholder="City"
+                />
+                <select
+                  class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
+                  name="state"
+                  value={item?.state}
+                  onChange={(e) =>
+                    handleCharity(i, e.target.name, e.target.value)
+                  }
+                >
+                  <option value="Armed Forces America">
+                    Armed Forces America
+                  </option>
+                  <option value="Armed Forces">Armed Forces</option>
+                  <option value="Armed Forces Pacific">
+                    Armed Forces Pacific
+                  </option>
+                  <option value="Alabama">Alabama</option>
+                </select>
+                <input
+                  type="text"
+                  name="zipCode"
+                  value={item?.zipCode}
+                  onChange={(e) =>
+                    handleCharity(i, e.target.name, e.target.value)
+                  }
+                  class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[33%]"
+                  placeholder="zipCode"
+                />
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-full">
+                  <h3 className="mb-1 font-bold">Purpose for the gift</h3>
+                  <input
+                    type="text"
+                    name="purposeForTheGift"
+                    value={item?.purposeForTheGift}
+                    onChange={(e) =>
+                      handleCharity(i, e.target.name, e.target.value)
+                    }
+                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                  />
+                  <i className="text-sm">
+                    If left blank, the gift will be used for the charity's
+                    general charitable purposes
+                  </i>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="mt-2">
+            <button
+              className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
+              onClick={() => addCharity()}
+            >
+              Add Charity
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
