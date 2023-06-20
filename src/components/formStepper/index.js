@@ -6,11 +6,7 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Check from '@mui/icons-material/Check';
-import PersonIcon from '@mui/icons-material/Person';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
-import WorkIcon from '@mui/icons-material/Work';
-import PaidIcon from '@mui/icons-material/Paid';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import StepConnector, {
   stepConnectorClasses,
 } from '@mui/material/StepConnector';
@@ -115,11 +111,11 @@ function ColorlibStepIcon(props) {
   const { active, completed, className } = props;
 
   const icons = {
-    1: <AssignmentIcon />,
-    2: <PersonIcon />,
-    3: <WorkIcon />,
-    4: <PaidIcon />,
-    5: <UploadFileIcon />,
+    1: <ArrowForwardIcon />,
+    2: <ArrowForwardIcon />,
+    3: <ArrowForwardIcon />,
+    4: <ArrowForwardIcon />,
+    5: <ArrowForwardIcon />,
   };
 
   return (

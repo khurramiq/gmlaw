@@ -478,8 +478,54 @@ const Home = () => {
         },
       ],
     },
-    documentMenu: {},
-    preliminaryTrustInfo: {},
+    documentMenu: {
+      personalRepresentativeQ: {
+        question:
+          'Do you want the personal representative(s) under your Pour-Over-Will to be the same as your successor trustee(s)',
+        options: [
+          {
+            label: 'Yes',
+            value: true,
+          },
+          {
+            label: 'No',
+            value: false,
+          },
+        ],
+      },
+      personalRepresentatives: [
+        {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+        },
+      ],
+    },
+    preliminaryTrustInfo: {
+      question: {
+        text: 'Do you want the attorney(s)-in-fact under your Durable Power of Attorney to be the same as your successor trustee(s)',
+        options: [
+          {
+            label: 'Yes',
+            value: true,
+          },
+          {
+            label: 'No',
+            value: false,
+          },
+        ],
+      },
+      attorneyInFacts: [
+        {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          relationship: '',
+        },
+      ],
+    },
     familyInfo: {},
     successorTrustees: {},
     specialDistributions: {},
@@ -792,8 +838,22 @@ const Home = () => {
                 setData={setData}
               />
             )}
-            {step === 2 && <Step2 step={step} setStep={setStep} />}
-            {step === 3 && <Step3 step={step} setStep={setStep} />}
+            {step === 2 && (
+              <Step2
+                step={step}
+                setStep={setStep}
+                data={data}
+                setData={setData}
+              />
+            )}
+            {step === 3 && (
+              <Step3
+                step={step}
+                setStep={setStep}
+                data={data}
+                setData={setData}
+              />
+            )}
             {step === 4 && <Step4 step={step} setStep={setStep} />}
             {step === 5 && <Step5 step={step} setStep={setStep} />}
             {step === 6 && <Step6 step={step} setStep={setStep} />}

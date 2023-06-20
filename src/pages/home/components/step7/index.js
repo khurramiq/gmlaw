@@ -79,7 +79,7 @@ const Step7 = ({ step, setStep }) => {
             }
           }}
         >
-          Next
+          Submit
         </button>
       </div>
     </div>

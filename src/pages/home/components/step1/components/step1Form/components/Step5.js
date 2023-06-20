@@ -389,13 +389,15 @@ const Step5 = ({ data, setData }) => {
     });
   };
   const removeGift = (i) => {
-    setData({
-      ...data,
-      personalInfo: {
-        ...data.personalInfo,
-        gifts: data.personalInfo.gifts.filter((item, index) => i !== index),
-      },
-    });
+    if (i > 0) {
+      setData({
+        ...data,
+        personalInfo: {
+          ...data.personalInfo,
+          gifts: data.personalInfo.gifts.filter((item, index) => i !== index),
+        },
+      });
+    }
   };
   const addGift = () => {
     setData({
@@ -852,7 +854,7 @@ const Step5 = ({ data, setData }) => {
               className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
               onClick={() => addLivingChildrenInformation()}
             >
-              Add Another Living Children
+              Add Living Child
             </button>
           </div>
         </div>
@@ -1032,8 +1034,6 @@ const Step5 = ({ data, setData }) => {
             }
             onChange={() => how_many_successor_Trustees_do_you_want_to_name(0)}
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option1"
           />
           <span className="ml-2 text-gray-700">
             {
@@ -1051,8 +1051,6 @@ const Step5 = ({ data, setData }) => {
             }
             onChange={() => how_many_successor_Trustees_do_you_want_to_name(1)}
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option2"
           />
           <span className="ml-2 text-gray-700">
             {
@@ -1283,8 +1281,6 @@ const Step5 = ({ data, setData }) => {
               )
             }
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option1"
           />
           <span className="ml-2 text-gray-700">
             {
@@ -1297,9 +1293,17 @@ const Step5 = ({ data, setData }) => {
         <label className="flex items-center">
           <input
             type="radio"
+            checked={
+              data.personalInfo
+                .is_there_anyone_that_you_do_not_want_serving_as_a_successor_Trustee
+                .options[1].value
+            }
+            onChange={() =>
+              is_there_anyone_that_you_do_not_want_serving_as_a_successor_Trustee(
+                1
+              )
+            }
             className="form-radio h-5 w-5 text-blue-500"
-            name="radio-option"
-            value="option2"
           />
           <span className="ml-2 text-gray-700">No</span>
         </label>
@@ -1340,7 +1344,6 @@ const Step5 = ({ data, setData }) => {
             }
             onChange={() => do_you_want_to_make_any_specific_gifts(0)}
             className="form-radio h-5 w-5 text-blue-500"
-            name="do_you_want_to_make_any_specific_gifts"
           />
           <span className="ml-2 text-gray-700">
             {
@@ -1358,7 +1361,6 @@ const Step5 = ({ data, setData }) => {
             }
             onChange={() => do_you_want_to_make_any_specific_gifts(1)}
             className="form-radio h-5 w-5 text-blue-500"
-            name="do_you_want_to_make_any_specific_gifts"
           />
           <span className="ml-2 text-gray-700">
             {
