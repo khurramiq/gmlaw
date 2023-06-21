@@ -9,7 +9,7 @@ import Step5 from './components/step5';
 import Step6 from './components/step6';
 import Step7 from './components/step7';
 const Home = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(6);
   const [data, setData] = useState({
     personalInfo: {
       yourInfo: {
@@ -526,10 +526,131 @@ const Home = () => {
         },
       ],
     },
-    familyInfo: {},
-    successorTrustees: {},
-    specialDistributions: {},
-    remainingDistributions: {},
+    familyInfo: {
+      healthCareAgents: [
+        {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          relationship: '',
+        },
+      ],
+    },
+    successorTrustees: {
+      question: {
+        text: 'Are there individuals that you want to identify as your HIPAA agents?',
+        options: [
+          {
+            label: 'Yes',
+            value: false,
+          },
+          {
+            label: 'No',
+            value: true,
+          },
+        ],
+      },
+      hIPAAAgents: [
+        {
+          firstName: '',
+          lastName: '',
+        },
+      ],
+    },
+    specialDistributions: {
+      question1: {
+        text: 'Do you have any children under 18 years of age?',
+        options: [
+          {
+            label: 'Yes',
+            value: false,
+          },
+          {
+            label: 'No',
+            value: true,
+          },
+        ],
+      },
+      question2: {
+        text: 'Do you want to name a guardian for your minor child or minor children?',
+        options: [
+          {
+            label: 'Yes',
+            value: false,
+          },
+          {
+            label: 'No',
+            value: true,
+          },
+        ],
+      },
+      question3: {
+        text: 'Do you want to nominate an individual or a couple as Guardian of your minor child or children?',
+        options: [
+          {
+            label: 'Individual',
+            value: false,
+          },
+          {
+            label: 'Couple',
+            value: false,
+          },
+        ],
+      },
+      guardians: [
+        {
+          firstName: '',
+          lastName: '',
+          relationship_of_Guardian_to_you: '',
+          addressLine1: '',
+          addressLine2: '',
+          city: '',
+          state: '',
+          zipCode: '',
+          email: '',
+          phone: '',
+        },
+      ],
+      co_GuardianInformation: {
+        co_Guardian_One_First_Name: '',
+        co_Guardian_One_Last_Name: '',
+        relationship_of_co_Guardian_One_to_you: '',
+        co_Guardian_Two_First_Name: '',
+        co_Guardian_Two_Last_Name: '',
+        relationship_of_co_Guardian_Two_to_you: '',
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        email: '',
+        phone: '',
+      },
+      question4: {
+        text: 'Which co Guardian has priority should the couple divorce or otherwise split up?',
+        options: [
+          {
+            label: 'Co Guardian One',
+            value: false,
+          },
+          {
+            label: 'Co Guardian Two',
+            value: false,
+          },
+        ],
+      },
+    },
+    remainingDistributions: {
+      personalRepresentatives: [
+        {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+        },
+      ],
+    },
   });
   return (
     <div>
@@ -854,10 +975,38 @@ const Home = () => {
                 setData={setData}
               />
             )}
-            {step === 4 && <Step4 step={step} setStep={setStep} />}
-            {step === 5 && <Step5 step={step} setStep={setStep} />}
-            {step === 6 && <Step6 step={step} setStep={setStep} />}
-            {step === 7 && <Step7 step={step} setStep={setStep} />}
+            {step === 4 && (
+              <Step4
+                step={step}
+                setStep={setStep}
+                data={data}
+                setData={setData}
+              />
+            )}
+            {step === 5 && (
+              <Step5
+                step={step}
+                setStep={setStep}
+                data={data}
+                setData={setData}
+              />
+            )}
+            {step === 6 && (
+              <Step6
+                step={step}
+                setStep={setStep}
+                data={data}
+                setData={setData}
+              />
+            )}
+            {step === 7 && (
+              <Step7
+                step={step}
+                setStep={setStep}
+                data={data}
+                setData={setData}
+              />
+            )}
           </div>
         </form>
       </div>
