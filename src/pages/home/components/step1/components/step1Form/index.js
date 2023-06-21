@@ -4,6 +4,7 @@ import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 import Step4 from './components/Step4';
 import Step5 from './components/Step5';
+import Step6 from './components/Step6';
 
 const Step1Form = ({ activeStep, setActiveStep, setStep, data, setData }) => {
   return (
@@ -13,6 +14,7 @@ const Step1Form = ({ activeStep, setActiveStep, setStep, data, setData }) => {
       {activeStep === 2 && <Step3 data={data} setData={setData} />}
       {activeStep === 3 && <Step4 data={data} setData={setData} />}
       {activeStep === 4 && <Step5 data={data} setData={setData} />}
+      {activeStep === 5 && <Step6 data={data} setData={setData} />}
       <div className="flex justify-end">
         <button
           class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
@@ -24,7 +26,7 @@ const Step1Form = ({ activeStep, setActiveStep, setStep, data, setData }) => {
         <button
           class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
           onClick={() => {
-            if (activeStep === 4) {
+            if (activeStep === 5) {
               setStep((prev) => prev + 1);
             } else {
               setActiveStep((prev) => prev + 1);

@@ -9,7 +9,7 @@ import Step5 from './components/step5';
 import Step6 from './components/step6';
 import Step7 from './components/step7';
 const Home = () => {
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(1);
   const [data, setData] = useState({
     personalInfo: {
       yourInfo: {
@@ -656,8 +656,8 @@ const Home = () => {
     <div>
       <CowLevelHeaderWithLinks />
       <div className="flex h-screen">
-        <div className="relative w-[30%] h-screen">
-          <div className="absolute top-0 w-full h-full overflow-hidden">
+        <div className="relative xs:w-[20%] w-[30%] h-screen">
+          <div className="absolute xs:hidden sm:block top-0 w-full h-full overflow-hidden">
             <img src={sideImg} alt="sideImg" />
           </div>
           <div className="absolute top-0 right-0 flex items-end">
@@ -666,8 +666,11 @@ const Home = () => {
                 className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
                 style={{ border: '1px solid #6660AD' }}
               >
-                <p className="absolute left-[-220px] text-white">
-                  Personal Information
+                <p
+                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
+                  style={{ lineHeight: 1 }}
+                >
+                  Personal <br /> Information
                 </p>
                 <span className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full bg-[#6660AD] font-bold">
                   1
@@ -690,15 +693,18 @@ const Home = () => {
                 }
               >
                 <div
-                  className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                  className="absolute top-[-10px] left-0 h-[30px] w-[1px] ml-[24px]"
                   style={
                     step >= 2
                       ? { display: 'none' }
                       : { border: '1px solid #BCBDBD' }
                   }
                 />
-                <p className="absolute left-[-220px] text-white">
-                  Document Menu
+                <p
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white`}
+                  style={{ lineHeight: 1 }}
+                >
+                  Document <br /> Menu
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -743,8 +749,11 @@ const Home = () => {
                       : { border: '1px solid #BCBDBD' }
                   }
                 />
-                <p className="absolute left-[-220px] text-white">
-                  Preliminary Trust Information
+                <p
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white`}
+                  style={{ lineHeight: 1 }}
+                >
+                  Preliminary <br /> Trust <br /> Information
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -789,8 +798,11 @@ const Home = () => {
                       : { border: '1px solid #BCBDBD' }
                   }
                 />
-                <p className="absolute left-[-220px] text-white">
-                  Family Information
+                <p
+                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
+                  style={{ lineHeight: 1 }}
+                >
+                  Family <br /> Information
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -835,8 +847,11 @@ const Home = () => {
                       : { border: '1px solid #BCBDBD' }
                   }
                 />
-                <p className="absolute left-[-220px] text-white">
-                  Successor Trustees
+                <p
+                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
+                  style={{ lineHeight: 1 }}
+                >
+                  Successor <br /> Trustees
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -881,8 +896,11 @@ const Home = () => {
                       : { border: '1px solid #BCBDBD' }
                   }
                 />
-                <p className="absolute left-[-220px] text-white">
-                  Special Distributions
+                <p
+                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
+                  style={{ lineHeight: 1 }}
+                >
+                  Special <br /> Distributions
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -927,8 +945,11 @@ const Home = () => {
                       : { border: '1px solid #BCBDBD' }
                   }
                 />
-                <p className="absolute left-[-220px] text-white">
-                  Remaining Distributions
+                <p
+                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
+                  style={{ lineHeight: 1 }}
+                >
+                  Remaining <br /> Distributions
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"

@@ -116,6 +116,7 @@ function ColorlibStepIcon(props) {
     3: <ArrowForwardIcon />,
     4: <ArrowForwardIcon />,
     5: <ArrowForwardIcon />,
+    6: <ArrowForwardIcon />,
   };
 
   return (
