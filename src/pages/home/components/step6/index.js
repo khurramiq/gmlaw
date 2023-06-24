@@ -1,4 +1,6 @@
+import { Autocomplete, TextField } from '@mui/material';
 import React from 'react';
+import stateList from '../../../../data/stateList';
 
 const Step6 = ({ step, setStep, data, setData }) => {
   const handleSpecialDistributionsQ1 = (i) => {
@@ -137,7 +139,10 @@ const Step6 = ({ step, setStep, data, setData }) => {
             addressLine1: '',
             addressLine2: '',
             city: '',
-            state: '',
+            state: {
+              label: 'Armed Forces America',
+              value: 'Armed Forces America',
+            },
             zipCode: '',
             email: '',
             phone: '',
@@ -394,7 +399,35 @@ const Step6 = ({ step, setStep, data, setData }) => {
                             class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                             placeholder="City"
                           />
-                          <input
+                          <div className="w-[33%] mr-2">
+                            <Autocomplete
+                              fullWidth
+                              options={stateList}
+                              value={item?.state}
+                              getOptionLabel={(option) => option.label}
+                              onChange={(_, value) =>
+                                handleGuardianFields(i, 'state', value)
+                              }
+                              renderInput={(params) => (
+                                <TextField
+                                  label="State"
+                                  variant="outlined"
+                                  placeholder="Select State"
+                                  name="state"
+                                  // error={
+                                  //   !!touched?.billingAddress && !!errors?.billingAddress?.country
+                                  // }
+                                  // helperText={
+                                  //   touched.billingAddress &&
+                                  //   errors?.billingAddress?.country &&
+                                  //   'required'
+                                  // }
+                                  {...params}
+                                />
+                              )}
+                            />
+                          </div>
+                          {/* <input
                             type="text"
                             name="state"
                             value={item?.state}
@@ -407,7 +440,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                             }
                             class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                             placeholder="State"
-                          />
+                          /> */}
                           <input
                             type="text"
                             name="zipCode"
@@ -652,7 +685,38 @@ const Step6 = ({ step, setStep, data, setData }) => {
                       class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                       placeholder="City"
                     />
-                    <input
+                    <div className="w-[33%] mr-2">
+                      <Autocomplete
+                        fullWidth
+                        options={stateList}
+                        value={
+                          data.specialDistributions.co_GuardianInformation
+                            ?.state
+                        }
+                        getOptionLabel={(option) => option.label}
+                        onChange={(_, value) =>
+                          handleCo_GuardianInformationFields('state', value)
+                        }
+                        renderInput={(params) => (
+                          <TextField
+                            label="State"
+                            variant="outlined"
+                            placeholder="Select State"
+                            name="state"
+                            // error={
+                            //   !!touched?.billingAddress && !!errors?.billingAddress?.country
+                            // }
+                            // helperText={
+                            //   touched.billingAddress &&
+                            //   errors?.billingAddress?.country &&
+                            //   'required'
+                            // }
+                            {...params}
+                          />
+                        )}
+                      />
+                    </div>
+                    {/* <input
                       type="text"
                       name="state"
                       value={
@@ -666,7 +730,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                       }
                       class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                       placeholder="State"
-                    />
+                    /> */}
                     <input
                       type="text"
                       name="zipCode"

@@ -1,3 +1,5 @@
+import { Autocomplete, TextField } from '@mui/material';
+import stateList from '../../../../../../../data/stateList';
 import React from 'react';
 
 const Step1 = ({ data, setData }) => {
@@ -9,6 +11,18 @@ const Step1 = ({ data, setData }) => {
         yourInfo: {
           ...data.personalInfo.yourInfo,
           [e.target.name]: e.target.value,
+        },
+      },
+    });
+  };
+  const handleStateChange = (value) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        yourInfo: {
+          ...data.personalInfo.yourInfo,
+          state: value,
         },
       },
     });
@@ -73,14 +87,32 @@ const Step1 = ({ data, setData }) => {
           class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
           placeholder="City"
         />
-        <input
-          type="text"
-          name="state"
-          value={data?.personalInfo?.yourInfo?.state}
-          onChange={handleYourInfoChange}
-          class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
-          placeholder="State"
-        />
+        <div className="w-[33%] mr-2">
+          <Autocomplete
+            fullWidth
+            options={stateList}
+            value={data?.personalInfo?.yourInfo?.state}
+            getOptionLabel={(option) => option.label}
+            onChange={(_, value) => handleStateChange(value)}
+            renderInput={(params) => (
+              <TextField
+                label="State"
+                variant="outlined"
+                placeholder="Select State"
+                name="state"
+                // error={
+                //   !!touched?.billingAddress && !!errors?.billingAddress?.country
+                // }
+                // helperText={
+                //   touched.billingAddress &&
+                //   errors?.billingAddress?.country &&
+                //   'required'
+                // }
+                {...params}
+              />
+            )}
+          />
+        </div>
         <input
           type="text"
           name="zipCode"

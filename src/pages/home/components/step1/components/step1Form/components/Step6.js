@@ -1,6 +1,8 @@
 import React from 'react';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
+import stateList from '../../../../../../../data/stateList';
+import { Autocomplete, TextField } from '@mui/material';
 
 const Step6 = ({ data, setData }) => {
   const do_you_want_to_make_any_specific_gifts = (i) => {
@@ -178,7 +180,10 @@ const Step6 = ({ data, setData }) => {
             firstName: '',
             lastName: '',
             city: '',
-            state: '',
+            state: {
+              label: 'Armed Forces America',
+              value: 'Armed Forces America',
+            },
             Beneficiary_relationship_to_you: '',
             percentageShare: '',
             any_statements_that_you_wish_to_make: '',
@@ -282,7 +287,10 @@ const Step6 = ({ data, setData }) => {
             addressLine1: '',
             addressLine2: '',
             city: '',
-            status: '',
+            status: {
+              label: 'Armed Forces America',
+              value: 'Armed Forces America',
+            },
             zipCode: '',
             purposeForTheGift: '',
           },
@@ -659,7 +667,35 @@ const Step6 = ({ data, setData }) => {
                 class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[50%]"
                 placeholder="City"
               />
-              <input
+              <div className="w-[50%]">
+                <Autocomplete
+                  fullWidth
+                  options={stateList}
+                  value={item?.state}
+                  getOptionLabel={(option) => option.label}
+                  onChange={(_, value) =>
+                    handleBeneficiariesFields(i, 'state', value)
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      label="State"
+                      variant="outlined"
+                      placeholder="Select State"
+                      name="state"
+                      // error={
+                      //   !!touched?.billingAddress && !!errors?.billingAddress?.country
+                      // }
+                      // helperText={
+                      //   touched.billingAddress &&
+                      //   errors?.billingAddress?.country &&
+                      //   'required'
+                      // }
+                      {...params}
+                    />
+                  )}
+                />
+              </div>
+              {/* <input
                 type="text"
                 name="state"
                 value={item?.state}
@@ -668,7 +704,7 @@ const Step6 = ({ data, setData }) => {
                 }
                 class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[50%]"
                 placeholder="State"
-              />
+              /> */}
             </div>
             <div className="mb-2 flex">
               <div className="w-[70%] mr-2">
@@ -939,7 +975,33 @@ const Step6 = ({ data, setData }) => {
                   class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                   placeholder="City"
                 />
-                <select
+                <div className="w-[33%] mr-2">
+                  <Autocomplete
+                    fullWidth
+                    options={stateList}
+                    value={item?.state}
+                    getOptionLabel={(option) => option.label}
+                    onChange={(_, value) => handleCharity(i, 'state', value)}
+                    renderInput={(params) => (
+                      <TextField
+                        label="State"
+                        variant="outlined"
+                        placeholder="Select State"
+                        name="state"
+                        // error={
+                        //   !!touched?.billingAddress && !!errors?.billingAddress?.country
+                        // }
+                        // helperText={
+                        //   touched.billingAddress &&
+                        //   errors?.billingAddress?.country &&
+                        //   'required'
+                        // }
+                        {...params}
+                      />
+                    )}
+                  />
+                </div>
+                {/* <select
                   class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                   name="state"
                   value={item?.state}
@@ -955,7 +1017,7 @@ const Step6 = ({ data, setData }) => {
                     Armed Forces Pacific
                   </option>
                   <option value="Alabama">Alabama</option>
-                </select>
+                </select> */}
                 <input
                   type="text"
                   name="zipCode"

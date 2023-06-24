@@ -8,13 +8,13 @@ const CowLevelHeaderWithLinks = ({ fullpageApi, open, setOpen }) => {
         <div>
           <Link to="/" onClick={() => fullpageApi.moveTo(1)}>
             <img
-              className="sm:w-[120px]  xs:w-[50px]"
+              className="sm:w-[200px]  xs:w-[50px]"
               src={headerLogo}
               alt="headerLogo"
             />
           </Link>
         </div>
-        <ul className="sm:flex xs:hidden text-[#BCBDBD] text-[18px]">
+        {/* <ul className="sm:flex xs:hidden text-[#BCBDBD] text-[18px]">
           <li className="pl-5 pr-5">
             <Link to={'/'} className="hover:text-black">
               Home
@@ -35,7 +35,7 @@ const CowLevelHeaderWithLinks = ({ fullpageApi, open, setOpen }) => {
               Contact Us
             </Link>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

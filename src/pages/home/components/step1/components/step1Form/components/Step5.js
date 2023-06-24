@@ -2,6 +2,8 @@ import React from 'react';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
+import { Autocomplete, TextField } from '@mui/material';
+import stateList from '../../../../../../../data/stateList';
 
 const Step5 = ({ data, setData }) => {
   const maritalStatus = (i) => {
@@ -337,6 +339,18 @@ const Step5 = ({ data, setData }) => {
                 }
               }
             ),
+        },
+      },
+    });
+  };
+  const handleStateChange = (value) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        successorTrustee: {
+          ...data.personalInfo.successorTrustee,
+          state: value,
         },
       },
     });
@@ -802,7 +816,33 @@ const Step5 = ({ data, setData }) => {
               class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
               placeholder="City"
             />
-            <select
+            <div className="w-[33%] mr-2">
+              <Autocomplete
+                fullWidth
+                options={stateList}
+                value={data?.personalInfo?.successorTrustee?.state}
+                getOptionLabel={(option) => option.label}
+                onChange={(_, value) => handleStateChange(value)}
+                renderInput={(params) => (
+                  <TextField
+                    label="State"
+                    variant="outlined"
+                    placeholder="Select State"
+                    name="state"
+                    // error={
+                    //   !!touched?.billingAddress && !!errors?.billingAddress?.country
+                    // }
+                    // helperText={
+                    //   touched.billingAddress &&
+                    //   errors?.billingAddress?.country &&
+                    //   'required'
+                    // }
+                    {...params}
+                  />
+                )}
+              />
+            </div>
+            {/* <select
               class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
               name="state"
               value={data?.personalInfo?.successorTrustee?.state}
@@ -811,7 +851,7 @@ const Step5 = ({ data, setData }) => {
               <option value="Armed Forces America">Armed Forces America</option>
               <option value="Armed Forces">Armed Forces</option>
               <option value="Armed Forces Pacific">Armed Forces Pacific</option>
-            </select>
+            </select> */}
             <input
               type="text"
               name="zipCode"

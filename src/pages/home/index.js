@@ -8,6 +8,7 @@ import Step4 from './components/step4';
 import Step5 from './components/step5';
 import Step6 from './components/step6';
 import Step7 from './components/step7';
+import Step11 from './components/step11';
 const Home = () => {
   const [step, setStep] = useState(1);
   const [data, setData] = useState({
@@ -19,7 +20,10 @@ const Home = () => {
         addressLine1: '',
         addressLine2: '',
         city: '',
-        state: '',
+        state: {
+          label: 'Armed Forces America',
+          value: 'Armed Forces America',
+        },
         zipCode: '',
         email: '',
         gender: 'Male',
@@ -353,7 +357,10 @@ const Home = () => {
         addressLine1: '',
         addressLine2: '',
         city: '',
-        state: '',
+        state: {
+          label: 'Armed Forces America',
+          value: 'Armed Forces America',
+        },
         zipCode: '',
         email: '',
         phone: '',
@@ -431,7 +438,10 @@ const Home = () => {
           firstName: '',
           lastName: '',
           city: '',
-          state: '',
+          state: {
+            label: 'Armed Forces America',
+            value: 'Armed Forces America',
+          },
           Beneficiary_relationship_to_you: '',
           percentageShare: '',
           any_statements_that_you_wish_to_make: '',
@@ -472,7 +482,10 @@ const Home = () => {
           addressLine1: '',
           addressLine2: '',
           city: '',
-          status: '',
+          status: {
+            label: 'Armed Forces America',
+            value: 'Armed Forces America',
+          },
           zipCode: '',
           purposeForTheGift: '',
         },
@@ -606,7 +619,10 @@ const Home = () => {
           addressLine1: '',
           addressLine2: '',
           city: '',
-          state: '',
+          status: {
+            label: 'Armed Forces America',
+            value: 'Armed Forces America',
+          },
           zipCode: '',
           email: '',
           phone: '',
@@ -622,7 +638,10 @@ const Home = () => {
         addressLine1: '',
         addressLine2: '',
         city: '',
-        state: '',
+        state: {
+          label: 'Armed Forces America',
+          value: 'Armed Forces America',
+        },
         zipCode: '',
         email: '',
         phone: '',
@@ -658,7 +677,7 @@ const Home = () => {
       <div className="flex h-screen">
         <div className="relative xs:w-[20%] w-[30%] h-screen">
           <div className="absolute xs:hidden sm:block top-0 w-full h-full overflow-hidden">
-            <img src={sideImg} alt="sideImg" />
+            <img className="h-full" src={sideImg} alt="sideImg" />
           </div>
           <div className="absolute top-0 right-0 flex items-end">
             <ul className="w-[60px] mt-5">
@@ -704,7 +723,7 @@ const Home = () => {
                   className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white`}
                   style={{ lineHeight: 1 }}
                 >
-                  Document <br /> Menu
+                  Family & <br /> Beneficiary <br /> info
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -753,7 +772,7 @@ const Home = () => {
                   className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white`}
                   style={{ lineHeight: 1 }}
                 >
-                  Preliminary <br /> Trust <br /> Information
+                  Document <br /> Menu
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -799,10 +818,10 @@ const Home = () => {
                   }
                 />
                 <p
-                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white`}
                   style={{ lineHeight: 1 }}
                 >
-                  Family <br /> Information
+                  Preliminary <br /> Trust <br /> Information
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -851,7 +870,7 @@ const Home = () => {
                   className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
                   style={{ lineHeight: 1 }}
                 >
-                  Successor <br /> Trustees
+                  Family <br /> Information
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -861,7 +880,7 @@ const Home = () => {
                       : { background: '#BCBDBD' }
                   }
                 >
-                  5
+                  4
                 </span>
                 <div
                   className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
@@ -900,7 +919,7 @@ const Home = () => {
                   className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
                   style={{ lineHeight: 1 }}
                 >
-                  Special <br /> Distributions
+                  Successor <br /> Trustees
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -949,7 +968,7 @@ const Home = () => {
                   className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
                   style={{ lineHeight: 1 }}
                 >
-                  Remaining <br /> Distributions
+                  Special <br /> Distributions
                 </p>
                 <span
                   className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
@@ -960,6 +979,55 @@ const Home = () => {
                   }
                 >
                   7
+                </span>
+                <div
+                  className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                  style={
+                    step >= 7
+                      ? { display: 'none' }
+                      : { border: '1px solid #BCBDBD' }
+                  }
+                />
+              </li>
+              <div
+                className="h-[20px] w-[1px] ml-[24px]"
+                style={
+                  step >= 7
+                    ? { border: '1px solid #6660AD' }
+                    : { display: 'none' }
+                }
+              />
+              <li
+                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
+                style={
+                  step >= 8
+                    ? { border: '1px solid #6660AD' }
+                    : { marginTop: '10px' }
+                }
+              >
+                <div
+                  className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                  style={
+                    step >= 8
+                      ? { display: 'none' }
+                      : { border: '1px solid #BCBDBD' }
+                  }
+                />
+                <p
+                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
+                  style={{ lineHeight: 1 }}
+                >
+                  Remaining <br /> Distributions
+                </p>
+                <span
+                  className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                  style={
+                    step >= 8
+                      ? { background: '#6660AD' }
+                      : { background: '#BCBDBD' }
+                  }
+                >
+                  8
                 </span>
               </li>
             </ul>
@@ -981,7 +1049,7 @@ const Home = () => {
               />
             )}
             {step === 2 && (
-              <Step2
+              <Step11
                 step={step}
                 setStep={setStep}
                 data={data}
@@ -989,7 +1057,7 @@ const Home = () => {
               />
             )}
             {step === 3 && (
-              <Step3
+              <Step2
                 step={step}
                 setStep={setStep}
                 data={data}
@@ -997,7 +1065,7 @@ const Home = () => {
               />
             )}
             {step === 4 && (
-              <Step4
+              <Step3
                 step={step}
                 setStep={setStep}
                 data={data}
@@ -1005,7 +1073,7 @@ const Home = () => {
               />
             )}
             {step === 5 && (
-              <Step5
+              <Step4
                 step={step}
                 setStep={setStep}
                 data={data}
@@ -1013,7 +1081,7 @@ const Home = () => {
               />
             )}
             {step === 6 && (
-              <Step6
+              <Step5
                 step={step}
                 setStep={setStep}
                 data={data}
@@ -1021,6 +1089,14 @@ const Home = () => {
               />
             )}
             {step === 7 && (
+              <Step6
+                step={step}
+                setStep={setStep}
+                data={data}
+                setData={setData}
+              />
+            )}
+            {step === 8 && (
               <Step7
                 step={step}
                 setStep={setStep}
