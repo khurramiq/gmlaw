@@ -9,6 +9,7 @@ import Step5 from './components/step5';
 import Step6 from './components/step6';
 import Step7 from './components/step7';
 import Step11 from './components/step11';
+import Preview from './components/Preview';
 const Home = () => {
   const [step, setStep] = useState(1);
   const [data, setData] = useState({
@@ -1107,6 +1108,7 @@ const Home = () => {
           </div>
         </form>
       </div>
+      {/* <Preview data={data} /> */}
     </div>
   );
 };
