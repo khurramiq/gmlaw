@@ -50,6 +50,31 @@ const Step4 = ({ step, setStep, data, setData }) => {
       },
     });
   };
+  const validate = () => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if (data.familyInfo.healthCareAgents.length > 0) {
+      for (let i = 0; i < data.familyInfo.healthCareAgents.length; i++) {
+        const element = data.familyInfo.healthCareAgents[i];
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          !regex.test(element.email) ||
+          element.phone === '' ||
+          element.relationship === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const handleNext = () => {
+    if (validate()) {
+      if (step <= 7) {
+        setStep((prev) => prev + 1);
+      }
+    }
+  };
   return (
     <div className="m-5">
       <h1 className="font-bold text-2xl text-center">
@@ -96,6 +121,7 @@ const Step4 = ({ step, setStep, data, setData }) => {
                   }
                   class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                   placeholder="First"
+                  required
                 />
               </div>
               <div className="w-[50%]">
@@ -112,6 +138,7 @@ const Step4 = ({ step, setStep, data, setData }) => {
                   }
                   class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                   placeholder="Last"
+                  required
                 />
               </div>
             </div>
@@ -130,6 +157,7 @@ const Step4 = ({ step, setStep, data, setData }) => {
                     )
                   }
                   class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                  required
                 />
               </div>
               <div className="w-[50%]">
@@ -146,6 +174,7 @@ const Step4 = ({ step, setStep, data, setData }) => {
                     )
                   }
                   class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                  required
                 />
               </div>
             </div>
@@ -164,6 +193,7 @@ const Step4 = ({ step, setStep, data, setData }) => {
                     )
                   }
                   class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
+                  required
                 />
               </div>
             </div>
@@ -188,11 +218,7 @@ const Step4 = ({ step, setStep, data, setData }) => {
         </button>
         <button
           class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-          onClick={() => {
-            if (step <= 6) {
-              setStep((prev) => prev + 1);
-            }
-          }}
+          onClick={() => handleNext()}
         >
           Next
         </button>

@@ -174,6 +174,65 @@ const Step6 = ({ step, setStep, data, setData }) => {
       },
     });
   };
+  const validate = () => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if (
+      data.specialDistributions.question1.options[0].value &&
+      data.specialDistributions.question2.options[0].value &&
+      data.specialDistributions.question3.options[0].value
+    ) {
+      for (let i = 0; i < data.specialDistributions.guardians.length; i++) {
+        const element = data.specialDistributions.guardians[i];
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          element.relationship_of_Guardian_to_you === '' ||
+          element.addressLine1 === '' ||
+          element.city === '' ||
+          element.zipCode === '' ||
+          !regex.test(element.email) ||
+          element.phone === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (
+      data.specialDistributions.question1.options[0].value &&
+      data.specialDistributions.question2.options[0].value &&
+      data.specialDistributions.question3.options[1].value
+    ) {
+      if (
+        data.specialDistributions.co_GuardianInformation
+          ?.co_Guardian_One_First_Name === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.co_Guardian_One_Last_Name === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.relationship_of_co_Guardian_One_to_you === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.co_Guardian_Two_First_Name === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.co_Guardian_Two_Last_Name === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.relationship_of_co_Guardian_Two_to_you === '' ||
+        data.specialDistributions.co_GuardianInformation?.addressLine1 === '' ||
+        data.specialDistributions.co_GuardianInformation?.city === '' ||
+        data.specialDistributions.co_GuardianInformation?.zipCode === '' ||
+        !regex.test(data.specialDistributions.co_GuardianInformation?.email) ||
+        data.specialDistributions.co_GuardianInformation?.phone === ''
+      ) {
+        return false;
+      }
+    }
+    return true;
+  };
+  const handleNext = () => {
+    if (validate()) {
+      if (step <= 7) {
+        setStep((prev) => prev + 1);
+      }
+    }
+  };
   return (
     <div className="m-5">
       <h1 className="font-bold text-2xl text-center">
@@ -211,7 +270,8 @@ const Step6 = ({ step, setStep, data, setData }) => {
             up to the government.
           </h1>
           <h3 className="font-bold mt-5">
-            Do you have any children under 18 years of age?
+            Do you want to name a guardian for your minor child or minor
+            children?
           </h3>
           <div class="flex space-x-4">
             <label class="flex items-center">
@@ -306,6 +366,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                               }
                               class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                               placeholder="First"
+                              required
                             />
                           </div>
                           <div className="w-[50%]">
@@ -322,6 +383,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                               }
                               class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                               placeholder="Last"
+                              required
                             />
                           </div>
                         </div>
@@ -342,6 +404,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                                 )
                               }
                               class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                              required
                             />
                           </div>
                         </div>
@@ -363,6 +426,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                               }
                               class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                               placeholder="Address Line 1"
+                              required
                             />
                           </div>
                         </div>
@@ -398,6 +462,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                             }
                             class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                             placeholder="City"
+                            required
                           />
                           <div className="w-[33%] mr-2">
                             <Autocomplete
@@ -427,20 +492,6 @@ const Step6 = ({ step, setStep, data, setData }) => {
                               )}
                             />
                           </div>
-                          {/* <input
-                            type="text"
-                            name="state"
-                            value={item?.state}
-                            onChange={(e) =>
-                              handleGuardianFields(
-                                i,
-                                e.target.name,
-                                e.target.value
-                              )
-                            }
-                            class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
-                            placeholder="State"
-                          /> */}
                           <input
                             type="text"
                             name="zipCode"
@@ -454,6 +505,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                             }
                             class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[33%]"
                             placeholder="Zip Code"
+                            required
                           />
                         </div>
                         <div className="mb-2 flex">
@@ -471,6 +523,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                                 )
                               }
                               class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                              required
                             />
                           </div>
                           <div className="w-[50%]">
@@ -487,6 +540,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                                 )
                               }
                               class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                              required
                             />
                           </div>
                         </div>
@@ -524,6 +578,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                         placeholder="First"
+                        required
                       />
                     </div>
                     <div className="w-[50%]">
@@ -542,6 +597,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                         placeholder="Last"
+                        required
                       />
                     </div>
                   </div>
@@ -564,6 +620,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                           )
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                        required
                       />
                     </div>
                   </div>
@@ -585,6 +642,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                         placeholder="First"
+                        required
                       />
                     </div>
                     <div className="w-[50%]">
@@ -603,6 +661,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                         placeholder="Last"
+                        required
                       />
                     </div>
                   </div>
@@ -625,6 +684,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                           )
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                        required
                       />
                     </div>
                   </div>
@@ -646,6 +706,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                         placeholder="Address Line 1"
+                        required
                       />
                     </div>
                   </div>
@@ -684,6 +745,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                       }
                       class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                       placeholder="City"
+                      required
                     />
                     <div className="w-[33%] mr-2">
                       <Autocomplete
@@ -716,21 +778,6 @@ const Step6 = ({ step, setStep, data, setData }) => {
                         )}
                       />
                     </div>
-                    {/* <input
-                      type="text"
-                      name="state"
-                      value={
-                        data.specialDistributions.co_GuardianInformation?.state
-                      }
-                      onChange={(e) =>
-                        handleCo_GuardianInformationFields(
-                          e.target.name,
-                          e.target.value
-                        )
-                      }
-                      class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
-                      placeholder="State"
-                    /> */}
                     <input
                       type="text"
                       name="zipCode"
@@ -746,6 +793,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                       }
                       class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[33%]"
                       placeholder="Zip Code"
+                      required
                     />
                   </div>
                   <div className="mb-2 flex">
@@ -765,6 +813,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                           )
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                        required
                       />
                     </div>
                     <div className="w-[50%]">
@@ -783,6 +832,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
                           )
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                        required
                       />
                     </div>
                   </div>
@@ -830,11 +880,7 @@ const Step6 = ({ step, setStep, data, setData }) => {
         </button>
         <button
           class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-          onClick={() => {
-            if (step <= 6) {
-              setStep((prev) => prev + 1);
-            }
-          }}
+          onClick={() => handleNext()}
         >
           Next
         </button>

@@ -519,6 +519,24 @@ const Step11 = ({ step, setStep, data, setData }) => {
       },
     });
   };
+  const handleBeneficiariesFields1 = (i, name, value) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        beneficiaries1: data.personalInfo.beneficiaries1.map((item, index) => {
+          if (i === index) {
+            return {
+              ...item,
+              [name]: value,
+            };
+          } else {
+            return item;
+          }
+        }),
+      },
+    });
+  };
   const addBeneficiary = () => {
     setData({
       ...data,
@@ -556,12 +574,46 @@ const Step11 = ({ step, setStep, data, setData }) => {
       },
     });
   };
+  const addBeneficiary1 = () => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        beneficiaries1: [
+          ...data.personalInfo.beneficiaries1,
+          {
+            firstName: '',
+            lastName: '',
+            city: '',
+            state: {
+              label: 'Armed Forces America',
+              value: 'Armed Forces America',
+            },
+            Beneficiary_relationship_to_you: '',
+            percentageShare: '',
+            any_statements_that_you_wish_to_make: '',
+          },
+        ],
+      },
+    });
+  };
   const removeBeneficiary = (i) => {
     setData({
       ...data,
       personalInfo: {
         ...data.personalInfo,
         beneficiaries: data.personalInfo.beneficiaries.filter(
+          (item, index) => i !== index
+        ),
+      },
+    });
+  };
+  const removeBeneficiary1 = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        beneficiaries1: data.personalInfo.beneficiaries1.filter(
           (item, index) => i !== index
         ),
       },
@@ -678,6 +730,190 @@ const Step11 = ({ step, setStep, data, setData }) => {
         ),
       },
     });
+  };
+  const addCharity1 = () => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        charitableDonations1: [
+          ...data.personalInfo.charitableDonations1,
+          {
+            nameOfCharity: '',
+            percentageOfResidue: '',
+            addressLine1: '',
+            addressLine2: '',
+            city: '',
+            status: {
+              label: 'Armed Forces America',
+              value: 'Armed Forces America',
+            },
+            zipCode: '',
+            purposeForTheGift: '',
+          },
+        ],
+      },
+    });
+  };
+  const removeCharity1 = (i) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        charitableDonations1: data.personalInfo.charitableDonations1.filter(
+          (item, index) => i !== index
+        ),
+      },
+    });
+  };
+  const handleCharity1 = (i, name, value) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        charitableDonations1: data.personalInfo.charitableDonations1.map(
+          (item, index) => {
+            if (i === index) {
+              return {
+                ...item,
+                [name]: value,
+              };
+            } else {
+              return item;
+            }
+          }
+        ),
+      },
+    });
+  };
+  const validate = () => {
+    // let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+
+    if (!data.personalInfo.livingChildren.options[0].value) {
+      for (
+        let i = 0;
+        i < data.personalInfo.livingChildrenInformation.length;
+        i++
+      ) {
+        const element = data.personalInfo.livingChildrenInformation[i];
+        if (
+          element.firstName === '' ||
+          element.middleName === '' ||
+          element.lastName === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (!data.personalInfo.deceasedChildren.options[0].value) {
+      for (
+        let i = 0;
+        i < data.personalInfo.deceasedChildrenInformation.length;
+        i++
+      ) {
+        const element = data.personalInfo.deceasedChildrenInformation[i];
+        if (
+          element.firstName === '' ||
+          element.middleName === '' ||
+          element.lastName === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (
+      data.personalInfo.do_you_want_to_make_any_specific_gifts.options[0].value
+    ) {
+      for (let i = 0; i < data.personalInfo.gifts.length; i++) {
+        const element = data.personalInfo.gifts[i];
+        if (element.nameOfIndividual === '') {
+          return false;
+        }
+        if (element?.typeOfGift[0]?.value && element?.cashGiftAmount === '') {
+          return false;
+        }
+        if (
+          element.typeOfGift[1].value &&
+          element.describeTheItemOfPersonalProperty === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (
+      data.personalInfo.first_do_you_want_to_make_any_charitable_donations
+        .options[0].value
+    ) {
+      for (let i = 0; i < data.personalInfo.charitableDonations1.length; i++) {
+        const element = data.personalInfo.charitableDonations1[i];
+
+        if (
+          element.nameOfCharity === '' ||
+          element.percentageOfResidue === '' ||
+          element.addressLine1 === '' ||
+          element.city === '' ||
+          element.zipCode === '' ||
+          element.purposeForTheGift === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (data.personalInfo.beneficiaries.length > 0) {
+      for (let i = 0; i < data.personalInfo.beneficiaries.length; i++) {
+        const element = data.personalInfo.beneficiaries[i];
+
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          element.city === '' ||
+          element.Beneficiary_relationship_to_you === '' ||
+          element.percentageShare === '' ||
+          element.will_this_beneficiarys_share_be_given_outright === '' ||
+          element.pick_your_age_for_disbursement === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (data.personalInfo.contingent_Residue_Distribution[1].value) {
+      for (let i = 0; i < data.personalInfo.beneficiaries1.length; i++) {
+        const element = data.personalInfo.beneficiaries1[i];
+
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          element.city === '' ||
+          element.Beneficiary_relationship_to_you === '' ||
+          element.percentageShare === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (data.personalInfo.contingent_Residue_Distribution[2].value) {
+      for (let i = 0; i < data.personalInfo.charitableDonations.length; i++) {
+        const element = data.personalInfo.charitableDonations[i];
+        if (
+          element.nameOfCharity === '' ||
+          element.percentageOfResidue === '' ||
+          element.addressLine1 === '' ||
+          element.city === '' ||
+          element.zipCode === '' ||
+          element.purposeForTheGift === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const handleNext = () => {
+    if (validate()) {
+      if (step <= 7) {
+        setStep((prev) => prev + 1);
+      }
+    }
   };
   return (
     <div className="p-5">
@@ -829,6 +1065,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     }
                     className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                     placeholder="First"
+                    required
                   />
                   <input
                     type="text"
@@ -843,6 +1080,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     }
                     className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                     placeholder="Middle"
+                    required
                   />
                   <input
                     type="text"
@@ -857,6 +1095,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     }
                     className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[33%]"
                     placeholder="Last"
+                    required
                   />
                 </div>
                 <h3 className="mb-1 font-bold">Date of Birth</h3>
@@ -914,6 +1153,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     }
                     className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                     placeholder="First"
+                    required
                   />
                   <input
                     type="text"
@@ -928,6 +1168,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     }
                     className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                     placeholder="Middle"
+                    required
                   />
                   <input
                     type="text"
@@ -942,6 +1183,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     }
                     className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[33%]"
                     placeholder="Last"
+                    required
                   />
                 </div>
                 <div className="mb-2 flex">
@@ -1508,6 +1750,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                       }
                       class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                       placeholder="Name of Individual"
+                      required
                     />
                   </div>
                 </div>
@@ -1545,7 +1788,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     <div className="w-[50%]">
                       <h3 className="mb-1 font-bold">Cash Gift Amount</h3>
                       <input
-                        type="text"
+                        type="number"
                         name="cashGiftAmount"
                         value={item?.cashGiftAmount}
                         onChange={(e) =>
@@ -1553,6 +1796,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                         placeholder="Amount"
+                        required
                       />
                     </div>
                   )}
@@ -1572,6 +1816,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                         }
                         class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
                         placeholder="Describe the item of personal property"
+                        required
                       />
                     </div>
                   </div>
@@ -1668,6 +1913,163 @@ const Step11 = ({ step, setStep, data, setData }) => {
             </span>
           </label>
         </div>
+        {data.personalInfo.first_do_you_want_to_make_any_charitable_donations
+          .options[0].value && (
+          <>
+            <div>
+              <h3 className="font-bold mb-3">Charitable Donations</h3>
+              {data.personalInfo.charitableDonations1.map((item, i) => (
+                <div
+                  key={i}
+                  className={`${
+                    i % 2 === 0 ? 'bg-slate-200' : ''
+                  } p-5 rounded-lg mb-3`}
+                >
+                  <div>
+                    <i
+                      className="far fa-times-circle cursor-pointer"
+                      onClick={() => removeCharity1(i)}
+                    ></i>
+                    <span className="font-bold ml-3">Charity {i + 1}</span>
+                  </div>
+                  <div className="mb-2 flex">
+                    <div className="w-[50%] mr-2">
+                      <h3 className="mb-1 font-bold">Name of Charity</h3>
+                      <input
+                        type="text"
+                        name="nameOfCharity"
+                        value={item?.nameOfCharity}
+                        onChange={(e) =>
+                          handleCharity1(i, e.target.name, e.target.value)
+                        }
+                        class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                        required
+                      />
+                    </div>
+                    <div className="w-[50%]">
+                      <h3 className="mb-1 font-bold">Percentage of Residue</h3>
+                      <input
+                        type="text"
+                        name="percentageOfResidue"
+                        value={item?.percentageOfResidue}
+                        onChange={(e) =>
+                          handleCharity1(i, e.target.name, e.target.value)
+                        }
+                        class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="mb-2">
+                    <h3 className="mb-1 font-bold">Charity's Address</h3>
+                    <input
+                      type="text"
+                      name="addressLine1"
+                      value={item?.addressLine1}
+                      onChange={(e) =>
+                        handleCharity1(i, e.target.name, e.target.value)
+                      }
+                      class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
+                      placeholder="Address Line 1"
+                      required
+                    />
+                  </div>
+                  <div className="mb-2">
+                    <input
+                      type="text"
+                      name="addressLine2"
+                      value={item?.addressLine2}
+                      onChange={(e) =>
+                        handleCharity1(i, e.target.name, e.target.value)
+                      }
+                      class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
+                      placeholder="Address Line 2"
+                    />
+                  </div>
+                  <div className="mb-2 flex">
+                    <input
+                      type="text"
+                      name="city"
+                      value={item?.city}
+                      onChange={(e) =>
+                        handleCharity1(i, e.target.name, e.target.value)
+                      }
+                      class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
+                      placeholder="City"
+                      required
+                    />
+                    <div className="w-[33%] mr-2">
+                      <Autocomplete
+                        fullWidth
+                        options={stateList}
+                        value={item?.state}
+                        getOptionLabel={(option) => option.label}
+                        onChange={(_, value) =>
+                          handleCharity1(i, 'state', value)
+                        }
+                        renderInput={(params) => (
+                          <TextField
+                            label="State"
+                            variant="outlined"
+                            placeholder="Select State"
+                            name="state"
+                            // error={
+                            //   !!touched?.billingAddress && !!errors?.billingAddress?.country
+                            // }
+                            // helperText={
+                            //   touched.billingAddress &&
+                            //   errors?.billingAddress?.country &&
+                            //   'required'
+                            // }
+                            {...params}
+                          />
+                        )}
+                      />
+                    </div>
+                    <input
+                      type="text"
+                      name="zipCode"
+                      value={item?.zipCode}
+                      onChange={(e) =>
+                        handleCharity1(i, e.target.name, e.target.value)
+                      }
+                      class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[33%]"
+                      placeholder="zipCode"
+                      required
+                    />
+                  </div>
+                  <div className="mb-2 flex">
+                    <div className="w-full">
+                      <h3 className="mb-1 font-bold">Purpose for the gift</h3>
+                      <input
+                        type="text"
+                        name="purposeForTheGift"
+                        value={item?.purposeForTheGift}
+                        onChange={(e) =>
+                          handleCharity1(i, e.target.name, e.target.value)
+                        }
+                        class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                        required
+                      />
+                      <i className="text-sm">
+                        If left blank, the gift will be used for the charity's
+                        general charitable purposes
+                      </i>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div className="mt-2">
+                <button
+                  className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
+                  onClick={() => addCharity1()}
+                >
+                  Add Charity
+                </button>
+              </div>
+            </div>
+          </>
+        )}
         <h1 className="mt-5 font-bold">REMAINDER BENEFICIARIES</h1>
         <i className="mt-2">Remember - the total must add up to 100%</i>
         <div className="mt-3">
@@ -1690,22 +2092,24 @@ const Step11 = ({ step, setStep, data, setData }) => {
                 <input
                   type="text"
                   name="firstName"
-                  value={data?.personalInfo?.beneficiaries?.firstName}
+                  value={item?.firstName}
                   onChange={(e) =>
                     handleBeneficiariesFields(i, e.target.name, e.target.value)
                   }
                   class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[50%]"
                   placeholder="First"
+                  required
                 />
                 <input
                   type="text"
                   name="lastName"
-                  value={data?.personalInfo?.beneficiaries?.lastName}
+                  value={item?.lastName}
                   onChange={(e) =>
                     handleBeneficiariesFields(i, e.target.name, e.target.value)
                   }
                   class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[50%]"
-                  placeholder="Middle"
+                  placeholder="Last"
+                  required
                 />
               </div>
               <h3 className="mb-1 font-bold">
@@ -1721,6 +2125,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                   }
                   class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[50%]"
                   placeholder="City"
+                  required
                 />
                 <div className="w-[50%]">
                   <Autocomplete
@@ -1750,16 +2155,6 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     )}
                   />
                 </div>
-                {/* <input
-                type="text"
-                name="state"
-                value={item?.state}
-                onChange={(e) =>
-                  handleBeneficiariesFields(i, e.target.name, e.target.value)
-                }
-                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[50%]"
-                placeholder="State"
-              /> */}
               </div>
               <div className="mb-2 flex">
                 <div className="w-[70%] mr-2">
@@ -1778,6 +2173,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                       )
                     }
                     class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                    required
                   />
                 </div>
                 <div className="w-[30%]">
@@ -1794,6 +2190,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                       )
                     }
                     class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                    required
                   />
                 </div>
               </div>
@@ -1888,6 +2285,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                       )
                     }
                     class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                    required
                   />
                 </div>
               </div>
@@ -1917,6 +2315,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                       )
                     }
                     class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                    required
                   />
                 </div>
               </div>
@@ -1978,6 +2377,171 @@ const Step11 = ({ step, setStep, data, setData }) => {
             </span>
           </label>
         </div>
+        {data.personalInfo.contingent_Residue_Distribution[1].value && (
+          <div className="mt-3">
+            {data.personalInfo.beneficiaries1.map((item, i) => (
+              <div
+                key={i}
+                className={`${
+                  i % 2 === 0 ? 'bg-slate-200' : ''
+                } p-5 rounded-lg mb-3`}
+              >
+                <div>
+                  <i
+                    className="far fa-times-circle cursor-pointer"
+                    onClick={() => removeBeneficiary1(i)}
+                  ></i>
+                  <span className="font-bold ml-3">Beneficiary {i + 1}</span>
+                </div>
+                <h3 className="mb-1 font-bold">Name</h3>
+                <div className="mb-2 flex">
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={item?.firstName}
+                    onChange={(e) =>
+                      handleBeneficiariesFields1(
+                        i,
+                        e.target.name,
+                        e.target.value
+                      )
+                    }
+                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[50%]"
+                    placeholder="First"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={item?.lastName}
+                    onChange={(e) =>
+                      handleBeneficiariesFields1(
+                        i,
+                        e.target.name,
+                        e.target.value
+                      )
+                    }
+                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[50%]"
+                    placeholder="Last"
+                    required
+                  />
+                </div>
+                <h3 className="mb-1 font-bold">
+                  City and State where beneficiary lives
+                </h3>
+                <div className="mb-2 flex">
+                  <input
+                    type="text"
+                    name="city"
+                    value={item?.city}
+                    onChange={(e) =>
+                      handleBeneficiariesFields1(
+                        i,
+                        e.target.name,
+                        e.target.value
+                      )
+                    }
+                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[50%]"
+                    placeholder="City"
+                    required
+                  />
+                  <div className="w-[50%]">
+                    <Autocomplete
+                      fullWidth
+                      options={stateList}
+                      value={item?.state}
+                      getOptionLabel={(option) => option.label}
+                      onChange={(_, value) =>
+                        handleBeneficiariesFields1(i, 'state', value)
+                      }
+                      renderInput={(params) => (
+                        <TextField
+                          label="State"
+                          variant="outlined"
+                          placeholder="Select State"
+                          name="state"
+                          // error={
+                          //   !!touched?.billingAddress && !!errors?.billingAddress?.country
+                          // }
+                          // helperText={
+                          //   touched.billingAddress &&
+                          //   errors?.billingAddress?.country &&
+                          //   'required'
+                          // }
+                          {...params}
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="mb-2 flex">
+                  <div className="w-[70%] mr-2">
+                    <h3 className="mb-1 font-bold">
+                      Beneficiary's relationship to you
+                    </h3>
+                    <input
+                      type="text"
+                      name="Beneficiary_relationship_to_you"
+                      value={item?.Beneficiary_relationship_to_you}
+                      onChange={(e) =>
+                        handleBeneficiariesFields1(
+                          i,
+                          e.target.name,
+                          e.target.value
+                        )
+                      }
+                      class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                      required
+                    />
+                  </div>
+                  <div className="w-[30%]">
+                    <h3 className="mb-1 font-bold">Percentage Share</h3>
+                    <input
+                      type="text"
+                      name="percentageShare"
+                      value={item?.percentageShare}
+                      onChange={(e) =>
+                        handleBeneficiariesFields1(
+                          i,
+                          e.target.name,
+                          e.target.value
+                        )
+                      }
+                      class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="mb-2 flex">
+                  <div className="w-full">
+                    <h3 className="mb-1 font-bold">
+                      Any statements that you wish to make (optional)
+                    </h3>
+                    <input
+                      type="text"
+                      name="any_statements_that_you_wish_to_make"
+                      value={item?.any_statements_that_you_wish_to_make}
+                      onChange={(e) =>
+                        handleBeneficiariesFields1(
+                          i,
+                          e.target.name,
+                          e.target.value
+                        )
+                      }
+                      class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+            <button
+              class="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
+              onClick={() => addBeneficiary1()}
+            >
+              Add Beneficiary
+            </button>
+          </div>
+        )}
         {data.personalInfo.contingent_Residue_Distribution[2].value && (
           <div>
             <h3 className="font-bold mb-3">Charitable Donations</h3>
@@ -2006,6 +2570,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                         handleCharity(i, e.target.name, e.target.value)
                       }
                       class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                      required
                     />
                   </div>
                   <div className="w-[50%]">
@@ -2018,6 +2583,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                         handleCharity(i, e.target.name, e.target.value)
                       }
                       class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                      required
                     />
                   </div>
                 </div>
@@ -2032,6 +2598,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     }
                     class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
                     placeholder="Address Line 1"
+                    required
                   />
                 </div>
                 <div className="mb-2">
@@ -2056,6 +2623,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     }
                     class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                     placeholder="City"
+                    required
                   />
                   <div className="w-[33%] mr-2">
                     <Autocomplete
@@ -2083,23 +2651,6 @@ const Step11 = ({ step, setStep, data, setData }) => {
                       )}
                     />
                   </div>
-                  {/* <select
-                  class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
-                  name="state"
-                  value={item?.state}
-                  onChange={(e) =>
-                    handleCharity(i, e.target.name, e.target.value)
-                  }
-                >
-                  <option value="Armed Forces America">
-                    Armed Forces America
-                  </option>
-                  <option value="Armed Forces">Armed Forces</option>
-                  <option value="Armed Forces Pacific">
-                    Armed Forces Pacific
-                  </option>
-                  <option value="Alabama">Alabama</option>
-                </select> */}
                   <input
                     type="text"
                     name="zipCode"
@@ -2109,6 +2660,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                     }
                     class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[33%]"
                     placeholder="zipCode"
+                    required
                   />
                 </div>
                 <div className="mb-2 flex">
@@ -2122,6 +2674,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
                         handleCharity(i, e.target.name, e.target.value)
                       }
                       class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
+                      required
                     />
                     <i className="text-sm">
                       If left blank, the gift will be used for the charity's
@@ -2152,11 +2705,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
         </button>
         <button
           class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-          onClick={() => {
-            if (step <= 7) {
-              setStep((prev) => prev + 1);
-            }
-          }}
+          onClick={() => handleNext()}
         >
           Next
         </button>

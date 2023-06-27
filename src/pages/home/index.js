@@ -11,6 +11,7 @@ import Step7 from './components/step7';
 import Step11 from './components/step11';
 import Preview from './components/Preview';
 const Home = () => {
+  const [previewOpen, setPreviewOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [data, setData] = useState({
     personalInfo: {
@@ -394,11 +395,11 @@ const Home = () => {
         options: [
           {
             label: 'Yes',
-            value: false,
+            value: true,
           },
           {
             label: 'No',
-            value: true,
+            value: false,
           },
         ],
       },
@@ -426,11 +427,11 @@ const Home = () => {
         options: [
           {
             label: 'Yes',
-            value: false,
+            value: true,
           },
           {
             label: 'No',
-            value: true,
+            value: false,
           },
         ],
       },
@@ -462,6 +463,20 @@ const Home = () => {
           pick_your_age_for_disbursement: '',
         },
       ],
+      beneficiaries1: [
+        {
+          firstName: '',
+          lastName: '',
+          city: '',
+          state: {
+            label: 'Armed Forces America',
+            value: 'Armed Forces America',
+          },
+          Beneficiary_relationship_to_you: '',
+          percentageShare: '',
+          any_statements_that_you_wish_to_make: '',
+        },
+      ],
       contingent_Residue_Distribution: [
         {
           label: 'My heirs at law',
@@ -476,6 +491,21 @@ const Home = () => {
           value: false,
         },
       ],
+      charitableDonations1: [
+        {
+          nameOfCharity: '',
+          percentageOfResidue: '',
+          addressLine1: '',
+          addressLine2: '',
+          city: '',
+          state: {
+            label: 'Armed Forces America',
+            value: 'Armed Forces America',
+          },
+          zipCode: '',
+          purposeForTheGift: '',
+        },
+      ],
       charitableDonations: [
         {
           nameOfCharity: '',
@@ -483,7 +513,7 @@ const Home = () => {
           addressLine1: '',
           addressLine2: '',
           city: '',
-          status: {
+          state: {
             label: 'Armed Forces America',
             value: 'Armed Forces America',
           },
@@ -881,7 +911,7 @@ const Home = () => {
                       : { background: '#BCBDBD' }
                   }
                 >
-                  4
+                  5
                 </span>
                 <div
                   className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
@@ -1103,12 +1133,13 @@ const Home = () => {
                 setStep={setStep}
                 data={data}
                 setData={setData}
+                setPreviewOpen={setPreviewOpen}
               />
             )}
           </div>
         </form>
       </div>
-      {/* <Preview data={data} /> */}
+      {previewOpen && <Preview data={data} setPreviewOpen={setPreviewOpen} />}
     </div>
   );
 };

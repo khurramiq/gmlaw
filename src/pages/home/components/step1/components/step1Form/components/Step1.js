@@ -2,7 +2,7 @@ import { Autocomplete, TextField } from '@mui/material';
 import stateList from '../../../../../../../data/stateList';
 import React from 'react';
 
-const Step1 = ({ data, setData }) => {
+const Step1 = ({ data, setData, activeStep, setStep, setActiveStep }) => {
   const handleYourInfoChange = (e) => {
     setData({
       ...data,
@@ -27,35 +27,77 @@ const Step1 = ({ data, setData }) => {
       },
     });
   };
+  const validate = () => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    const {
+      firstName,
+      middleName,
+      lastName,
+      addressLine1,
+      city,
+      zipCode,
+      email,
+    } = data?.personalInfo?.yourInfo;
+    if (
+      firstName !== '' &&
+      middleName !== '' &&
+      lastName !== '' &&
+      addressLine1 !== '' &&
+      city !== '' &&
+      zipCode !== '' &&
+      regex.test(email)
+    ) {
+      return true;
+    }
+    return false;
+  };
+  const handleNext = () => {
+    if (validate()) {
+      if (activeStep === 3) {
+        setStep((prev) => prev + 1);
+      } else {
+        setActiveStep((prev) => prev + 1);
+      }
+    }
+  };
   return (
     <div>
       <h1 className="mb-3 font-bold">YOUR INFORMATION</h1>
       <h3 className="mb-1 font-bold">Your Name</h3>
       <div className="mb-2 flex">
-        <input
-          type="text"
-          name="firstName"
-          value={data?.personalInfo?.yourInfo?.firstName}
-          onChange={handleYourInfoChange}
-          class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
-          placeholder="First"
-        />
-        <input
-          type="text"
-          name="middleName"
-          value={data?.personalInfo?.yourInfo?.middleName}
-          onChange={handleYourInfoChange}
-          class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
-          placeholder="Middle"
-        />
-        <input
-          type="text"
-          name="lastName"
-          value={data?.personalInfo?.yourInfo?.lastName}
-          onChange={handleYourInfoChange}
-          class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[33%]"
-          placeholder="Last"
-        />
+        <div className="mr-2 w-[33%]">
+          <input
+            type="text"
+            name="firstName"
+            value={data?.personalInfo?.yourInfo?.firstName}
+            onChange={handleYourInfoChange}
+            class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
+            placeholder="First"
+            required
+          />
+        </div>
+        <div className="mr-2 w-[33%]">
+          <input
+            type="text"
+            name="middleName"
+            value={data?.personalInfo?.yourInfo?.middleName}
+            onChange={handleYourInfoChange}
+            class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
+            placeholder="Middle"
+            required
+          />
+        </div>
+        <div className="w-[33%]">
+          <input
+            type="text"
+            name="lastName"
+            value={data?.personalInfo?.yourInfo?.lastName}
+            onChange={handleYourInfoChange}
+            class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
+            placeholder="Last"
+            required
+          />
+        </div>
       </div>
       <h3 className="mb-1 font-bold">Mailing Address</h3>
       <div className="mb-2">
@@ -66,6 +108,7 @@ const Step1 = ({ data, setData }) => {
           onChange={handleYourInfoChange}
           class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
           placeholder="Address Line 1"
+          required
         />
       </div>
       <div className="mb-2">
@@ -86,6 +129,7 @@ const Step1 = ({ data, setData }) => {
           onChange={handleYourInfoChange}
           class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
           placeholder="City"
+          required
         />
         <div className="w-[33%] mr-2">
           <Autocomplete
@@ -100,6 +144,7 @@ const Step1 = ({ data, setData }) => {
                 variant="outlined"
                 placeholder="Select State"
                 name="state"
+                required
                 // error={
                 //   !!touched?.billingAddress && !!errors?.billingAddress?.country
                 // }
@@ -120,6 +165,7 @@ const Step1 = ({ data, setData }) => {
           onChange={handleYourInfoChange}
           class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-[33%]"
           placeholder="Zip Code"
+          required
         />
       </div>
       <div className="mb-2 flex">
@@ -132,6 +178,7 @@ const Step1 = ({ data, setData }) => {
             onChange={handleYourInfoChange}
             class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full"
             placeholder="Email"
+            required
           />
         </div>
         <div className="w-[50%] ml-2">
@@ -189,6 +236,21 @@ const Step1 = ({ data, setData }) => {
             <option value="Britain">Britain</option>
           </select>
         </div>
+      </div>
+      <div className="flex justify-end">
+        <button
+          class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
+          disabled={activeStep === 0}
+          onClick={() => setActiveStep((prev) => prev - 1)}
+        >
+          Back
+        </button>
+        <button
+          class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
+          onClick={() => handleNext()}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

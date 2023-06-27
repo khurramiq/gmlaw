@@ -9,33 +9,44 @@ import Step4 from './components/Step4';
 const Step1Form = ({ activeStep, setActiveStep, setStep, data, setData }) => {
   return (
     <div className="p-5">
-      {activeStep === 0 && <Step1 data={data} setData={setData} />}
-      {activeStep === 1 && <Step2 data={data} setData={setData} />}
-      {activeStep === 2 && <Step3 data={data} setData={setData} />}
-      {activeStep === 3 && <Step4 data={data} setData={setData} />}
+      {activeStep === 0 && (
+        <Step1
+          data={data}
+          setData={setData}
+          activeStep={activeStep}
+          setStep={setStep}
+          setActiveStep={setActiveStep}
+        />
+      )}
+      {activeStep === 1 && (
+        <Step2
+          data={data}
+          setData={setData}
+          activeStep={activeStep}
+          setStep={setStep}
+          setActiveStep={setActiveStep}
+        />
+      )}
+      {activeStep === 2 && (
+        <Step3
+          data={data}
+          setData={setData}
+          activeStep={activeStep}
+          setStep={setStep}
+          setActiveStep={setActiveStep}
+        />
+      )}
+      {activeStep === 3 && (
+        <Step4
+          data={data}
+          setData={setData}
+          activeStep={activeStep}
+          setStep={setStep}
+          setActiveStep={setActiveStep}
+        />
+      )}
       {/* {activeStep === 4 && <Step5 data={data} setData={setData} />}
       {activeStep === 5 && <Step6 data={data} setData={setData} />} */}
-      <div className="flex justify-end">
-        <button
-          class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-          disabled={activeStep === 0}
-          onClick={() => setActiveStep((prev) => prev - 1)}
-        >
-          Back
-        </button>
-        <button
-          class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-          onClick={() => {
-            if (activeStep === 3) {
-              setStep((prev) => prev + 1);
-            } else {
-              setActiveStep((prev) => prev + 1);
-            }
-          }}
-        >
-          Next
-        </button>
-      </div>
     </div>
   );
 };
