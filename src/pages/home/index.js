@@ -770,14 +770,14 @@ const Home = () => {
             <img className="h-full" src={sideImg} alt="sideImg" />
           </div>
           <div className="absolute top-0 right-0 flex items-end">
-            <ul className="w-[60px] mt-5">
+            <ul className="xs:w-[50px] sm:w-[60px] mt-5">
               <li
                 className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
                 style={{ border: '1px solid #6660AD' }}
               >
                 <p
-                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
-                  style={{ lineHeight: 1 }}
+                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[55px] sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto"
+                  style={{ lineHeight: 1, zIndex: 10 }}
                 >
                   Personal <br /> Information
                 </p>
@@ -810,8 +810,10 @@ const Home = () => {
                   }
                 />
                 <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white`}
-                  style={{ lineHeight: 1 }}
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                    step >= 2 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                  style={{ lineHeight: 1, zIndex: 10 }}
                 >
                   Family & <br /> Beneficiary <br /> info
                 </p>
@@ -859,8 +861,10 @@ const Home = () => {
                   }
                 />
                 <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white`}
-                  style={{ lineHeight: 1 }}
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                    step >= 3 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                  style={{ lineHeight: 1, zIndex: 10 }}
                 >
                   Document <br /> Menu
                 </p>
@@ -908,8 +912,10 @@ const Home = () => {
                   }
                 />
                 <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white`}
-                  style={{ lineHeight: 1 }}
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                    step >= 4 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                  style={{ lineHeight: 1, zIndex: 10 }}
                 >
                   Preliminary <br /> Trust <br /> Information
                 </p>
@@ -957,8 +963,10 @@ const Home = () => {
                   }
                 />
                 <p
-                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
-                  style={{ lineHeight: 1 }}
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                    step >= 5 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                  style={{ lineHeight: 1, zIndex: 10 }}
                 >
                   Family <br /> Information
                 </p>
@@ -1006,8 +1014,10 @@ const Home = () => {
                   }
                 />
                 <p
-                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
-                  style={{ lineHeight: 1 }}
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                    step >= 6 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                  style={{ lineHeight: 1, zIndex: 10 }}
                 >
                   Successor <br /> Trustees
                 </p>
@@ -1055,8 +1065,10 @@ const Home = () => {
                   }
                 />
                 <p
-                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
-                  style={{ lineHeight: 1 }}
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                    step >= 7 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                  style={{ lineHeight: 1, zIndex: 10 }}
                 >
                   Special <br /> Distributions
                 </p>
@@ -1104,8 +1116,10 @@ const Home = () => {
                   }
                 />
                 <p
-                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[50px] sm:top-0 xs:text-[8px] sm:text-base text-white"
-                  style={{ lineHeight: 1 }}
+                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                    step >= 8 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                  style={{ lineHeight: 1, zIndex: 10 }}
                 >
                   Remaining <br /> Distributions
                 </p>

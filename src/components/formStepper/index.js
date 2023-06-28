@@ -157,7 +157,9 @@ export default function FormStepper({ activeStep, steps }) {
       >
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+            <StepLabel StepIconComponent={ColorlibStepIcon}>
+              <span className="xs:text-xs sm:text-sm">{label}</span>
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
