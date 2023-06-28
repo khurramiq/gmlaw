@@ -197,6 +197,125 @@ const FormDataPreview = ({ data, setPreviewOpen }) => {
                 {data.personalInfo.creatingTrustType.options.map((item, i) => (
                   <Checkbox isChecked={item.value} label={item.label} />
                 ))}
+                {data.personalInfo.creatingTrustType.options[0].value && (
+                  <>
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      Creating your new revocable living trust.
+                    </Text>
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      {
+                        data.personalInfo.what_do_you_want_to_name_your_trust
+                          .question
+                      }
+                    </Text>
+                    {data.personalInfo.what_do_you_want_to_name_your_trust.options.map(
+                      (item, i) => (
+                        <RadioButton
+                          isChecked={item.value}
+                          label={item.label}
+                        />
+                      )
+                    )}
+                  </>
+                )}
+                {data.personalInfo.creatingTrustType.options[1].value && (
+                  <>
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      First, we need to collect some information about your
+                      existing trust
+                    </Text>
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      What is the name of your existing trust?
+                    </Text>
+                    <Text style={{ fontSize: '14px' }}>
+                      Answer:{' '}
+                      {
+                        data.personalInfo
+                          .first_we_need_to_collect_some_information_about_your_existing_trust
+                          .what_is_the_name_of_your_existing_trust
+                      }
+                    </Text>
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      What is the date you signed your existing trust?
+                    </Text>
+                    <Text style={{ fontSize: '14px' }}>
+                      Answer:{' '}
+                      {formateDate(
+                        data.personalInfo
+                          .first_we_need_to_collect_some_information_about_your_existing_trust
+                          .what_is_the_date_you_signed_your_existing_trust
+                      )}
+                    </Text>
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      After you signed your trust, did you ever amend it?
+                    </Text>
+                    {data.personalInfo.first_we_need_to_collect_some_information_about_your_existing_trust.after_you_signed_your_trust_did_you_ever_amend_it.map(
+                      (item, i) => (
+                        <RadioButton
+                          isChecked={item.value}
+                          label={item.label}
+                        />
+                      )
+                    )}
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      Locate the paragraph or section number in your existing
+                      trust agreement that allows you to make amendments to your
+                      trust write the location below.
+                    </Text>
+                    <Text style={{ fontSize: '14px' }}>
+                      Answer:{' '}
+                      {
+                        data.personalInfo
+                          .first_we_need_to_collect_some_information_about_your_existing_trust
+                          .locate_the_paragraph_or_section_number_in_your_existing_trust_agreement_that_allows_you_to_make_amendments_to_your_trust_write_the_location_below
+                      }
+                    </Text>
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      Have you amended your Trust before?
+                    </Text>
+                    {data.personalInfo.first_we_need_to_collect_some_information_about_your_existing_trust.have_you_amended_your_Trust_before.map(
+                      (item, i) => (
+                        <RadioButton
+                          isChecked={item.value}
+                          label={item.label}
+                        />
+                      )
+                    )}
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      What month you will sign the document(s) you are creating?
+                    </Text>
+                    <Text style={{ fontSize: '14px' }}>
+                      Answer:{' '}
+                      {
+                        data.personalInfo
+                          .first_we_need_to_collect_some_information_about_your_existing_trust
+                          .what_month_you_will_sign_the_document_you_are_creating
+                      }
+                    </Text>
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      What month you will sign the document(s) you are creating?
+                    </Text>
+                    <Text style={{ fontSize: '14px' }}>
+                      Answer:{' '}
+                      {
+                        data.personalInfo
+                          .first_we_need_to_collect_some_information_about_your_existing_trust
+                          .what_month_you_will_sign_the_document_you_are_creating
+                      }
+                    </Text>
+                    <Text style={{ fontSize: '18px', marginTop: '10px' }}>
+                      On what day of the month will you sign your documents
+                    </Text>
+                    <Text style={{ fontSize: '14px' }}>
+                      Answer:{' '}
+                      {
+                        data.personalInfo
+                          .first_we_need_to_collect_some_information_about_your_existing_trust
+                          .on_what_day_of_the_month_will_you_sign_your_documents
+                      }
+                    </Text>
+                  </>
+                )}
                 <Text style={{ fontSize: '18px', marginTop: '10px' }}>
                   {data.personalInfo.initialTrustee.question}
                 </Text>

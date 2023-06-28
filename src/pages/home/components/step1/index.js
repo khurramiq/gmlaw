@@ -3,7 +3,7 @@ import FormStepper from '../../../../components/formStepper';
 import Step1Form from './components/step1Form';
 
 const Step1 = ({ step, setStep, data, setData }) => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(3);
   const steps = [
     'Name & Address',
     'Package/Document selection',

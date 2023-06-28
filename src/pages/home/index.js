@@ -243,6 +243,52 @@ const Home = () => {
           },
         ],
       },
+      what_do_you_want_to_name_your_trust: {
+        question: 'What do you want to name your trust?',
+        options: [
+          {
+            label: 'The [your last Name + signing year] Recovable Trust',
+            value: false,
+          },
+          {
+            label:
+              'The [your first Name+Your middle Initial+Your Last Name] Revocable Trust',
+            value: false,
+          },
+          {
+            label: 'The [fill in yourself] Revocable Trust',
+            value: false,
+          },
+        ],
+      },
+      first_we_need_to_collect_some_information_about_your_existing_trust: {
+        what_is_the_name_of_your_existing_trust: '',
+        what_is_the_date_you_signed_your_existing_trust: new Date(),
+        after_you_signed_your_trust_did_you_ever_amend_it: [
+          {
+            label: 'Yes',
+            value: false,
+          },
+          {
+            label: 'No',
+            value: true,
+          },
+        ],
+        locate_the_paragraph_or_section_number_in_your_existing_trust_agreement_that_allows_you_to_make_amendments_to_your_trust_write_the_location_below:
+          '',
+        have_you_amended_your_Trust_before: [
+          {
+            label: 'Yes',
+            value: false,
+          },
+          {
+            label: 'No',
+            value: true,
+          },
+        ],
+        what_month_you_will_sign_the_document_you_are_creating: 'January',
+        on_what_day_of_the_month_will_you_sign_your_documents: '1',
+      },
       initialTrustee: {
         question: 'Select the initial Trustee',
         options: [
@@ -261,6 +307,19 @@ const Home = () => {
           },
         ],
       },
+      coTrustee: {
+        firstName: '',
+        middleName: '',
+        lastName: '',
+      },
+      coTrustees: [
+        {
+          firstName: '',
+          middleName: '',
+          lastName: '',
+          relationship: '',
+        },
+      ],
       maritalStatus: {
         question: 'Your Marital Status',
         options: [
