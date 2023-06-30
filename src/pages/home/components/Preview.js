@@ -1059,10 +1059,7 @@ const FormDataPreview = ({ data, setPreviewOpen }) => {
       >
         <div className="xs:block sm:hidden">
           <button class="bg-[#6E66D4] ml-2 mt-20 text-white font-bold py-2 px-4 rounded">
-            <PDFDownloadLink
-              document={<MyPdfDocument />}
-              fileName="somename.pdf"
-            >
+            <PDFDownloadLink document={<MyPdfDocument />} fileName="gmLaw.pdf">
               {({ _blob, _url, loading, _error }) =>
                 loading ? 'Loading document...' : 'Download Preview'
               }
