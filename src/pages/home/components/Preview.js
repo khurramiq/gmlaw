@@ -68,11 +68,11 @@ const FormDataPreview = ({ data, setPreviewOpen }) => {
     // Scroll to the top when the component mounts
     window.scrollTo(0, 0);
   }, []);
-  //   const handleDownloadPDF = () => {
-  //     const pdfContainer = pdfContainerRef.current;
-  //     const blob = new Blob([pdfContainer], { type: 'application/pdf' });
-  //     saveAs(blob, 'form_data_preview.pdf');
-  //   };
+  // const handleDownloadPDF = () => {
+  //   const pdfContainer = pdfContainerRef.current;
+  //   const blob = new Blob([pdfContainer], { type: 'application/pdf' });
+  //   saveAs(blob, 'form_data_preview.pdf');
+  // };
   const formateDate = (dd) => {
     const d = new Date(dd);
     const year = moment(d).format('YYYY');
@@ -87,7 +87,7 @@ const FormDataPreview = ({ data, setPreviewOpen }) => {
 
   return (
     <div className="absolute top-0 left-0 bg-white w-full z-[100]">
-      <div className="flex justify-end p-5">
+      <div className="flex justify-end h-[60px] items-center pr-5">
         <button
           class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
           onClick={() => setPreviewOpen(false)}
@@ -100,10 +100,20 @@ const FormDataPreview = ({ data, setPreviewOpen }) => {
         >
           Submit
         </button>
+        {/* <button
+          class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
+          onClick={() => handleDownloadPDF()}
+        >
+          Download preview
+        </button> */}
       </div>
 
-      <div className="flex justify-center" ref={pdfContainerRef}>
-        <PDFViewer width={'100%'} height={800}>
+      <div
+        className="flex justify-center"
+        ref={pdfContainerRef}
+        style={{ height: 'calc(100vh - 60px)' }}
+      >
+        <PDFViewer width={'100%'} height={'auto'}>
           <Document>
             <Page size="A4" style={styles.page}>
               <View style={styles.section}>

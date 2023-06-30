@@ -200,7 +200,7 @@ const Step7 = ({ step, setStep, data, setData, setPreviewOpen }) => {
           </button>
         </div>
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-5">
         <button
           class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
           disabled={step === 1}
