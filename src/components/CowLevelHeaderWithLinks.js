@@ -8,7 +8,7 @@ const CowLevelHeaderWithLinks = ({ fullpageApi, open, setOpen }) => {
         <div>
           <Link to="/" onClick={() => fullpageApi.moveTo(1)}>
             <img
-              className="sm:w-[200px]  xs:w-[50px]"
+              className="sm:w-[200px]  xs:w-[150px]"
               src={headerLogo}
               alt="headerLogo"
             />

@@ -29,18 +29,10 @@ const Step1 = ({ data, setData, activeStep, setStep, setActiveStep }) => {
   };
   const validate = () => {
     let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
-    const {
-      firstName,
-      middleName,
-      lastName,
-      addressLine1,
-      city,
-      zipCode,
-      email,
-    } = data?.personalInfo?.yourInfo;
+    const { firstName, lastName, addressLine1, city, zipCode, email } =
+      data?.personalInfo?.yourInfo;
     if (
       firstName !== '' &&
-      middleName !== '' &&
       lastName !== '' &&
       addressLine1 !== '' &&
       city !== '' &&
@@ -84,7 +76,6 @@ const Step1 = ({ data, setData, activeStep, setStep, setActiveStep }) => {
             onChange={handleYourInfoChange}
             class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-full"
             placeholder="Middle"
-            required
           />
         </div>
         <div className="w-[33%]">

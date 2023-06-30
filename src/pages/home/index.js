@@ -12,7 +12,7 @@ import Step11 from './components/step11';
 import Preview from './components/Preview';
 const Home = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [step, setStep] = useState(8);
+  const [step, setStep] = useState(1);
   const [data, setData] = useState({
     personalInfo: {
       yourInfo: {
