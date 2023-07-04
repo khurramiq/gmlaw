@@ -90,7 +90,7 @@ const FormDataPreview = ({ data, setPreviewOpen }) => {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          {/* <Image style={styles.image} src={gmlawLogo} /> */}
+          <Image style={styles.image} src={gmlawLogo} />
           <Text style={{ fontSize: '24px' }}>YOUR INFORMATION</Text>
           <Text style={{ fontSize: '18px' }}>Your Name</Text>
           <Text style={{ fontSize: '14px' }}>

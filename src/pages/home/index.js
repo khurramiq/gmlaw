@@ -761,6 +761,363 @@ const Home = () => {
       ],
     },
   });
+  const validate = () => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    const { firstName, lastName, addressLine1, city, zipCode, email } =
+      data?.personalInfo?.yourInfo;
+    if (
+      firstName !== '' &&
+      lastName !== '' &&
+      addressLine1 !== '' &&
+      city !== '' &&
+      zipCode !== '' &&
+      regex.test(email)
+    ) {
+      return true;
+    }
+    return false;
+  };
+  const handleStep2 = () => {
+    if (validate()) {
+      setStep(2);
+    } else {
+      alert('Some fields are required in step 1.');
+    }
+  };
+  const validate1 = () => {
+    // let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if (!data.personalInfo.livingChildren.options[0].value) {
+      for (
+        let i = 0;
+        i < data.personalInfo.livingChildrenInformation.length;
+        i++
+      ) {
+        const element = data.personalInfo.livingChildrenInformation[i];
+        if (
+          element.firstName === '' ||
+          element.middleName === '' ||
+          element.lastName === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (!data.personalInfo.deceasedChildren.options[0].value) {
+      for (
+        let i = 0;
+        i < data.personalInfo.deceasedChildrenInformation.length;
+        i++
+      ) {
+        const element = data.personalInfo.deceasedChildrenInformation[i];
+        if (
+          element.firstName === '' ||
+          element.middleName === '' ||
+          element.lastName === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const validate2 = () => {
+    // let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if (
+      data.personalInfo.do_you_want_to_make_any_specific_gifts.options[0].value
+    ) {
+      for (let i = 0; i < data.personalInfo.gifts.length; i++) {
+        const element = data.personalInfo.gifts[i];
+        if (element.nameOfIndividual === '') {
+          return false;
+        }
+        if (element?.typeOfGift[0]?.value && element?.cashGiftAmount === '') {
+          return false;
+        }
+        if (
+          element.typeOfGift[1].value &&
+          element.describeTheItemOfPersonalProperty === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (
+      data.personalInfo.first_do_you_want_to_make_any_charitable_donations
+        .options[0].value
+    ) {
+      for (let i = 0; i < data.personalInfo.charitableDonations1.length; i++) {
+        const element = data.personalInfo.charitableDonations1[i];
+
+        if (
+          element.nameOfCharity === '' ||
+          element.percentageOfResidue === '' ||
+          element.addressLine1 === '' ||
+          element.city === '' ||
+          element.zipCode === '' ||
+          element.purposeForTheGift === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (data.personalInfo.beneficiaries.length > 0) {
+      for (let i = 0; i < data.personalInfo.beneficiaries.length; i++) {
+        const element = data.personalInfo.beneficiaries[i];
+
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          element.city === '' ||
+          element.Beneficiary_relationship_to_you === '' ||
+          element.percentageShare === '' ||
+          element.will_this_beneficiarys_share_be_given_outright === '' ||
+          element.pick_your_age_for_disbursement === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (data.personalInfo.contingent_Residue_Distribution[1].value) {
+      for (let i = 0; i < data.personalInfo.beneficiaries1.length; i++) {
+        const element = data.personalInfo.beneficiaries1[i];
+
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          element.city === '' ||
+          element.Beneficiary_relationship_to_you === '' ||
+          element.percentageShare === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (data.personalInfo.contingent_Residue_Distribution[2].value) {
+      for (let i = 0; i < data.personalInfo.charitableDonations.length; i++) {
+        const element = data.personalInfo.charitableDonations[i];
+        if (
+          element.nameOfCharity === '' ||
+          element.percentageOfResidue === '' ||
+          element.addressLine1 === '' ||
+          element.city === '' ||
+          element.zipCode === '' ||
+          element.purposeForTheGift === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const handleStep3 = () => {
+    if (!validate()) {
+      alert('Some fields are required in step 1.');
+    } else if (!validate1() && !validate2()) {
+      alert('Some fields are required in step 2.');
+    } else {
+      setStep(3);
+    }
+  };
+  const validate3 = () => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if (data.documentMenu.personalRepresentativeQ.options[1].value) {
+      for (
+        let i = 0;
+        i < data.documentMenu.personalRepresentatives.length;
+        i++
+      ) {
+        const element = data.documentMenu.personalRepresentatives[i];
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          !regex.test(element.email) ||
+          element.phone === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const handleStep4 = () => {
+    if (!validate()) {
+      alert('Some fields are required in step 1.');
+    } else if (!validate1() && !validate2()) {
+      alert('Some fields are required in step 2.');
+    } else if (!validate3()) {
+      alert('Some fields are required in step 3.');
+    } else {
+      setStep(4);
+    }
+  };
+  const validate4 = () => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if (data.preliminaryTrustInfo.question.options[1].value) {
+      for (
+        let i = 0;
+        i < data.preliminaryTrustInfo.attorneyInFacts.length;
+        i++
+      ) {
+        const element = data.preliminaryTrustInfo.attorneyInFacts[i];
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          !regex.test(element.email) ||
+          element.phone === '' ||
+          element.relationship === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const handleStep5 = () => {
+    if (!validate()) {
+      alert('Some fields are required in step 1.');
+    } else if (!validate1() && !validate2()) {
+      alert('Some fields are required in step 2.');
+    } else if (!validate3()) {
+      alert('Some fields are required in step 3.');
+    } else if (!validate4()) {
+      alert('Some fields are required in step 4.');
+    } else {
+      setStep(5);
+    }
+  };
+  const validate5 = () => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if (data.familyInfo.healthCareAgents.length > 0) {
+      for (let i = 0; i < data.familyInfo.healthCareAgents.length; i++) {
+        const element = data.familyInfo.healthCareAgents[i];
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          !regex.test(element.email) ||
+          element.phone === '' ||
+          element.relationship === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const handleStep6 = () => {
+    if (!validate()) {
+      alert('Some fields are required in step 1.');
+    } else if (!validate1() && !validate2()) {
+      alert('Some fields are required in step 2.');
+    } else if (!validate3()) {
+      alert('Some fields are required in step 3.');
+    } else if (!validate4()) {
+      alert('Some fields are required in step 4.');
+    } else if (!validate5()) {
+      alert('Some fields are required in step 5.');
+    } else {
+      setStep(5);
+    }
+  };
+  const validate6 = () => {
+    // let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if (data.successorTrustees.question.options[0].value) {
+      for (let i = 0; i < data.successorTrustees.hIPAAAgents.length; i++) {
+        const element = data.successorTrustees.hIPAAAgents[i];
+        if (element.firstName === '' || element.lastName === '') {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const handleStep7 = () => {
+    if (!validate()) {
+      alert('Some fields are required in step 1.');
+    } else if (!validate1() && !validate2()) {
+      alert('Some fields are required in step 2.');
+    } else if (!validate3()) {
+      alert('Some fields are required in step 3.');
+    } else if (!validate4()) {
+      alert('Some fields are required in step 4.');
+    } else if (!validate5()) {
+      alert('Some fields are required in step 5.');
+    } else if (!validate6()) {
+      alert('Some fields are required in step 6.');
+    } else {
+      setStep(5);
+    }
+  };
+  const validate7 = () => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if (
+      data.specialDistributions.question1.options[0].value &&
+      data.specialDistributions.question2.options[0].value &&
+      data.specialDistributions.question3.options[0].value
+    ) {
+      for (let i = 0; i < data.specialDistributions.guardians.length; i++) {
+        const element = data.specialDistributions.guardians[i];
+        if (
+          element.firstName === '' ||
+          element.lastName === '' ||
+          element.relationship_of_Guardian_to_you === '' ||
+          element.addressLine1 === '' ||
+          element.city === '' ||
+          element.zipCode === '' ||
+          !regex.test(element.email) ||
+          element.phone === ''
+        ) {
+          return false;
+        }
+      }
+    }
+    if (
+      data.specialDistributions.question1.options[0].value &&
+      data.specialDistributions.question2.options[0].value &&
+      data.specialDistributions.question3.options[1].value
+    ) {
+      if (
+        data.specialDistributions.co_GuardianInformation
+          ?.co_Guardian_One_First_Name === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.co_Guardian_One_Last_Name === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.relationship_of_co_Guardian_One_to_you === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.co_Guardian_Two_First_Name === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.co_Guardian_Two_Last_Name === '' ||
+        data.specialDistributions.co_GuardianInformation
+          ?.relationship_of_co_Guardian_Two_to_you === '' ||
+        data.specialDistributions.co_GuardianInformation?.addressLine1 === '' ||
+        data.specialDistributions.co_GuardianInformation?.city === '' ||
+        data.specialDistributions.co_GuardianInformation?.zipCode === '' ||
+        !regex.test(data.specialDistributions.co_GuardianInformation?.email) ||
+        data.specialDistributions.co_GuardianInformation?.phone === ''
+      ) {
+        return false;
+      }
+    }
+    return true;
+  };
+  const handleStep8 = () => {
+    if (!validate()) {
+      alert('Some fields are required in step 1.');
+    } else if (!validate1() && !validate2()) {
+      alert('Some fields are required in step 2.');
+    } else if (!validate3()) {
+      alert('Some fields are required in step 3.');
+    } else if (!validate4()) {
+      alert('Some fields are required in step 4.');
+    } else if (!validate5()) {
+      alert('Some fields are required in step 5.');
+    } else if (!validate6()) {
+      alert('Some fields are required in step 6.');
+    } else if (!validate7()) {
+      alert('Some fields are required in step 7.');
+    } else {
+      setStep(5);
+    }
+  };
   return (
     <div>
       <CowLevelHeaderWithLinks />
@@ -774,6 +1131,7 @@ const Home = () => {
               <li
                 className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
                 style={{ border: '1px solid #6660AD' }}
+                onClick={() => setStep(1)}
               >
                 <p
                   className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[55px] sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto"
@@ -794,12 +1152,13 @@ const Home = () => {
                 }
               />
               <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
+                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                 style={
                   step >= 2
                     ? { border: '1px solid #6660AD' }
                     : { marginTop: '10px' }
                 }
+                onClick={() => handleStep2()}
               >
                 <div
                   className="absolute top-[-10px] left-0 h-[30px] w-[1px] ml-[24px]"
@@ -845,12 +1204,13 @@ const Home = () => {
                 }
               />
               <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
+                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                 style={
                   step >= 3
                     ? { border: '1px solid #6660AD' }
                     : { marginTop: '10px' }
                 }
+                onClick={() => handleStep3()}
               >
                 <div
                   className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
@@ -896,12 +1256,13 @@ const Home = () => {
                 }
               />
               <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
+                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                 style={
                   step >= 4
                     ? { border: '1px solid #6660AD' }
                     : { marginTop: '10px' }
                 }
+                onClick={() => handleStep4()}
               >
                 <div
                   className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
@@ -947,12 +1308,13 @@ const Home = () => {
                 }
               />
               <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
+                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                 style={
                   step >= 5
                     ? { border: '1px solid #6660AD' }
                     : { marginTop: '10px' }
                 }
+                onClick={() => handleStep5()}
               >
                 <div
                   className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
@@ -998,12 +1360,13 @@ const Home = () => {
                 }
               />
               <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
+                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                 style={
                   step >= 6
                     ? { border: '1px solid #6660AD' }
                     : { marginTop: '10px' }
                 }
+                onClick={() => handleStep6()}
               >
                 <div
                   className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
@@ -1049,12 +1412,13 @@ const Home = () => {
                 }
               />
               <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
+                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                 style={
                   step >= 7
                     ? { border: '1px solid #6660AD' }
                     : { marginTop: '10px' }
                 }
+                onClick={() => handleStep7()}
               >
                 <div
                   className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
@@ -1100,12 +1464,13 @@ const Home = () => {
                 }
               />
               <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
+                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                 style={
                   step >= 8
                     ? { border: '1px solid #6660AD' }
                     : { marginTop: '10px' }
                 }
+                onClick={() => handleStep8()}
               >
                 <div
                   className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
