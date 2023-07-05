@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Step7 = ({ step, setStep, data, setData, setPreviewOpen }) => {
+const Step7 = ({
+  notActionBtns,
+  step,
+  setStep,
+  data,
+  setData,
+  setPreviewOpen,
+}) => {
   const handlePersonalRepresentatives = (i, name, value) => {
     setData({
       ...data,
@@ -200,21 +207,23 @@ const Step7 = ({ step, setStep, data, setData, setPreviewOpen }) => {
           </button>
         </div>
       </div>
-      <div className="flex justify-end mt-5">
-        <button
-          class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-          disabled={step === 1}
-          onClick={() => setStep((prev) => prev - 1)}
-        >
-          Back
-        </button>
-        <button
-          class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-          onClick={() => handleNext()}
-        >
-          Preview
-        </button>
-      </div>
+      {!notActionBtns && (
+        <div className="flex justify-end mt-5">
+          <button
+            class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
+            disabled={step === 1}
+            onClick={() => setStep((prev) => prev - 1)}
+          >
+            Back
+          </button>
+          <button
+            class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
+            onClick={() => handleNext()}
+          >
+            Preview
+          </button>
+        </div>
+      )}
     </div>
   );
 };

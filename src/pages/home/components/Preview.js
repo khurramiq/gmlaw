@@ -11,6 +11,17 @@ import {
   Image,
   PDFDownloadLink,
 } from '@react-pdf/renderer';
+import Step1 from './step1/components/step1Form/components/Step1';
+import Step2 from './step1/components/step1Form/components/Step2';
+import Step3 from './step1/components/step1Form/components/Step3';
+import Step4 from './step1/components/step1Form/components/Step4';
+import Step11 from './step11';
+import Step21 from './step2';
+import Step31 from './step3';
+import Step41 from './step4';
+import Step51 from './step5';
+import Step61 from './step6';
+import Step71 from './step7';
 // import { saveAs } from 'file-saver';
 // Create styles
 const styles = StyleSheet.create({
@@ -62,7 +73,15 @@ const RadioButton = ({ isChecked, label }) => (
   </View>
 );
 
-const FormDataPreview = ({ data, setPreviewOpen }) => {
+const FormDataPreview = ({
+  step,
+  data,
+  setData,
+  activeStep,
+  setStep,
+  setActiveStep,
+  setPreviewOpen,
+}) => {
   const pdfContainerRef = useRef();
 
   useEffect(() => {
@@ -1027,52 +1046,157 @@ const FormDataPreview = ({ data, setPreviewOpen }) => {
   );
 
   return (
-    <div className="absolute top-0 left-0 bg-white w-full z-[100]">
-      <div className="flex justify-end h-[60px] items-center px-5">
-        {/* <div className="text-black">
-          <PDFDownloadLink document={<MyPdfDocument />} fileName="somename.pdf">
-            {({ _blob, _url, loading, _error }) =>
-              loading ? 'Loading document...' : 'Download Preview'
-            }
-          </PDFDownloadLink>
-        </div> */}
-        <div>
-          <button
-            class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-            onClick={() => setPreviewOpen(false)}
-          >
-            Back
-          </button>
-          <button
-            class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-            onClick={() => handleSubmit()}
-          >
-            Submit
-          </button>
-        </div>
-      </div>
-
-      <div
-        className="flex justify-center"
-        ref={pdfContainerRef}
-        style={{ height: 'calc(100vh - 60px)' }}
-      >
-        <div className="xs:block sm:hidden">
-          <button class="bg-[#6E66D4] ml-2 mt-20 text-white font-bold py-2 px-4 rounded">
-            <PDFDownloadLink document={<MyPdfDocument />} fileName="gmLaw.pdf">
-              {({ _blob, _url, loading, _error }) =>
-                loading ? 'Loading document...' : 'Download Preview'
-              }
-            </PDFDownloadLink>
-          </button>
-        </div>
-        <div className="xs:hidden sm:block">
-          <PDFViewer width={'100%'} height={'auto'}>
-            <MyPdfDocument />
-          </PDFViewer>
-        </div>
+    <div className="w-[90%] m-auto pb-10">
+      <Step1
+        data={data}
+        setData={setData}
+        activeStep={activeStep}
+        setStep={setStep}
+        setActiveStep={setActiveStep}
+        notActionBtns
+      />
+      <br />
+      <br />
+      <Step2
+        data={data}
+        setData={setData}
+        activeStep={activeStep}
+        setStep={setStep}
+        setActiveStep={setActiveStep}
+        notActionBtns
+      />
+      <br />
+      <br />
+      <Step3
+        data={data}
+        setData={setData}
+        activeStep={activeStep}
+        setStep={setStep}
+        setActiveStep={setActiveStep}
+        notActionBtns
+      />
+      <br />
+      <br />
+      <Step4
+        data={data}
+        setData={setData}
+        activeStep={activeStep}
+        setStep={setStep}
+        setActiveStep={setActiveStep}
+        notActionBtns
+      />
+      <br />
+      <br />
+      <Step11
+        step={step}
+        setStep={setStep}
+        data={data}
+        setData={setData}
+        notActionBtns={true}
+      />
+      <br />
+      <br />
+      <Step21
+        step={step}
+        setStep={setStep}
+        data={data}
+        setData={setData}
+        notActionBtns
+      />
+      <br />
+      <br />
+      <Step31
+        step={step}
+        setStep={setStep}
+        data={data}
+        setData={setData}
+        notActionBtns
+      />
+      <br />
+      <br />
+      <Step41
+        step={step}
+        setStep={setStep}
+        data={data}
+        setData={setData}
+        notActionBtns
+      />
+      <br />
+      <br />
+      <Step51
+        step={step}
+        setStep={setStep}
+        data={data}
+        setData={setData}
+        notActionBtns
+      />
+      <br />
+      <br />
+      <Step61
+        step={step}
+        setStep={setStep}
+        data={data}
+        setData={setData}
+        notActionBtns
+      />
+      <br />
+      <br />
+      <Step71
+        step={step}
+        setStep={setStep}
+        data={data}
+        setData={setData}
+        setPreviewOpen={setPreviewOpen}
+        notActionBtns
+      />
+      <div className="flex justify-end">
+        <button
+          class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
+          onClick={() => handleSubmit()}
+        >
+          Submit
+        </button>
       </div>
     </div>
+    // <div className="absolute top-0 left-0 bg-white w-full z-[100]">
+    //   <div className="flex justify-end h-[60px] items-center px-5">
+    //     <div>
+    //       <button
+    //         class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
+    //         onClick={() => setPreviewOpen(false)}
+    //       >
+    //         Back
+    //       </button>
+    //       <button
+    //         class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
+    //         onClick={() => handleSubmit()}
+    //       >
+    //         Submit
+    //       </button>
+    //     </div>
+    //   </div>
+
+    //   <div
+    //     className="flex justify-center"
+    //     ref={pdfContainerRef}
+    //     style={{ height: 'calc(100vh - 60px)' }}
+    //   >
+    //     <div className="xs:block sm:hidden">
+    //       <button class="bg-[#6E66D4] ml-2 mt-20 text-white font-bold py-2 px-4 rounded">
+    //         <PDFDownloadLink document={<MyPdfDocument />} fileName="gmLaw.pdf">
+    //           {({ _blob, _url, loading, _error }) =>
+    //             loading ? 'Loading document...' : 'Download Preview'
+    //           }
+    //         </PDFDownloadLink>
+    //       </button>
+    //     </div>
+    //     <div className="xs:hidden sm:block">
+    //       <PDFViewer width={'100%'} height={'auto'}>
+    //         <MyPdfDocument />
+    //       </PDFViewer>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 

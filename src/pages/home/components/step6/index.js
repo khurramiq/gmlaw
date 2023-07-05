@@ -2,7 +2,7 @@ import { Autocomplete, TextField } from '@mui/material';
 import React from 'react';
 import stateList from '../../../../data/stateList';
 
-const Step6 = ({ step, setStep, data, setData }) => {
+const Step6 = ({ notActionBtns, step, setStep, data, setData }) => {
   const handleSpecialDistributionsQ1 = (i) => {
     setData({
       ...data,
@@ -870,21 +870,23 @@ const Step6 = ({ step, setStep, data, setData }) => {
           )}
         </div>
       )}
-      <div className="flex justify-end">
-        <button
-          class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-          disabled={step === 1}
-          onClick={() => setStep((prev) => prev - 1)}
-        >
-          Back
-        </button>
-        <button
-          class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-          onClick={() => handleNext()}
-        >
-          Next
-        </button>
-      </div>
+      {!notActionBtns && (
+        <div className="flex justify-end">
+          <button
+            class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
+            disabled={step === 1}
+            onClick={() => setStep((prev) => prev - 1)}
+          >
+            Back
+          </button>
+          <button
+            class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
+            onClick={() => handleNext()}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

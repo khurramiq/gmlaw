@@ -6,7 +6,7 @@ import stateList from '../../../../data/stateList';
 import { useState } from 'react';
 import FormStepper from '../../../../components/formStepper';
 
-const Step11 = ({ step, setStep, data, setData }) => {
+const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
   const [activeStep, setActiveStep] = useState(0);
   const steps = ['Family', 'Beneficiary info'];
   const maritalStatus = (i) => {
@@ -930,8 +930,8 @@ const Step11 = ({ step, setStep, data, setData }) => {
   };
   return (
     <div className="p-5">
-      <FormStepper activeStep={activeStep} steps={steps} />
-      {activeStep === 0 && (
+      {!notActionBtns && <FormStepper activeStep={activeStep} steps={steps} />}
+      {(activeStep === 0 || notActionBtns) && (
         <div>
           <h1 className="mb-1 text-3xl font-bold">FAMILY</h1>
           <h3 className="mb-1 font-bold">
@@ -1662,7 +1662,7 @@ const Step11 = ({ step, setStep, data, setData }) => {
           </div>
         </div>
       )}
-      {activeStep === 1 && (
+      {(activeStep === 1 || notActionBtns) && (
         <div>
           <h1 className="m-y-2 text-3xl text-center font-bold">
             TRUST ADMINISTRATION ON YOUR DEATH
@@ -2753,27 +2753,29 @@ const Step11 = ({ step, setStep, data, setData }) => {
           )}
         </div>
       )}
-      <div className="flex justify-end">
-        <button
-          class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-          disabled={step === 1}
-          onClick={() => {
-            if (activeStep === 0) {
-              setStep((prev) => prev - 1);
-            } else {
-              setActiveStep((prev) => prev - 1);
-            }
-          }}
-        >
-          Back
-        </button>
-        <button
-          class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-          onClick={() => handleNext()}
-        >
-          Next
-        </button>
-      </div>
+      {!notActionBtns && (
+        <div className="flex justify-end">
+          <button
+            class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
+            disabled={step === 1}
+            onClick={() => {
+              if (activeStep === 0) {
+                setStep((prev) => prev - 1);
+              } else {
+                setActiveStep((prev) => prev - 1);
+              }
+            }}
+          >
+            Back
+          </button>
+          <button
+            class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
+            onClick={() => handleNext()}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

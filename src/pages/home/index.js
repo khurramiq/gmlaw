@@ -12,7 +12,7 @@ import Step11 from './components/step11';
 import Preview from './components/Preview';
 const Home = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(8);
   const [data, setData] = useState({
     personalInfo: {
       yourInfo: {
@@ -1121,463 +1121,480 @@ const Home = () => {
   return (
     <div>
       <CowLevelHeaderWithLinks />
-      <div className="flex h-screen">
-        <div className="relative xs:w-[20%] w-[30%] h-screen">
-          <div className="absolute xs:hidden sm:block top-0 w-full h-full overflow-hidden">
-            <img className="h-full" src={sideImg} alt="sideImg" />
-          </div>
-          <div className="absolute top-0 right-0 flex items-end">
-            <ul className="xs:w-[50px] sm:w-[60px] mt-5">
-              <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
-                style={{ border: '1px solid #6660AD' }}
-                onClick={() => setStep(1)}
-              >
-                <p
-                  className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[55px] sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto"
-                  style={{ lineHeight: 1, zIndex: 10 }}
+      {previewOpen ? (
+        <Preview
+          data={data}
+          setData={setData}
+          // activeStep={activeStep}
+          // setStep={setStep}
+          // setActiveStep={setActiveStep}
+          setPreviewOpen={setPreviewOpen}
+        />
+      ) : (
+        <div className="flex h-screen">
+          <div className="relative xs:w-[20%] w-[30%] h-screen">
+            <div className="absolute xs:hidden sm:block top-0 w-full h-full overflow-hidden">
+              <img className="h-full" src={sideImg} alt="sideImg" />
+            </div>
+            <div className="absolute top-0 right-0 flex items-end">
+              <ul className="xs:w-[50px] sm:w-[60px] mt-5">
+                <li
+                  className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full"
+                  style={{ border: '1px solid #6660AD' }}
+                  onClick={() => setStep(1)}
                 >
-                  Personal <br /> Information
-                </p>
-                <span className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full bg-[#6660AD] font-bold">
-                  1
-                </span>
-              </li>
-              <div
-                className="w-[1px] ml-[24px]"
-                style={
-                  step >= 2
-                    ? { border: '1px solid #6660AD', height: '30px' }
-                    : { border: '1px solid #6660AD', height: '20px' }
-                }
-              />
-              <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
-                style={
-                  step >= 2
-                    ? { border: '1px solid #6660AD' }
-                    : { marginTop: '10px' }
-                }
-                onClick={() => handleStep2()}
-              >
+                  <p
+                    className="absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] xs:top-[55px] sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto"
+                    style={{ lineHeight: 1, zIndex: 10 }}
+                  >
+                    Personal <br /> Information
+                  </p>
+                  <span className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full bg-[#6660AD] font-bold">
+                    1
+                  </span>
+                </li>
                 <div
-                  className="absolute top-[-10px] left-0 h-[30px] w-[1px] ml-[24px]"
+                  className="w-[1px] ml-[24px]"
                   style={
                     step >= 2
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD', height: '30px' }
+                      : { border: '1px solid #6660AD', height: '20px' }
                   }
                 />
-                <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
-                    step >= 2 ? 'xs:top-[55px]' : 'xs:top-[45px]'
-                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
-                  style={{ lineHeight: 1, zIndex: 10 }}
-                >
-                  Family & <br /> Beneficiary <br /> info
-                </p>
-                <span
-                  className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                <li
+                  className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                   style={
                     step >= 2
-                      ? { background: '#6660AD' }
-                      : { background: '#BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { marginTop: '10px' }
                   }
+                  onClick={() => handleStep2()}
                 >
-                  2
-                </span>
+                  <div
+                    className="absolute top-[-10px] left-0 h-[30px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 2
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                  <p
+                    className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                      step >= 2 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                    } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                    style={{ lineHeight: 1, zIndex: 10 }}
+                  >
+                    Family & <br /> Beneficiary <br /> info
+                  </p>
+                  <span
+                    className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                    style={
+                      step >= 2
+                        ? { background: '#6660AD' }
+                        : { background: '#BCBDBD' }
+                    }
+                  >
+                    2
+                  </span>
+                  <div
+                    className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 2
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                </li>
                 <div
-                  className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                  className="h-[20px] w-[1px] ml-[24px]"
                   style={
                     step >= 2
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { display: 'none' }
                   }
                 />
-              </li>
-              <div
-                className="h-[20px] w-[1px] ml-[24px]"
-                style={
-                  step >= 2
-                    ? { border: '1px solid #6660AD' }
-                    : { display: 'none' }
-                }
-              />
-              <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
-                style={
-                  step >= 3
-                    ? { border: '1px solid #6660AD' }
-                    : { marginTop: '10px' }
-                }
-                onClick={() => handleStep3()}
-              >
-                <div
-                  className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                <li
+                  className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                   style={
                     step >= 3
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { marginTop: '10px' }
                   }
-                />
-                <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
-                    step >= 3 ? 'xs:top-[55px]' : 'xs:top-[45px]'
-                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
-                  style={{ lineHeight: 1, zIndex: 10 }}
+                  onClick={() => handleStep3()}
                 >
-                  Document <br /> Menu
-                </p>
-                <span
-                  className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                  <div
+                    className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 3
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                  <p
+                    className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                      step >= 3 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                    } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                    style={{ lineHeight: 1, zIndex: 10 }}
+                  >
+                    Document <br /> Menu
+                  </p>
+                  <span
+                    className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                    style={
+                      step >= 3
+                        ? { background: '#6660AD' }
+                        : { background: '#BCBDBD' }
+                    }
+                  >
+                    3
+                  </span>
+                  <div
+                    className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 3
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                </li>
+                <div
+                  className="h-[20px] w-[1px] ml-[24px]"
                   style={
                     step >= 3
-                      ? { background: '#6660AD' }
-                      : { background: '#BCBDBD' }
-                  }
-                >
-                  3
-                </span>
-                <div
-                  className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
-                  style={
-                    step >= 3
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { display: 'none' }
                   }
                 />
-              </li>
-              <div
-                className="h-[20px] w-[1px] ml-[24px]"
-                style={
-                  step >= 3
-                    ? { border: '1px solid #6660AD' }
-                    : { display: 'none' }
-                }
-              />
-              <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
-                style={
-                  step >= 4
-                    ? { border: '1px solid #6660AD' }
-                    : { marginTop: '10px' }
-                }
-                onClick={() => handleStep4()}
-              >
-                <div
-                  className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                <li
+                  className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                   style={
                     step >= 4
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { marginTop: '10px' }
                   }
-                />
-                <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
-                    step >= 4 ? 'xs:top-[55px]' : 'xs:top-[45px]'
-                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
-                  style={{ lineHeight: 1, zIndex: 10 }}
+                  onClick={() => handleStep4()}
                 >
-                  Preliminary <br /> Trust <br /> Information
-                </p>
-                <span
-                  className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                  <div
+                    className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 4
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                  <p
+                    className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                      step >= 4 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                    } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                    style={{ lineHeight: 1, zIndex: 10 }}
+                  >
+                    Preliminary <br /> Trust <br /> Information
+                  </p>
+                  <span
+                    className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                    style={
+                      step >= 4
+                        ? { background: '#6660AD' }
+                        : { background: '#BCBDBD' }
+                    }
+                  >
+                    4
+                  </span>
+                  <div
+                    className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 4
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                </li>
+                <div
+                  className="h-[20px] w-[1px] ml-[24px]"
                   style={
                     step >= 4
-                      ? { background: '#6660AD' }
-                      : { background: '#BCBDBD' }
-                  }
-                >
-                  4
-                </span>
-                <div
-                  className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
-                  style={
-                    step >= 4
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { display: 'none' }
                   }
                 />
-              </li>
-              <div
-                className="h-[20px] w-[1px] ml-[24px]"
-                style={
-                  step >= 4
-                    ? { border: '1px solid #6660AD' }
-                    : { display: 'none' }
-                }
-              />
-              <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
-                style={
-                  step >= 5
-                    ? { border: '1px solid #6660AD' }
-                    : { marginTop: '10px' }
-                }
-                onClick={() => handleStep5()}
-              >
-                <div
-                  className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                <li
+                  className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                   style={
                     step >= 5
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { marginTop: '10px' }
                   }
-                />
-                <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
-                    step >= 5 ? 'xs:top-[55px]' : 'xs:top-[45px]'
-                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
-                  style={{ lineHeight: 1, zIndex: 10 }}
+                  onClick={() => handleStep5()}
                 >
-                  Family <br /> Information
-                </p>
-                <span
-                  className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                  <div
+                    className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 5
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                  <p
+                    className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                      step >= 5 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                    } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                    style={{ lineHeight: 1, zIndex: 10 }}
+                  >
+                    Family <br /> Information
+                  </p>
+                  <span
+                    className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                    style={
+                      step >= 5
+                        ? { background: '#6660AD' }
+                        : { background: '#BCBDBD' }
+                    }
+                  >
+                    5
+                  </span>
+                  <div
+                    className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 5
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                </li>
+                <div
+                  className="h-[20px] w-[1px] ml-[24px]"
                   style={
                     step >= 5
-                      ? { background: '#6660AD' }
-                      : { background: '#BCBDBD' }
-                  }
-                >
-                  5
-                </span>
-                <div
-                  className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
-                  style={
-                    step >= 5
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { display: 'none' }
                   }
                 />
-              </li>
-              <div
-                className="h-[20px] w-[1px] ml-[24px]"
-                style={
-                  step >= 5
-                    ? { border: '1px solid #6660AD' }
-                    : { display: 'none' }
-                }
-              />
-              <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
-                style={
-                  step >= 6
-                    ? { border: '1px solid #6660AD' }
-                    : { marginTop: '10px' }
-                }
-                onClick={() => handleStep6()}
-              >
-                <div
-                  className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                <li
+                  className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                   style={
                     step >= 6
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { marginTop: '10px' }
                   }
-                />
-                <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
-                    step >= 6 ? 'xs:top-[55px]' : 'xs:top-[45px]'
-                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
-                  style={{ lineHeight: 1, zIndex: 10 }}
+                  onClick={() => handleStep6()}
                 >
-                  Successor <br /> Trustees
-                </p>
-                <span
-                  className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                  <div
+                    className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 6
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                  <p
+                    className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                      step >= 6 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                    } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                    style={{ lineHeight: 1, zIndex: 10 }}
+                  >
+                    Successor <br /> Trustees
+                  </p>
+                  <span
+                    className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                    style={
+                      step >= 6
+                        ? { background: '#6660AD' }
+                        : { background: '#BCBDBD' }
+                    }
+                  >
+                    6
+                  </span>
+                  <div
+                    className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 6
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                </li>
+                <div
+                  className="h-[20px] w-[1px] ml-[24px]"
                   style={
                     step >= 6
-                      ? { background: '#6660AD' }
-                      : { background: '#BCBDBD' }
-                  }
-                >
-                  6
-                </span>
-                <div
-                  className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
-                  style={
-                    step >= 6
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { display: 'none' }
                   }
                 />
-              </li>
-              <div
-                className="h-[20px] w-[1px] ml-[24px]"
-                style={
-                  step >= 6
-                    ? { border: '1px solid #6660AD' }
-                    : { display: 'none' }
-                }
-              />
-              <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
-                style={
-                  step >= 7
-                    ? { border: '1px solid #6660AD' }
-                    : { marginTop: '10px' }
-                }
-                onClick={() => handleStep7()}
-              >
-                <div
-                  className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                <li
+                  className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                   style={
                     step >= 7
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { marginTop: '10px' }
+                  }
+                  onClick={() => handleStep7()}
+                >
+                  <div
+                    className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 7
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                  <p
+                    className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                      step >= 7 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                    } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                    style={{ lineHeight: 1, zIndex: 10 }}
+                  >
+                    Special <br /> Distributions
+                  </p>
+                  <span
+                    className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                    style={
+                      step >= 7
+                        ? { background: '#6660AD' }
+                        : { background: '#BCBDBD' }
+                    }
+                  >
+                    7
+                  </span>
+                  <div
+                    className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 7
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                </li>
+                <div
+                  className="h-[20px] w-[1px] ml-[24px]"
+                  style={
+                    step >= 7
+                      ? { border: '1px solid #6660AD' }
+                      : { display: 'none' }
                   }
                 />
-                <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
-                    step >= 7 ? 'xs:top-[55px]' : 'xs:top-[45px]'
-                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
-                  style={{ lineHeight: 1, zIndex: 10 }}
-                >
-                  Special <br /> Distributions
-                </p>
-                <span
-                  className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
-                  style={
-                    step >= 7
-                      ? { background: '#6660AD' }
-                      : { background: '#BCBDBD' }
-                  }
-                >
-                  7
-                </span>
-                <div
-                  className="absolute bottom-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
-                  style={
-                    step >= 7
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
-                  }
-                />
-              </li>
-              <div
-                className="h-[20px] w-[1px] ml-[24px]"
-                style={
-                  step >= 7
-                    ? { border: '1px solid #6660AD' }
-                    : { display: 'none' }
-                }
-              />
-              <li
-                className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
-                style={
-                  step >= 8
-                    ? { border: '1px solid #6660AD' }
-                    : { marginTop: '10px' }
-                }
-                onClick={() => handleStep8()}
-              >
-                <div
-                  className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                <li
+                  className="relative flex justify-center items-center w-[50px] h-[50px] rounded-full cursor-pointer"
                   style={
                     step >= 8
-                      ? { display: 'none' }
-                      : { border: '1px solid #BCBDBD' }
+                      ? { border: '1px solid #6660AD' }
+                      : { marginTop: '10px' }
                   }
-                />
-                <p
-                  className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
-                    step >= 8 ? 'xs:top-[55px]' : 'xs:top-[45px]'
-                  } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
-                  style={{ lineHeight: 1, zIndex: 10 }}
+                  onClick={() => handleStep8()}
                 >
-                  Remaining <br /> Distributions
-                </p>
-                <span
-                  className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
-                  style={
-                    step >= 8
-                      ? { background: '#6660AD' }
-                      : { background: '#BCBDBD' }
-                  }
-                >
-                  8
-                </span>
-              </li>
-            </ul>
+                  <div
+                    className="absolute top-[-10px] left-0 h-[20px] w-[1px] ml-[24px]"
+                    style={
+                      step >= 8
+                        ? { display: 'none' }
+                        : { border: '1px solid #BCBDBD' }
+                    }
+                  />
+                  <p
+                    className={`absolute xs:text-black sm:text-white xs:text-center sm:left-[-100px] xs:left-[0px] ${
+                      step >= 8 ? 'xs:top-[55px]' : 'xs:top-[45px]'
+                    } sm:top-0 xs:text-[8px] sm:text-base text-white xs:w-full sm:w-auto`}
+                    style={{ lineHeight: 1, zIndex: 10 }}
+                  >
+                    Remaining <br /> Distributions
+                  </p>
+                  <span
+                    className="flex justify-center items-center text-white w-[35px] h-[35px] rounded-full font-bold"
+                    style={
+                      step >= 8
+                        ? { background: '#6660AD' }
+                        : { background: '#BCBDBD' }
+                    }
+                  >
+                    8
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
+          <form
+            className="w-full h-full overflow-scroll"
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <div className="">
+              {step === 1 && (
+                <Step1
+                  step={step}
+                  setStep={setStep}
+                  data={data}
+                  setData={setData}
+                />
+              )}
+              {step === 2 && (
+                <Step11
+                  step={step}
+                  setStep={setStep}
+                  data={data}
+                  setData={setData}
+                  notActionBtns={false}
+                />
+              )}
+              {step === 3 && (
+                <Step2
+                  step={step}
+                  setStep={setStep}
+                  data={data}
+                  setData={setData}
+                  notActionBtns={false}
+                />
+              )}
+              {step === 4 && (
+                <Step3
+                  step={step}
+                  setStep={setStep}
+                  data={data}
+                  setData={setData}
+                  notActionBtns={false}
+                />
+              )}
+              {step === 5 && (
+                <Step4
+                  step={step}
+                  setStep={setStep}
+                  data={data}
+                  setData={setData}
+                  notActionBtns={false}
+                />
+              )}
+              {step === 6 && (
+                <Step5
+                  step={step}
+                  setStep={setStep}
+                  data={data}
+                  setData={setData}
+                  notActionBtns={false}
+                />
+              )}
+              {step === 7 && (
+                <Step6
+                  step={step}
+                  setStep={setStep}
+                  data={data}
+                  setData={setData}
+                  notActionBtns={false}
+                />
+              )}
+              {step === 8 && (
+                <Step7
+                  step={step}
+                  setStep={setStep}
+                  data={data}
+                  setData={setData}
+                  setPreviewOpen={setPreviewOpen}
+                  notActionBtns={false}
+                />
+              )}
+            </div>
+          </form>
         </div>
-        <form
-          className="w-full h-full overflow-scroll"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <div className="">
-            {step === 1 && (
-              <Step1
-                step={step}
-                setStep={setStep}
-                data={data}
-                setData={setData}
-              />
-            )}
-            {step === 2 && (
-              <Step11
-                step={step}
-                setStep={setStep}
-                data={data}
-                setData={setData}
-              />
-            )}
-            {step === 3 && (
-              <Step2
-                step={step}
-                setStep={setStep}
-                data={data}
-                setData={setData}
-              />
-            )}
-            {step === 4 && (
-              <Step3
-                step={step}
-                setStep={setStep}
-                data={data}
-                setData={setData}
-              />
-            )}
-            {step === 5 && (
-              <Step4
-                step={step}
-                setStep={setStep}
-                data={data}
-                setData={setData}
-              />
-            )}
-            {step === 6 && (
-              <Step5
-                step={step}
-                setStep={setStep}
-                data={data}
-                setData={setData}
-              />
-            )}
-            {step === 7 && (
-              <Step6
-                step={step}
-                setStep={setStep}
-                data={data}
-                setData={setData}
-              />
-            )}
-            {step === 8 && (
-              <Step7
-                step={step}
-                setStep={setStep}
-                data={data}
-                setData={setData}
-                setPreviewOpen={setPreviewOpen}
-              />
-            )}
-          </div>
-        </form>
-      </div>
-      {previewOpen && <Preview data={data} setPreviewOpen={setPreviewOpen} />}
+      )}
     </div>
   );
 };

@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Step3 = ({ data, setData, activeStep, setStep, setActiveStep }) => {
+const Step3 = ({
+  notActionBtns,
+  data,
+  setData,
+  activeStep,
+  setStep,
+  setActiveStep,
+}) => {
   const specialIrrevocableTrusts = (i) => {
     setData({
       ...data,
@@ -414,21 +421,23 @@ const Step3 = ({ data, setData, activeStep, setStep, setActiveStep }) => {
           Documents needed to transfer title of property you own to your Trust.{' '}
         </p>
       </div>
-      <div className="flex justify-end">
-        <button
-          class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-          disabled={activeStep === 0}
-          onClick={() => setActiveStep((prev) => prev - 1)}
-        >
-          Back
-        </button>
-        <button
-          class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-          onClick={() => handleNext()}
-        >
-          Next
-        </button>
-      </div>
+      {!notActionBtns && (
+        <div className="flex justify-end">
+          <button
+            class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
+            disabled={activeStep === 0}
+            onClick={() => setActiveStep((prev) => prev - 1)}
+          >
+            Back
+          </button>
+          <button
+            class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
+            onClick={() => handleNext()}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -3,7 +3,14 @@ import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
-const Step4 = ({ data, setData, activeStep, setStep, setActiveStep }) => {
+const Step4 = ({
+  notActionBtns,
+  data,
+  setData,
+  activeStep,
+  setStep,
+  setActiveStep,
+}) => {
   const creatingTrustType = (i) => {
     setData({
       ...data,
@@ -793,21 +800,23 @@ const Step4 = ({ data, setData, activeStep, setStep, setActiveStep }) => {
           </div>
         </div>
       )}
-      <div className="flex justify-end">
-        <button
-          class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
-          disabled={activeStep === 0}
-          onClick={() => setActiveStep((prev) => prev - 1)}
-        >
-          Back
-        </button>
-        <button
-          class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
-          onClick={() => handleNext()}
-        >
-          Next
-        </button>
-      </div>
+      {!notActionBtns && (
+        <div className="flex justify-end">
+          <button
+            class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
+            disabled={activeStep === 0}
+            onClick={() => setActiveStep((prev) => prev - 1)}
+          >
+            Back
+          </button>
+          <button
+            class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
+            onClick={() => handleNext()}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };
