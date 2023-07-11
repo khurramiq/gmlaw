@@ -1,77 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
-import gmlawLogo from '../../../assets/images/gmlawLogo.png';
-import {
-  PDFViewer,
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  PDFDownloadLink,
-} from '@react-pdf/renderer';
-import Step1 from './step1/components/step1Form/components/Step1';
-import Step2 from './step1/components/step1Form/components/Step2';
-import Step3 from './step1/components/step1Form/components/Step3';
-import Step4 from './step1/components/step1Form/components/Step4';
-import Step11 from './step11';
-import Step21 from './step2';
-import Step31 from './step3';
-import Step41 from './step4';
-import Step51 from './step5';
-import Step61 from './step6';
-import Step71 from './step7';
-// import { saveAs } from 'file-saver';
-// Create styles
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: 'row',
-    backgroundColor: '#E4E4E4',
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-  image: {
-    width: '200px',
-    marginBottom: '10px',
-  },
-});
-
-const Checkbox = ({ isChecked, label }) => (
-  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-    <View
-      style={{
-        width: 10,
-        height: 10,
-        marginRight: 5,
-        borderWidth: 1,
-        borderColor: 'black',
-        backgroundColor: isChecked ? 'black' : 'white',
-      }}
-    />
-    <Text style={{ fontSize: '14px' }}>{label}</Text>
-  </View>
-);
-
-const RadioButton = ({ isChecked, label }) => (
-  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-    <View
-      style={{
-        width: 10,
-        height: 10,
-        marginRight: 5,
-        borderRadius: '50%',
-        borderWidth: 1,
-        borderColor: 'black',
-        backgroundColor: isChecked ? 'black' : 'white',
-      }}
-    />
-    <Text style={{ fontSize: '14px' }}>{label}</Text>
-  </View>
-);
 
 const FormDataPreview = ({
   step,
@@ -82,7 +10,7 @@ const FormDataPreview = ({
   setActiveStep,
   setPreviewOpen,
 }) => {
-  const pdfContainerRef = useRef();
+  // const pdfContainerRef = useRef();
 
   useEffect(() => {
     // Scroll to the top when the component mounts
@@ -93,1062 +21,1860 @@ const FormDataPreview = ({
   //   const blob = new Blob([pdfContainer], { type: 'application/pdf' });
   //   saveAs(blob, 'form_data_preview.pdf');
   // };
-  const formateDate = (dd) => {
-    const d = new Date(dd);
-    const year = moment(d).format('YYYY');
-    const month = moment(d).format('MM');
-    const day = moment(d).format('DD');
-    return year + '-' + month + '-' + day;
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('data', data);
   };
 
-  const MyPdfDocument = () => (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Image style={styles.image} src={gmlawLogo} />
-          <Text style={{ fontSize: '24px' }}>YOUR INFORMATION</Text>
-          <Text style={{ fontSize: '18px' }}>Your Name</Text>
-          <Text style={{ fontSize: '14px' }}>
-            First Name: {data?.personalInfo?.yourInfo?.firstName}
-          </Text>
-          <Text style={{ fontSize: '14px' }}>
-            Middle Name: {data?.personalInfo?.yourInfo?.middleName}
-          </Text>
-          <Text style={{ fontSize: '14px' }}>
-            Last Name: {data?.personalInfo?.yourInfo?.lastName}
-          </Text>
-          <Text style={{ fontWeight: '800', marginTop: '10px' }}>
-            Mailing Address
-          </Text>
-          <Text style={{ fontSize: '14px' }}>
-            Address Line 1: {data?.personalInfo?.yourInfo?.addressLine1}
-          </Text>
-          <Text style={{ fontSize: '14px' }}>
-            Address Line 2:{data?.personalInfo?.yourInfo?.addressLine2}
-          </Text>
-          <Text style={{ fontSize: '14px' }}>
-            City:{data?.personalInfo?.yourInfo?.city}
-          </Text>
-          <Text style={{ fontSize: '14px' }}>
-            State:{data?.personalInfo?.yourInfo?.state.value}
-          </Text>
-          <Text style={{ fontSize: '14px' }}>
-            Zip Code: {data?.personalInfo?.yourInfo?.zipCode}
-          </Text>
-          <Text style={{ fontSize: '14px', marginTop: '5px' }}>
-            Email:{data?.personalInfo?.yourInfo?.email}
-          </Text>
-          <Text style={{ fontSize: '14px', marginTop: '5px' }}>
-            Gender: {data?.personalInfo?.yourInfo?.gender}
-          </Text>
-          <Text style={{ fontSize: '14px', marginTop: '5px' }}>
-            State of Residency:
-            {data?.personalInfo?.yourInfo?.stateOfResidency}
-          </Text>
-          <Text style={{ fontSize: '14px', marginTop: '5px' }}>
-            County of Residency:{' '}
-            {data?.personalInfo?.yourInfo?.countyOfResidency}
-          </Text>
-          <Text style={{ fontSize: '14px', marginTop: '5px' }}>
-            Country of Citizenship:{' '}
-            {data?.personalInfo?.yourInfo?.countryOfCitizenship}
-          </Text>
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.estatePlanningPackages.question}
-          </Text>
-          {data.personalInfo.estatePlanningPackages.options.map((item, i) => (
-            <Checkbox key={i} isChecked={item.value} label={item.label} />
-          ))}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.individualEstatePlanningDocuments.question}
-          </Text>
-          {data.personalInfo.individualEstatePlanningDocuments.options.map(
-            (item, i) => (
-              <Checkbox key={i} isChecked={item.value} label={item.label} />
-            )
-          )}
-        </View>
-      </Page>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.specialIrrevocableTrusts.question}
-          </Text>
-          {data.personalInfo.specialIrrevocableTrusts.options.map((item, i) => (
-            <Checkbox key={i} isChecked={item.value} label={item.label} />
-          ))}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.trustTransferDocuments.question}
-          </Text>
-          {data.personalInfo.trustTransferDocuments.options.map((item, i) => (
-            <Checkbox key={i} isChecked={item.value} label={item.label} />
-          ))}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.creatingTrustType.question}
-          </Text>
-          {data.personalInfo.creatingTrustType.options.map((item, i) => (
-            <Checkbox key={i} isChecked={item.value} label={item.label} />
-          ))}
-          {data.personalInfo.creatingTrustType.options[0].value && (
-            <>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                Creating your new revocable living trust.
-              </Text>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                {data.personalInfo.what_do_you_want_to_name_your_trust.question}
-              </Text>
-              {data.personalInfo.what_do_you_want_to_name_your_trust.options.map(
-                (item, i) => (
-                  <RadioButton
-                    key={i}
-                    isChecked={item.value}
-                    label={item.label}
-                  />
-                )
-              )}
-            </>
-          )}
-          {data.personalInfo.creatingTrustType.options[1].value && (
-            <>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                First, we need to collect some information about your existing
-                trust
-              </Text>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                What is the name of your existing trust?
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Answer:{' '}
-                {
-                  data.personalInfo
-                    .first_we_need_to_collect_some_information_about_your_existing_trust
-                    .what_is_the_name_of_your_existing_trust
-                }
-              </Text>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                What is the date you signed your existing trust?
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Answer:{' '}
-                {formateDate(
-                  data.personalInfo
-                    .first_we_need_to_collect_some_information_about_your_existing_trust
-                    .what_is_the_date_you_signed_your_existing_trust
-                )}
-              </Text>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                After you signed your trust, did you ever amend it?
-              </Text>
-              {data.personalInfo.first_we_need_to_collect_some_information_about_your_existing_trust.after_you_signed_your_trust_did_you_ever_amend_it.map(
-                (item, i) => (
-                  <RadioButton
-                    key={i}
-                    isChecked={item.value}
-                    label={item.label}
-                  />
-                )
-              )}
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                Locate the paragraph or section number in your existing trust
-                agreement that allows you to make amendments to your trust write
-                the location below.
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Answer:{' '}
-                {
-                  data.personalInfo
-                    .first_we_need_to_collect_some_information_about_your_existing_trust
-                    .locate_the_paragraph_or_section_number_in_your_existing_trust_agreement_that_allows_you_to_make_amendments_to_your_trust_write_the_location_below
-                }
-              </Text>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                Have you amended your Trust before?
-              </Text>
-              {data.personalInfo.first_we_need_to_collect_some_information_about_your_existing_trust.have_you_amended_your_Trust_before.map(
-                (item, i) => (
-                  <RadioButton
-                    key={i}
-                    isChecked={item.value}
-                    label={item.label}
-                  />
-                )
-              )}
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                What month you will sign the document(s) you are creating?
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Answer:{' '}
-                {
-                  data.personalInfo
-                    .first_we_need_to_collect_some_information_about_your_existing_trust
-                    .what_month_you_will_sign_the_document_you_are_creating
-                }
-              </Text>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                What month you will sign the document(s) you are creating?
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Answer:{' '}
-                {
-                  data.personalInfo
-                    .first_we_need_to_collect_some_information_about_your_existing_trust
-                    .what_month_you_will_sign_the_document_you_are_creating
-                }
-              </Text>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                On what day of the month will you sign your documents
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Answer:{' '}
-                {
-                  data.personalInfo
-                    .first_we_need_to_collect_some_information_about_your_existing_trust
-                    .on_what_day_of_the_month_will_you_sign_your_documents
-                }
-              </Text>
-            </>
-          )}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.initialTrustee.question}
-          </Text>
-          {data.personalInfo.initialTrustee.options.map((item, i) => (
-            <RadioButton key={i} isChecked={item.value} label={item.label} />
-          ))}
-          <Text style={{ fontSize: '24px', marginTop: '10px' }}>FAMILY</Text>
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.maritalStatus.question}
-          </Text>
-          {data.personalInfo.maritalStatus.options.map((item, i) => (
-            <RadioButton key={i} isChecked={item.value} label={item.label} />
-          ))}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.livingChildren.question}
-          </Text>
-          {data.personalInfo.livingChildren.options.map((item, i) => (
-            <Checkbox key={i} isChecked={item.value} label={item.label} />
-          ))}
-        </View>
-      </Page>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          {!data.personalInfo.livingChildren.options[0].value && (
-            <div>
-              <Text className="mb-1 mt-3 font-bold">
-                Living Children Information
-              </Text>
-              {data.personalInfo.livingChildrenInformation.map((item, i) => (
-                <View key={i} style={{ marginTop: '10px' }}>
-                  <Text>Child {i + 1}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    First Name: {item.firstName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Middle Name: {item.middleName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Last Name: {item.lastName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Date of Birth: {formateDate(item.dateOfBirth)}
-                  </Text>
-                </View>
-              ))}
-            </div>
-          )}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.deceasedChildren.question}
-          </Text>
-          {data.personalInfo.deceasedChildren.options.map((item, i) => (
-            <Checkbox key={i} isChecked={item.value} label={item.label} />
-          ))}
-          {!data.personalInfo.deceasedChildren.options[0].value && (
-            <div>
-              <Text className="mb-1 mt-3 font-bold">
-                Deceased Children Information
-              </Text>
-              {data.personalInfo.deceasedChildrenInformation.map((item, i) => (
-                <View key={i} style={{ marginTop: '10px' }}>
-                  <Text>Child {i + 1}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    First Name: {item.firstName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Middle Name: {item.middleName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Last Name: {item.lastName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Date of Birth: {formateDate(item.dateOfBirth)}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Date of Death: {formateDate(item.dateOfDeath)}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    {
-                      item
-                        .did_this_child_die_leaving_any_children_or_grandchildren
-                        .question
-                    }
-                  </Text>
-                  {item.did_this_child_die_leaving_any_children_or_grandchildren.options.map(
-                    (item, i) => (
-                      <RadioButton isChecked={item.value} label={item.label} />
-                    )
-                  )}
-                </View>
-              ))}
-            </div>
-          )}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {
-              data.personalInfo.how_many_successor_Trustees_do_you_want_to_name
-                .question
-            }
-          </Text>
-          {data.personalInfo.how_many_successor_Trustees_do_you_want_to_name.options.map(
-            (item, i) => (
-              <RadioButton key={i} isChecked={item.value} label={item.label} />
-            )
-          )}
-          {data.personalInfo.how_many_successor_Trustees_do_you_want_to_name
-            .options[0].value && (
-            <div>
-              <Text style={{ fontSize: '24px' }}>Successor Trustee</Text>
-              <Text style={{ fontSize: '14px' }}>
-                First Name: {data?.personalInfo?.successorTrustee?.firstName}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Middle Name: {data?.personalInfo?.successorTrustee?.middleName}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Last Name: {data?.personalInfo?.successorTrustee?.lastName}
-              </Text>
-              <h3 className="mb-1 mt-2 font-bold">Address</h3>
-              <Text style={{ fontSize: '14px' }}>
-                Address Line 1:
-                {data?.personalInfo?.successorTrustee?.addressLine1}{' '}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Address Line 2:
-                {data?.personalInfo?.successorTrustee?.addressLine2}{' '}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                City:
-                {data?.personalInfo?.successorTrustee?.city}{' '}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                State:
-                {data?.personalInfo?.successorTrustee?.state.value}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                zipCode:
-                {data?.personalInfo?.successorTrustee?.zipCode}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Email:
-                {data?.personalInfo?.successorTrustee?.email}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Phone:
-                {data?.personalInfo?.successorTrustee?.phone}
-              </Text>
-            </div>
-          )}
-          {data.personalInfo.how_many_successor_Trustees_do_you_want_to_name
-            .options[1].value && (
-            <div>
-              <Text style={{ fontSize: '24px' }}>Successor Trustees</Text>
-              {data.personalInfo.successorTrustees.map((item, i) => (
-                <>
-                  <Text style={{ fontSize: '18px' }}>
-                    Successor Trustee {i + 1}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    First Name: {item.firstName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Middle Name: {item.middleName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Last Name: {item.lastName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>Email: {item.email}</Text>
-                  <Text style={{ fontSize: '14px' }}>Phone: {item.phone}</Text>
-                </>
-              ))}
-            </div>
-          )}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {
-              data.personalInfo
-                .is_there_anyone_that_you_do_not_want_serving_as_a_successor_Trustee
-                .question
-            }
-          </Text>
-          {data.personalInfo.is_there_anyone_that_you_do_not_want_serving_as_a_successor_Trustee.options.map(
-            (item, i) => (
-              <RadioButton key={i} isChecked={item.value} label={item.label} />
-            )
-          )}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {data.personalInfo.do_you_want_to_make_any_specific_gifts.question}
-          </Text>
-          {data.personalInfo.do_you_want_to_make_any_specific_gifts.options.map(
-            (item, i) => (
-              <RadioButton key={i} isChecked={item.value} label={item.label} />
-            )
-          )}
-          {data.personalInfo.do_you_want_to_make_any_specific_gifts.options[0]
-            .value && (
-            <>
-              {data.personalInfo.gifts.map((item, i) => (
-                <>
-                  <Text style={{ fontSize: '18px' }}>Gift {i + 1}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Type of Gift: {item?.giftType}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Name of Individual: {item?.item?.nameOfIndividual}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>Type of Gift:</Text>
-                  {item.typeOfGift.map((item, i) => (
-                    <RadioButton
-                      key={i}
-                      isChecked={item.value}
-                      label={item.label}
-                    />
-                  ))}
-                  {item.typeOfGift[0].value && (
-                    <>
-                      <Text style={{ fontSize: '14px' }}>
-                        Cash Gift Amount: {item?.cashGiftAmount}
-                      </Text>
-                    </>
-                  )}
-
-                  {item.typeOfGift[1].value && (
-                    <>
-                      <Text style={{ fontSize: '14px' }}>
-                        Describe the item of personal property:{' '}
-                        {item?.describeTheItemOfPersonalProperty}
-                      </Text>
-                    </>
-                  )}
-                  <Text style={{ fontSize: '14px' }}>
-                    Make any comments, remarks or your reason for the gift
-                    (Optional):{' '}
-                    {item?.makeAnyCommentsRemarksOrYourReasonForTheGift}
-                  </Text>
-                </>
-              ))}
-            </>
-          )}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            {
-              data.personalInfo
-                .first_do_you_want_to_make_any_charitable_donations.question
-            }
-          </Text>
-          {data.personalInfo.first_do_you_want_to_make_any_charitable_donations.options.map(
-            (item, i) => (
-              <RadioButton key={i} isChecked={item.value} label={item.label} />
-            )
-          )}
-          {data.personalInfo.first_do_you_want_to_make_any_charitable_donations
-            .options[0].value && (
-            <>
-              <Text style={{ fontSize: '24px' }}>Charitable Donations</Text>
-              {data.personalInfo.charitableDonations1.map((item, i) => (
-                <>
-                  <Text style={{ fontSize: '18px' }}>Charity {i + 1}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Name of Charity: {item?.nameOfCharity}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Percentage of Residue: {item?.percentageOfResidue}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>Charity's Address</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Address Line 1:{item?.addressLine1}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Address Line 2:{item?.addressLine2}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>City:{item?.city}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    State:{item?.state.value}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    zipCode:{item?.zipCode}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Purpose for the gift:{item?.purposeForTheGift}
-                  </Text>
-                </>
-              ))}
-            </>
-          )}
-          {data.personalInfo.beneficiaries.map((item, i) => (
-            <>
-              <Text style={{ fontSize: '24px' }}>REMAINDER BENEFICIARIES</Text>
-              <Text style={{ fontSize: '18px' }}>Beneficiary {i + 1}</Text>
-              <Text style={{ fontSize: '14px' }}>
-                First Name: {item?.firstName}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Last Name: {item?.lastName}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>City: {item?.city}</Text>
-              <Text style={{ fontSize: '14px' }}>
-                State: {item?.state.value}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Beneficiary relationship to you:{' '}
-                {item?.Beneficiary_relationship_to_you}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                percentageShare: {item?.percentageShare}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Any statements that you wish to make (optional):{' '}
-                {item?.any_statements_that_you_wish_to_make}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                What happens if this person predeceases you?
-              </Text>
-              {item.what_happens_if_this_person_predeceases_you.map(
-                (item, i) => (
-                  <RadioButton
-                    key={i}
-                    isChecked={item.value}
-                    label={item.label}
-                  />
-                )
-              )}
-              <Text style={{ fontSize: '14px' }}>
-                Will this beneficiary's share be given outright,distributed at
-                certain time intervals, or held in trust for his or her life:{' '}
-                {item?.will_this_beneficiarys_share_be_given_outright}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Pick your age for disbursement:{' '}
-                {item?.pick_your_age_for_disbursement}
-              </Text>
-            </>
-          ))}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            Contingent Residue Distribution
-          </Text>
-          {data.personalInfo.contingent_Residue_Distribution.map((item, i) => (
-            <RadioButton key={i} isChecked={item.value} label={item.label} />
-          ))}
-          {data.personalInfo.contingent_Residue_Distribution[1].value && (
-            <>
-              {data.personalInfo.beneficiaries1.map((item, i) => (
-                <>
-                  <Text style={{ fontSize: '18px' }}>Beneficiary {i + 1}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    First Name: {item?.firstName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Last Name: {item?.lastName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>City: {item?.city}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    State: {item?.state.value}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Beneficiary relationship to you:{' '}
-                    {item?.Beneficiary_relationship_to_you}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    percentageShare: {item?.percentageShare}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Any statements that you wish to make (optional):{' '}
-                    {item?.any_statements_that_you_wish_to_make}
-                  </Text>
-                </>
-              ))}
-            </>
-          )}
-          {data.personalInfo.contingent_Residue_Distribution[2].value && (
-            <>
-              <Text style={{ fontSize: '24px' }}>Charitable Donations</Text>
-              {data.personalInfo.charitableDonations.map((item, i) => (
-                <>
-                  <Text style={{ fontSize: '18px' }}>Charity {i + 1}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Name of Charity: {item?.nameOfCharity}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Percentage of Residue: {item?.percentageOfResidue}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>Charity's Address</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Address Line 1:{item?.addressLine1}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Address Line 2:{item?.addressLine2}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>City:{item?.city}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    State:{item?.state.value}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    zipCode:{item?.zipCode}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Purpose for the gift:{item?.purposeForTheGift}
-                  </Text>
-                </>
-              ))}
-            </>
-          )}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            Do you want the personal representative(s) under your Pour-Over-Will
-            to be the same as your successor trustee(s)
-          </Text>
-          {data.documentMenu.personalRepresentativeQ.options.map((item, i) => (
-            <RadioButton key={i} isChecked={item.value} label={item.label} />
-          ))}
-          {data.documentMenu.personalRepresentativeQ.options[1].value && (
-            <div>
-              {data.documentMenu.personalRepresentatives.map((item, i) => (
-                <>
-                  <Text style={{ fontSize: '18px' }}>
-                    Personal Representative {i + 1}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    First Name: {item?.firstName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Last Name: {item?.lastName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>Email: {item?.email}</Text>
-                  <Text style={{ fontSize: '14px' }}>Phone: {item?.phone}</Text>
-                </>
-              ))}
-            </div>
-          )}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            Do you want the attorney(s)-in-fact under your Durable Power of
-            Attorney to be the same as your successor trustee(s)
-          </Text>
-          {data.preliminaryTrustInfo.question.options.map((item, i) => (
-            <RadioButton key={i} isChecked={item.value} label={item.label} />
-          ))}
-          {data.preliminaryTrustInfo.question.options[1].value && (
-            <>
-              {data.preliminaryTrustInfo.attorneyInFacts.map((item, i) => (
-                <>
-                  <Text style={{ fontSize: '18px' }}>
-                    Attorney-in-Fact {i + 1}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    First Name: {item?.firstName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Last Name: {item?.lastName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>Email: {item?.email}</Text>
-                  <Text style={{ fontSize: '14px' }}>Phone: {item?.phone}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Relationship: {item?.relationship}
-                  </Text>
-                </>
-              ))}
-            </>
-          )}
-          {data.familyInfo.healthCareAgents.map((item, i) => (
-            <>
-              <Text style={{ fontSize: '18px' }}>
-                Health Care Agent {i + 1}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                First Name: {item?.firstName}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>
-                Last Name: {item?.lastName}
-              </Text>
-              <Text style={{ fontSize: '14px' }}>Email: {item?.email}</Text>
-              <Text style={{ fontSize: '14px' }}>Phone: {item?.phone}</Text>
-              <Text style={{ fontSize: '14px' }}>
-                Relationship: {item?.relationship}
-              </Text>
-            </>
-          ))}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            Are there individuals that you want to identify as your HIPAA
-            agents?
-          </Text>
-          {data.successorTrustees.question.options.map((item, i) => (
-            <RadioButton isChecked={item.value} label={item.label} />
-          ))}
-          {data.successorTrustees.question.options[0].value && (
-            <>
-              <Text style={{ fontSize: '24px' }}>HIPAA Agents</Text>
-              {data.successorTrustees.hIPAAAgents.map((item, i) => (
-                <>
-                  <Text style={{ fontSize: '18px' }}>HIPAA Agent {i + 1}</Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    First Name: {item?.firstName}
-                  </Text>
-                  <Text style={{ fontSize: '14px' }}>
-                    Last Name: {item?.lastName}
-                  </Text>
-                </>
-              ))}
-            </>
-          )}
-          <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-            Do you have any children under 18 years of age?
-          </Text>
-          {data.specialDistributions.question1.options.map((item, i) => (
-            <RadioButton isChecked={item.value} label={item.label} />
-          ))}
-          {data.specialDistributions.question1.options[0].value && (
-            <>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                If you have any children under the age of 18 you should name a
-                guardian (or co-Guardians) to take care of them if you cannot.
-                Failure to make arrangements in this regard will leave the
-                decision up to the government.
-              </Text>
-              <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                Do you want to name a guardian for your minor child or minor
-                children?
-              </Text>
-              {data.specialDistributions.question2.options.map((item, i) => (
-                <RadioButton
-                  key={i}
-                  isChecked={item.value}
-                  label={item.label}
-                />
-              ))}
-              {data.specialDistributions.question2.options[0].value && (
-                <>
-                  <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                    Do you want to nominate an individual or a couple as
-                    Guardian of your minor child or children?
-                  </Text>
-                  {data.specialDistributions.question3.options.map(
-                    (item, i) => (
-                      <RadioButton
-                        key={i}
-                        isChecked={item.value}
-                        label={item.label}
-                      />
-                    )
-                  )}
-                  {data.specialDistributions.question3.options[0].value && (
-                    <>
-                      <Text style={{ fontSize: '24px' }}>SINGLE GUARDIANS</Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Name as many guardians as you want. Each one named will
-                        act in succession if the prior guardian cannot or will
-                        not serve.
-                      </Text>
-                      <>
-                        {data.specialDistributions.guardians.map((item, i) => (
-                          <>
-                            <Text style={{ fontSize: '18px' }}>
-                              Guardian {i + 1}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              First Name: {item?.firstName}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              Last Name: {item?.lastName}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              Relationship of Guardian to you:{' '}
-                              {item?.relationship_of_Guardian_to_you}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              Guardian's Address
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              Address Line 1: {item?.addressLine1}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              Address Line 2: {item?.addressLine2}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              City: {item?.city}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              State: {item?.state.value}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              zipCode: {item?.zipCode}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              Email: {item?.email}
-                            </Text>
-                            <Text style={{ fontSize: '14px' }}>
-                              Phone: {item?.phone}
-                            </Text>
-                          </>
-                        ))}
-                      </>
-                    </>
-                  )}
-                  {data.specialDistributions.question3.options[1].value && (
-                    <>
-                      <Text style={{ fontSize: '24px' }}>
-                        Co-Guardian Informations
-                      </Text>
-                      <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                        Co Guardian One
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        First Name:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.co_Guardian_One_First_Name
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Last Name:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.co_Guardian_One_Last_Name
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Relationship of co-Guardian One to you:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.relationship_of_co_Guardian_One_to_you
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                        Co-Guardian Two
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        First Name:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.co_Guardian_Two_First_Name
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Last Name:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.co_Guardian_Two_Last_Name
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Relationship of co-Guardian Two to you:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.relationship_of_co_Guardian_Two_to_you
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '18px', marginTop: '10px' }}>
-                        Co Guardian's Address
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Address Line 1:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.addressLine1
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Address Line 2:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.addressLine2
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        City:{' '}
-                        {data.specialDistributions.co_GuardianInformation?.city}
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        State:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.state.value
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        zipCode:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.zipCode
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Email:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.email
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Phone:{' '}
-                        {
-                          data.specialDistributions.co_GuardianInformation
-                            ?.phone
-                        }
-                      </Text>
-                      <Text style={{ fontSize: '14px' }}>
-                        Which co Guardian has priority should the couple divorce
-                        or otherwise split up?
-                      </Text>
-                      {data.specialDistributions.question4.options.map(
-                        (item, i) => (
-                          <RadioButton
-                            key={i}
-                            isChecked={item.value}
-                            label={item.label}
-                          />
-                        )
-                      )}
-                    </>
-                  )}
-                </>
-              )}
-            </>
-          )}
-          <Text style={{ fontSize: '24px', marginTop: '10px' }}>
-            Personal Representatives
-          </Text>
-          {data.remainingDistributions.personalRepresentatives.map(
-            (item, i) => (
-              <>
-                <Text style={{ fontSize: '18px' }}>
-                  Personal Representative {i + 1}
-                </Text>
-                <Text style={{ fontSize: '14px' }}>
-                  First Name: {item?.firstName}
-                </Text>
-                <Text style={{ fontSize: '14px' }}>
-                  Last Name: {item?.lastName}
-                </Text>
-                <Text style={{ fontSize: '14px' }}>Email: {item?.email}</Text>
-                <Text style={{ fontSize: '14px' }}>Phone: {item?.phone}</Text>
-              </>
-            )
-          )}
-        </View>
-      </Page>
-    </Document>
-  );
-
   return (
     <div className="w-[90%] m-auto pb-10">
-      <Step1
+      {/* <Step1
         data={data}
         setData={setData}
         activeStep={activeStep}
         setStep={setStep}
         setActiveStep={setActiveStep}
         notActionBtns
-      />
-      <br />
-      <br />
-      <Step2
+      /> */}
+      <h1 className="text-3xl font-bold">YOUR INFORMATION</h1>
+      <h3 className="text-2xl font-[500]">Your Name</h3>
+      <p>
+        <strong>First Name:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.firstName}&nbsp;
+        <strong>Middle Name:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.middleName}&nbsp;
+        <strong>Last Name:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.lastName}&nbsp;
+      </p>
+      <h3 className="text-2xl font-[500]">Mailing Address</h3>
+      <p>
+        <strong>Address Line 1:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.addressLine1} <br />
+        <strong>Address Line 2:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.addressLine2} <br />
+        <strong>City:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.city} <br />
+        <strong>State:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.state?.label} <br />
+        <strong>Zip Code:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.zipCode} <br />
+        <strong>Email:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.email} <br />
+        <strong>Your Gender:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.gender} <br />
+        <strong>State of Residency:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.stateOfResidency} <br />
+        <strong>County of Residency:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.countyOfResidency} <br />
+        <strong>Country of Citizenship:</strong>
+        &nbsp;{data?.personalInfo?.yourInfo?.countryOfCitizenship} <br />
+      </p>
+      {/* <Step2
         data={data}
         setData={setData}
         activeStep={activeStep}
         setStep={setStep}
         setActiveStep={setActiveStep}
         notActionBtns
-      />
-      <br />
-      <br />
-      <Step3
+      /> */}
+      <h1 className="mt-3 font-bold">
+        FROM THE LIST BELOW, SELECT THE DOCMENT(S) OR THE PACKAGE THAT BEST FITS
+        YOUR NEEDS.
+      </h1>
+      <p>
+        The package or documents selected will dictate the questions that
+        follow.
+      </p>
+      <h3 className="mb-1 font-bold">
+        {/* ESTATE PLANNING PACKAGES (insert prices for each set of documents) */}
+        {data.personalInfo.estatePlanningPackages.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.estatePlanningPackages.options.map((item, i) => (
+          <label key={i} className="w-[33%]">
+            <input
+              type="checkbox"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-checkbox h-5 w-[30px] text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+        <p>
+          Documents needed to transfer title of property you own to your Trust.{' '}
+        </p>
+      </div>
+      <p>Only select one. The package will determine the documents created.</p>
+      <h3 className="mb-1 font-bold">
+        {/* INDIVIDUAL ESTATE PLANNING DOCUMENTS */}
+        {data.personalInfo.individualEstatePlanningDocuments.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.individualEstatePlanningDocuments.options.map(
+          (item, i) => (
+            <label key={i} className="w-[33%]">
+              <input
+                type="checkbox"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-checkbox h-5 w-[30px] text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          )
+        )}
+        <p>
+          Documents needed to transfer title of property you own to your Trust.{' '}
+        </p>
+      </div>
+      {/* <Step3
         data={data}
         setData={setData}
         activeStep={activeStep}
         setStep={setStep}
         setActiveStep={setActiveStep}
         notActionBtns
-      />
-      <br />
-      <br />
-      <Step4
+      /> */}
+      <h3 className=" mt-3 font-bold">
+        {/* SPECIAL IRREVOCABLE TRUSTS */}
+        {data.personalInfo.specialIrrevocableTrusts.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.specialIrrevocableTrusts.options.map((item, i) => (
+          <label key={i} className="w-[33%]">
+            <input
+              type="checkbox"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-checkbox h-5 w-[30px] text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+        <p>
+          Documents needed to transfer title of property you own to your Trust.{' '}
+        </p>
+      </div>
+      <h3 className="mb-1 mt-2 font-bold">
+        {/* TRUST TRANSFER DOCUMENTS */}
+        {data.personalInfo.trustTransferDocuments.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.trustTransferDocuments.options.map((item, i) => (
+          <label key={i} className="w-[33%]">
+            <input
+              type="checkbox"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-checkbox h-5 w-[30px] text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+        <p>
+          Documents needed to transfer title of property you own to your Trust.{' '}
+        </p>
+      </div>
+
+      {/* <Step4
         data={data}
         setData={setData}
         activeStep={activeStep}
         setStep={setStep}
         setActiveStep={setActiveStep}
         notActionBtns
-      />
-      <br />
-      <br />
-      <Step11
+      /> */}
+      <h1 className=" mt-2 font-bold text-center">LIVING TRUST PACKAGE</h1>
+      <p>This set of documents includes the following:</p>
+      <ul className="list-disc list-inside">
+        <li>Living Trust Agreement;</li>
+        <li>Certification of Trust;</li>
+        <li>Assignment (transfer) of Personal Property to your Trust;</li>
+        <li>Last Will and Testament;</li>
+        <li>Durable Power of Attorney for finances;</li>
+        <li>
+          Health Care Power of Attorney and Living Will (sometimes called an
+          Advance Health Care Directive); and
+        </li>
+        <li>HIPAA Confidentiality Waiver;</li>
+      </ul>
+      <h1 className="mb-1 font-bold text-center">DRAFTING YOUR DOCUMENTS</h1>
+      <h1 className="mb-1 font-bold text-center">
+        THERE ARE _____ SECTIONS, EACH CONTAINING A NUMBER OF QUESTIONS.
+      </h1>
+      <h1 className="mb-1 font-bold text-center">
+        Anwer the questions accurately and completely and you will have a a well
+        crafted document.
+      </h1>
+      <h1 className="mb-1 font-bold text-center">We promise!</h1>
+      <p className="mb-1 text-center">
+        YOU CAN TRACK YOUR PROGRESS ON THE PROGRSS BAR, AND YOU CAN STOP AND
+        COME BACK AT ANY TIME WITHOUT LOSING YOUR PLACE.{' '}
+      </p>
+      <h1 className="mb-1 font-bold">SECTION ONE: TYPE OF TRUST</h1>
+      <h3 className="mb-1 font-bold">
+        {/* First,what type of trust are you creating? */}
+        {data.personalInfo.creatingTrustType.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.creatingTrustType.options.map((item, i) => (
+          <label key={i} className="w-[33%]">
+            <input
+              type="checkbox"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-checkbox h-5 w-[30px] text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+
+      {data.personalInfo.creatingTrustType.options[1].value && (
+        <>
+          <h1 className="text-center font-bold mt-5">
+            First, we need to collect some information about your existing trust
+          </h1>
+          <h3 className="mb-1 mt-5 font-bold">
+            What is the name of your existing trust?
+          </h3>
+          <p>
+            <strong>Answer:</strong>&nbsp;
+            {
+              data?.personalInfo
+                ?.first_we_need_to_collect_some_information_about_your_existing_trust
+                ?.what_is_the_name_of_your_existing_trust
+            }
+          </p>
+          <h3 className="mb-1 mt-5 font-bold">
+            What is the date you signed your existing trust?
+          </h3>
+          <p>
+            <strong>Answer:</strong>&nbsp;
+            {
+              data?.personalInfo
+                ?.first_we_need_to_collect_some_information_about_your_existing_trust
+                .what_is_the_date_you_signed_your_existing_trust
+            }
+          </p>
+          <h3 className="mb-1 mt-5 font-bold">
+            After you signed your trust, did you ever amend it?
+          </h3>
+          <div className="flex space-x-4">
+            {data?.personalInfo?.first_we_need_to_collect_some_information_about_your_existing_trust.after_you_signed_your_trust_did_you_ever_amend_it.map(
+              (item, i) => (
+                <label key={i} className="flex items-center">
+                  <input
+                    type="radio"
+                    checked={item.value}
+                    onChange={() => {}}
+                    className="form-radio h-5 w-5 text-blue-500"
+                  />
+                  <span className="ml-2 text-gray-700">{item.label}</span>
+                </label>
+              )
+            )}
+          </div>
+          <h3 className="mb-1 mt-3 font-bold">
+            Locate the paragraph or section number in your existing trust
+            agreement that allows you to make amendments to your trust write the
+            location below.
+          </h3>
+          <p>
+            <strong>Answer:</strong>&nbsp;
+            {
+              data?.personalInfo
+                ?.first_we_need_to_collect_some_information_about_your_existing_trust
+                ?.locate_the_paragraph_or_section_number_in_your_existing_trust_agreement_that_allows_you_to_make_amendments_to_your_trust_write_the_location_below
+            }
+          </p>
+          <h3 className="mb-1 mt-2 font-bold">
+            Have you amended your Trust before?
+          </h3>
+          <div className="flex space-x-4">
+            {data?.personalInfo?.first_we_need_to_collect_some_information_about_your_existing_trust.have_you_amended_your_Trust_before.map(
+              (item, i) => (
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    checked={item.value}
+                    onChange={() => {}}
+                    className="form-radio h-5 w-5 text-blue-500"
+                  />
+                  <span className="ml-2 text-gray-700">{item.label}</span>
+                </label>
+              )
+            )}
+          </div>
+          <h3 className="mb-1 font-bold">
+            What month you will sign the document(s) you are creating?
+          </h3>
+          <p>
+            <strong>Answer:</strong>&nbsp;
+            {
+              data?.personalInfo
+                ?.first_we_need_to_collect_some_information_about_your_existing_trust
+                .what_month_you_will_sign_the_document_you_are_creating
+            }
+          </p>
+          <h3 className="mb-1 font-bold">
+            On what day of the month will you sign your documents
+          </h3>
+          <p>
+            <strong>Answer:</strong>&nbsp;
+            {
+              data?.personalInfo
+                ?.first_we_need_to_collect_some_information_about_your_existing_trust
+                .on_what_day_of_the_month_will_you_sign_your_documents
+            }
+          </p>
+        </>
+      )}
+      {data.personalInfo.creatingTrustType.options[0].value && (
+        <>
+          <h1 className="mt-3 font-bold text-lg">
+            Creating your new revocable living trust.
+          </h1>
+          <h3 className="mb-1 font-bold">
+            {/* What do you want to name your trust? */}
+            {data.personalInfo.what_do_you_want_to_name_your_trust.question}
+          </h3>
+          <div className="space-y-2">
+            {data.personalInfo.what_do_you_want_to_name_your_trust.options.map(
+              (item, i) => (
+                <label key={i} className="inline-blog">
+                  <input
+                    type="radio"
+                    checked={item.value}
+                    onChange={() => {}}
+                    className="form-radio h-5 w-5 text-blue-500"
+                    name="radio-option"
+                    value="option1"
+                  />
+                  <span className="ml-1 text-gray-700 relative top-[-3px]">
+                    {item.label}
+                  </span>
+                </label>
+              )
+            )}
+          </div>
+        </>
+      )}
+      <h1 className="mb-1 mt-5 text-3xl font-bold text-center">
+        INITIAL TRUSTEE
+      </h1>
+      <h3 className="mb-1 font-bold">
+        {data.personalInfo.initialTrustee.question}
+      </h3>
+      <div className="space-y-2 mb-5">
+        {data.personalInfo.initialTrustee.options.map((item, i) => (
+          <label key={i} className="inline-blog">
+            <input
+              type="radio"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-radio ml-2 h-5 w-5 text-blue-500"
+              name="radio-option"
+              value="option1"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      {data.personalInfo.initialTrustee.options[1].value && (
+        <>
+          <h1 className="text-lg font-bold mt-5">Co-Trustee</h1>
+          <p>
+            <strong>First Name:</strong>
+            &nbsp;{data?.personalInfo?.coTrustee?.firstName}&nbsp;
+            <strong>Middle Name:</strong>
+            &nbsp;{data?.personalInfo?.coTrustee?.middleName}&nbsp;
+            <strong>Last Name:</strong>
+            &nbsp;{data?.personalInfo?.coTrustee?.lastName}&nbsp;
+          </p>
+        </>
+      )}
+      {data.personalInfo.initialTrustee.options[2].value && (
+        <div>
+          {data.personalInfo.coTrustees.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                {/* <i
+                  className="far fa-times-circle cursor-pointer"
+                  onClick={() => removeCoTrustee(i)}
+                ></i> */}
+                <span className="font-bold ml-3">Co-Trustee {i + 1}</span>
+              </div>
+              <h3 className="mb-1 font-bold">Name</h3>
+              <p>
+                <strong>First Name:</strong>
+                &nbsp;{item.firstName}&nbsp;
+                <strong>Middle Name:</strong>
+                &nbsp;{item.middleName}&nbsp;
+                <strong>Last Name:</strong>
+                &nbsp;{item.lastName}&nbsp;
+              </p>
+              <div>
+                <h3 className="mb-1 font-bold">Relationship</h3>
+                <p>&nbsp;{item.relationship}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {/* <Step11
         step={step}
         setStep={setStep}
         data={data}
         setData={setData}
         notActionBtns={true}
-      />
-      <br />
-      <br />
-      <Step21
+      /> */}
+      <h1 className="mb-1 mt-5 text-3xl font-bold">FAMILY</h1>
+      <h3 className="mb-1 font-bold">
+        {/* Your Marital Status */}
+        {data.personalInfo.maritalStatus.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.maritalStatus.options.map((item, i) => (
+          <label key={i} className="inline-block">
+            <input
+              type="radio"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-radio ml-2 h-5 w-5 text-blue-500"
+              name="radio-option"
+              value="option1"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+
+      <h3 className="mb-1 font-bold">
+        {/* Do you have any living children? */}
+        {data.personalInfo.livingChildren.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.livingChildren.options.map((item, i) => (
+          <label key={i} className="inline-block">
+            <input
+              type="checkbox"
+              checked={item.value}
+              onChange={() => {}}
+              className="ml-2 form-checkbox h-5 w-5 text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      <h3 className="mb-1 font-bold">
+        {/* Do you have any deceased children? */}
+        {data.personalInfo.deceasedChildren.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.deceasedChildren.options.map((item, i) => (
+          <label key={i} className="inline-block">
+            <input
+              type="checkbox"
+              checked={item.value}
+              onChange={() => {}}
+              className="ml-2 form-checkbox h-5 w-5 text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      {!data.personalInfo.livingChildren.options[0].value && (
+        <div>
+          <h3 className="mb-1 mt-3 font-bold">Living Children Information</h3>
+          {data.personalInfo.livingChildrenInformation.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">Child {i + 1}</span>
+              </div>
+              <h3 className="mb-1 font-bold">Name</h3>
+              <p>
+                <strong>First Name:</strong>
+                &nbsp;{item?.firstName}&nbsp;
+                <strong>Middle Name:</strong>
+                &nbsp;{item?.middleName}&nbsp;
+                <strong>Last Name:</strong>
+                &nbsp;{item?.lastName}&nbsp;
+              </p>
+
+              <h3 className="mb-1 font-bold">Date of Birth</h3>
+              <p>{moment(item?.dateOfBirth).format('MMMM Do YYYY')}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {!data.personalInfo.deceasedChildren.options[0].value && (
+        <div>
+          <h3 className="mb-1 mt-3 font-bold">Deceased Children Information</h3>
+          {data.personalInfo.deceasedChildrenInformation.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">Child {i + 1}</span>
+              </div>
+              <h3 className="mb-1 font-bold">Name</h3>
+              <p>
+                <strong>First Name:</strong>
+                &nbsp;{item?.firstName}&nbsp;
+                <strong>Middle Name:</strong>
+                &nbsp;{item?.middleName}&nbsp;
+                <strong>Last Name:</strong>
+                &nbsp;{item?.lastName}&nbsp;
+              </p>
+
+              <div className="mb-2 flex">
+                <div className="w-[50%]">
+                  <h3 className="mb-1 font-bold">Date of Birth</h3>
+                  <p>{moment(item?.dateOfBirth).format('MMMM Do YYYY')}</p>
+                </div>
+                <div className="w-[50%] ml-2">
+                  <h3 className="mb-1 font-bold">Date of Death</h3>
+                  <p>{moment(item?.dateOfDeath).format('MMMM Do YYYY')}</p>
+                </div>
+              </div>
+              <h3 className="mb-1 mt-2 font-bold">
+                {
+                  item.did_this_child_die_leaving_any_children_or_grandchildren
+                    .question
+                }
+              </h3>
+              <div className="space-x-2">
+                {item.did_this_child_die_leaving_any_children_or_grandchildren.options.map(
+                  (item, i) => (
+                    <label key={i} className="inline-block">
+                      <input
+                        type="radio"
+                        checked={item.value}
+                        onChange={() => {}}
+                        className="form-radio ml-2 h-5 w-5 text-blue-500"
+                      />
+                      <span className="ml-1 text-gray-700 relative top-[-3px]">
+                        {item.label}
+                      </span>
+                    </label>
+                  )
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      <h1 className="mt-3 text-3xl font-bold text-center">
+        SUCCESSOR TRUSTEES
+      </h1>
+      <h3 className="font-bold text-center">
+        These are the individuals that will act as your replacement Trustee,
+        should you become unable to act for yourself
+      </h3>
+      <p className="text-center">
+        If you name more than one, you can have them act alone, in the order you
+        name them, or you can have them act together as co-successor Trustees.
+      </p>
+
+      <h3 className="mb-1 mt-2 font-bold">
+        {/* How many successor Trustees do you want to name? */}
+        {
+          data.personalInfo.how_many_successor_Trustees_do_you_want_to_name
+            .question
+        }
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.deceasedChildren.options.map((item, i) => (
+          <label className="inline-block">
+            <input
+              type="radio"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-radio ml-2 h-5 w-5 text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+
+      {data.personalInfo.how_many_successor_Trustees_do_you_want_to_name
+        .options[0].value && (
+        <div>
+          <h3 className="mb-1 mt-2 font-bold">Successor Trustee</h3>
+          <p>
+            <strong>First Name:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.firstName}&nbsp;
+            <strong>Middle Name:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.middleName}&nbsp;
+            <strong>Last Name:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.lastName}&nbsp;
+          </p>
+          <h3 className="mb-1 mt-2 font-bold">Address</h3>
+          <p>
+            <strong>Address Line 1:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.addressLine1} <br />
+            <strong>Address Line 2:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.addressLine2} <br />
+            <strong>City:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.city} <br />
+            <strong>State:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.state?.label} <br />
+            <strong>Zip Code:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.zipCode} <br />
+            <strong>Email:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.email} <br />
+            <strong>Phone:</strong>
+            &nbsp;{data?.personalInfo?.successorTrustee?.phone} <br />
+          </p>
+        </div>
+      )}
+      {data.personalInfo.how_many_successor_Trustees_do_you_want_to_name
+        .options[1].value && (
+        <div>
+          <h3 className="mb-1 mt-3 font-bold">Successor Trustees</h3>
+          {data.personalInfo.successorTrustees.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">Successor Trustee {i + 1}</span>
+              </div>
+              <h3 className="mb-1 font-bold">Name</h3>
+              <p>
+                <strong>First Name:</strong>
+                &nbsp;{item?.firstName}&nbsp;
+                <strong>Middle Name:</strong>
+                &nbsp;{item?.middleName}&nbsp;
+                <strong>Last Name:</strong>
+                &nbsp;{item?.lastName}&nbsp;
+              </p>
+              <p>
+                <strong>Email:</strong>
+                &nbsp;{item?.email}&nbsp;
+                <strong>Phone:</strong>
+                &nbsp;{item?.phone}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+      <h3 className="mb-1 mt-2 font-bold">
+        {/* Is there anyone that you do not want serving as a successor Trustee? */}
+        {
+          data.personalInfo
+            .is_there_anyone_that_you_do_not_want_serving_as_a_successor_Trustee
+            .question
+        }
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.is_there_anyone_that_you_do_not_want_serving_as_a_successor_Trustee.options.map(
+          (item, i) => (
+            <label className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          )
+        )}
+      </div>
+      <h1 className="m-y-2 text-3xl text-center font-bold">
+        TRUST ADMINISTRATION ON YOUR DEATH
+      </h1>
+      <h3 className="m-y-2 text-lg text-center font-bold">
+        Upon your death, three things will happen with your trust estate
+      </h3>
+      <ol className="list-decimal list-inside">
+        <li>
+          Your trust property will be marshaled, inventoried, and all remaining
+          expenses and taxes will be paid.
+        </li>
+        <li>Special distributions (if any) will be made;</li>
+        <li>
+          Lastly, the remaineder of your trust property will be distributed.
+        </li>
+      </ol>
+      <h3 className="mt-5 text-lg text-center font-bold">
+        THE FOLLOWING SECTIONS PROVIDE INSTRUCTIONS REGARDING THE DISTRIBUTIONS
+      </h3>
+      <h3 className="mt-5 text-lg text-center font-bold">
+        SPECIFIC DISTRIBUTIONS
+      </h3>
+      <h3 className="mt-5 font-bold">
+        {/* Do you want to make any specific gifts? */}
+        {data.personalInfo.do_you_want_to_make_any_specific_gifts.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.do_you_want_to_make_any_specific_gifts.options.map(
+          (item, i) => (
+            <label className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          )
+        )}
+      </div>
+      {data.personalInfo.do_you_want_to_make_any_specific_gifts.options[0]
+        .value && (
+        <div>
+          {data.personalInfo.gifts.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">Gift {i + 1}</span>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-[50%]">
+                  <h3 className="mb-1 font-bold">Type of Gift</h3>
+                  <p>{item?.giftType}</p>
+                </div>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-full">
+                  <h3 className="mb-1 font-bold">Name of Individual</h3>
+                  <p>{item?.nameOfIndividual}</p>
+                </div>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-[50%]">
+                  <h3 className="mb-1 font-bold">Type of Gift</h3>
+                  <div className="space-x-2">
+                    {item.typeOfGift.map((item, i) => (
+                      <label className="inline-block">
+                        <input
+                          type="radio"
+                          checked={item.value}
+                          onChange={() => {}}
+                          className="form-radio ml-2 h-5 w-5 text-blue-500"
+                        />
+                        <span className="ml-1 text-gray-700 relative top-[-3px]">
+                          {item.label}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                {item.typeOfGift[0].value && (
+                  <div className="w-[50%]">
+                    <h3 className="mb-1 font-bold">Cash Gift Amount</h3>
+                    <p>{item?.cashGiftAmount}</p>
+                  </div>
+                )}
+              </div>
+              {item.typeOfGift[1].value && (
+                <div className="mb-2 flex">
+                  <div className="w-full">
+                    <h3 className="mb-1 font-bold">
+                      Describe the item of personal property
+                    </h3>
+                    <p>{item?.describeTheItemOfPersonalProperty}</p>
+                  </div>
+                </div>
+              )}
+              <div className="mb-2 flex">
+                <div className="w-full">
+                  <h3 className="mb-1 font-bold">
+                    Make any comments, remarks or your reason for the gift
+                    (Optional)
+                  </h3>
+                  <p>{item?.makeAnyCommentsRemarksOrYourReasonForTheGift}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      <h3 className="mt-5 text-lg text-center font-bold">
+        DISTRIBUTION OF THE RESIDUE
+      </h3>
+      <p>
+        Any remaining assets will be distributed as you specifiy in this
+        section.{' '}
+      </p>
+      <p>
+        We advise you to use percentages (not specific dollar amounts). This
+        will make things much easier to administer when the time comes.
+      </p>
+      <h3 className="mt-5 font-bold">
+        {/* First, do you want to make any charitable donations? */}
+        {
+          data.personalInfo.first_do_you_want_to_make_any_charitable_donations
+            .question
+        }
+      </h3>
+      <div className="space-x-2">
+        {data.personalInfo.first_do_you_want_to_make_any_charitable_donations.options.map(
+          (item, i) => (
+            <label className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          )
+        )}
+      </div>
+      {data.personalInfo.first_do_you_want_to_make_any_charitable_donations
+        .options[0].value && (
+        <>
+          <div>
+            <h3 className="font-bold mb-3">Charitable Donations</h3>
+            {data.personalInfo.charitableDonations1.map((item, i) => (
+              <div
+                key={i}
+                className={`${
+                  i % 2 === 0 ? 'bg-slate-200' : ''
+                } p-5 rounded-lg mb-3`}
+              >
+                <div>
+                  <span className="font-bold">Charity {i + 1}</span>
+                </div>
+                <div className="mb-2 flex">
+                  <div className="w-[50%] mr-2">
+                    <h3 className="mb-1 font-bold">Name of Charity</h3>
+                    <p>{item?.nameOfCharity}</p>
+                  </div>
+                  <div className="w-[50%]">
+                    <h3 className="mb-1 font-bold">Percentage of Residue</h3>
+                    <p>{item?.percentageOfResidue}</p>
+                  </div>
+                </div>
+                <div className="mb-2">
+                  <h3 className="mb-1 font-bold">Charity's Address</h3>
+                  <p>
+                    <strong>Address Line 1:</strong>&nbsp;{item?.addressLine1}
+                  </p>
+                </div>
+                <div className="mb-2">
+                  <p>
+                    <strong>Address Line 2:</strong>&nbsp;{item?.addressLine2}
+                  </p>
+                </div>
+                <div className="mb-2 flex">
+                  <p>
+                    <strong>City:</strong>&nbsp;{item?.city}
+                  </p>
+                  <p>
+                    <strong>State:</strong>&nbsp;{item?.state.label}
+                  </p>
+                  <p>
+                    <strong>zipCode:</strong>&nbsp;{item?.zipCode}
+                  </p>
+                </div>
+                <div className="mb-2 flex">
+                  <div className="w-full">
+                    <h3 className="mb-1 font-bold">Purpose for the gift</h3>
+                    <p>{item?.purposeForTheGift}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+      <h1 className="mt-5 font-bold">REMAINDER BENEFICIARIES</h1>
+      <i className="mt-2">Remember - the total must add up to 100%</i>
+      <div className="mt-3">
+        {data.personalInfo.beneficiaries.map((item, i) => (
+          <div
+            key={i}
+            className={`${
+              i % 2 === 0 ? 'bg-slate-200' : ''
+            } p-5 rounded-lg mb-3`}
+          >
+            <div>
+              <span className="font-bold">Beneficiary {i + 1}</span>
+            </div>
+            <h3 className="mb-1 font-bold">Name</h3>
+            <p>
+              <strong>First Name:</strong>&nbsp;{item?.firstName}&nbsp;
+              <strong>Last Name:</strong>&nbsp;{item?.lastName}&nbsp;
+            </p>
+            <h3 className="mb-1 font-bold">
+              City and State where beneficiary lives
+            </h3>
+            <p>
+              <strong>City:</strong>&nbsp;{item?.city}&nbsp;
+              <strong>State:</strong>&nbsp;{item?.state?.label}
+            </p>
+            <div className="mb-2 flex">
+              <div className="w-[70%] mr-2">
+                <h3 className="mb-1 font-bold">
+                  Beneficiary's relationship to you
+                </h3>
+                <p>{item?.Beneficiary_relationship_to_you}</p>
+              </div>
+              <div className="w-[30%]">
+                <h3 className="mb-1 font-bold">Percentage Share</h3>
+                <p>{item?.percentageShare}</p>
+              </div>
+            </div>
+            <div className="mb-2 flex">
+              <div className="w-full">
+                <h3 className="mb-1 font-bold">
+                  Any statements that you wish to make (optional)
+                </h3>
+                <p>{item?.any_statements_that_you_wish_to_make}</p>
+              </div>
+            </div>
+            <div className="mb-2 flex">
+              <div className="w-full">
+                <h3 className="mb-1 mt-3 font-bold">Gift Structure</h3>
+                <h3 className="mb-1 mt-3 font-bold">
+                  What happens if this person predeceases you?
+                </h3>
+                <div className="space-x-2">
+                  {item.what_happens_if_this_person_predeceases_you.map(
+                    (item, i) => (
+                      <label className="inline-block">
+                        <input
+                          type="radio"
+                          checked={item.value}
+                          onChange={() => {}}
+                          className="form-radio ml-2 h-5 w-5 text-blue-500"
+                        />
+                        <span className="ml-1 text-gray-700 relative top-[-3px]">
+                          {item.label}
+                        </span>
+                      </label>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="mb-1 flex">
+              <div className="w-full">
+                <h3 className="mb-1 font-bold">
+                  Will this beneficiary's share be given outright,distributed at
+                  certain time intervals, or held in trust for his or her life
+                </h3>
+                <p>{item?.will_this_beneficiarys_share_be_given_outright}</p>
+              </div>
+            </div>
+            <i>
+              If a beneficiary is going to receive a sizable amount of money,
+              you may want to have their share held in trust.
+            </i>
+            <p>
+              Doing this will protect the gift (asset protection) and guard
+              against judgement creditors, or possible divorce attachment)
+            </p>
+
+            <div className="mb-1 mt-3 flex">
+              <div className="w-full">
+                <h3 className="mb-1 font-bold">
+                  Pick your age for disbursement
+                </h3>
+                <p>{item?.pick_your_age_for_disbursement}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <h3 className="mt-5 font-bold">Contingent Residue Beneficiaries</h3>
+      <p className="text-sm">
+        Should there be no one to receive your trust residue, where would you
+        like it to be distributed?{' '}
+      </p>
+      <p className="mt-3 text-sm">
+        if you identify more than one contingent residue beneficiary, the
+        allocation to each will be an equal share.
+      </p>
+      <h3 className="mt-5 font-bold">Contingent Residue Distribution</h3>
+      <div className="space-x-2">
+        {data.personalInfo.contingent_Residue_Distribution.map((item, i) => (
+          <label className="inline-block">
+            <input
+              type="radio"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-radio ml-2 h-5 w-5 text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      {data.personalInfo.contingent_Residue_Distribution[1].value && (
+        <div className="mt-3">
+          {data.personalInfo.beneficiaries1.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">Beneficiary {i + 1}</span>
+              </div>
+              <h3 className="mb-1 font-bold">Name</h3>
+              <p>
+                <strong>First Name:</strong>&nbsp;{item?.firstName}&nbsp;
+                <strong>Last Name:</strong>&nbsp;{item?.lastName}&nbsp;
+              </p>
+              <h3 className="mb-1 font-bold">
+                City and State where beneficiary lives
+              </h3>
+              <p>
+                <strong>City:</strong>&nbsp;{item?.city}&nbsp;
+                <strong>State:</strong>&nbsp;{item?.state?.label}
+              </p>
+              <div className="mb-2 flex">
+                <div className="w-[70%] mr-2">
+                  <h3 className="mb-1 font-bold">
+                    Beneficiary's relationship to you
+                  </h3>
+                  <p>{item?.Beneficiary_relationship_to_you}</p>
+                </div>
+                <div className="w-[30%]">
+                  <h3 className="mb-1 font-bold">Percentage Share</h3>
+                  <p>{item?.percentageShare}</p>
+                </div>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-full">
+                  <h3 className="mb-1 font-bold">
+                    Any statements that you wish to make (optional)
+                  </h3>
+                  <p>{item?.any_statements_that_you_wish_to_make}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {data.personalInfo.contingent_Residue_Distribution[2].value && (
+        <div>
+          <h3 className="font-bold mb-3">Charitable Donations</h3>
+          {data.personalInfo.charitableDonations.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">Charity {i + 1}</span>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <h3 className="mb-1 font-bold">Name of Charity</h3>
+                  <p>{item?.nameOfCharity}</p>
+                </div>
+                <div className="w-[50%]">
+                  <h3 className="mb-1 font-bold">Percentage of Residue</h3>
+                  <p>{item?.percentageOfResidue}</p>
+                </div>
+              </div>
+              <div className="mb-2">
+                <h3 className="mb-1 font-bold">Charity's Address</h3>
+                <p>
+                  <strong>Address Line 1:</strong>
+                  {item?.addressLine1}
+                </p>
+                <p>
+                  <strong>Address Line 2:</strong>
+                  {item?.addressLine2}
+                </p>
+              </div>
+              <p>
+                <strong>City:</strong>&nbsp;
+                {item?.city}&nbsp;
+                <strong>State:</strong>&nbsp;{item?.state?.label}&nbsp;
+                <strong>zipCode:</strong>&nbsp;{item?.zipCode}&nbsp;
+              </p>
+              <div className="mb-2 flex">
+                <div className="w-full">
+                  <h3 className="mb-1 font-bold">Purpose for the gift</h3>
+                  <p>{item?.purposeForTheGift}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {/* <Step21
         step={step}
         setStep={setStep}
         data={data}
         setData={setData}
         notActionBtns
-      />
-      <br />
-      <br />
-      <Step31
+      /> */}
+      <h1 className="font-bold text-2xl text-center">POUR-OVER-WILL</h1>
+      <p className="text-center mt-3">
+        When you have a living trust, your last will and testament serves as a
+        safeguard just in case you forget to transfer an asset that you intended
+        to be a trust asset but are in a position (incacitated or dead) where
+        you can no longer transfer the asset yourself.
+      </p>
+      <h3 className="font-bold mt-3 text-center">Personal Representatives</h3>
+      <p className="mt-3">
+        Your Personal representative is the individual who will probate your
+        estate upon your death. You can name as many personal representatives as
+        you want, each of whom will act in succession if the predecessor cannot
+        serve.{' '}
+      </p>
+      <p className="font-[300] mt-3">[HYPER LINK TO WHAT IS PROBATE]</p>
+      <h3 className="font-bold mt-3">
+        Do you want the personal representative(s) under your Pour-Over-Will to
+        be the same as your successor trustee(s)
+      </h3>
+      <div className="space-x-2">
+        {data.documentMenu.personalRepresentativeQ.options.map((item, i) => (
+          <label className="inline-block">
+            <input
+              type="radio"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-radio ml-2 h-5 w-5 text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      <p className="mt-2">
+        Having the same personal representative and trustee makes logical sense
+        and is rarely a different person.
+      </p>
+      <p>
+        If you answer "No" and if you name more than one personal
+        representative, they will act in the order listed below.
+      </p>
+      {data.documentMenu.personalRepresentativeQ.options[1].value && (
+        <div>
+          {data.documentMenu.personalRepresentatives.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">
+                  Personal Representative {i + 1}
+                </span>
+              </div>
+              <h3 className="mb-1 mt-3 font-bold">Name</h3>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <p>
+                    <strong>First Name: </strong>
+                    {item?.firstName}
+                  </p>
+                </div>
+                <div className="w-[50%]">
+                  <p>
+                    <strong>Last Name: </strong>
+                    {item?.lastName}
+                  </p>
+                </div>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <h3 className="mb-1 font-bold">Email</h3>
+                  <p>
+                    <strong>Email: </strong>
+                    {item?.email}
+                  </p>
+                </div>
+                <div className="w-[50%]">
+                  <h3 className="mb-1 font-bold">Phone</h3>
+                  <p>
+                    <strong>Phone: </strong>
+                    {item?.phone}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {/* <Step31
         step={step}
         setStep={setStep}
         data={data}
         setData={setData}
         notActionBtns
-      />
-      <br />
-      <br />
-      <Step41
+      /> */}
+      <h1 className="font-bold text-2xl text-center">
+        DURABLE POWER OF ATTORNEY
+      </h1>
+      <p className="text-center mt-3">
+        If you become unavailable to make financial decisions for yourself, who
+        would you want to make decisions for you with regard to your property.
+        Frequently, the primary Agent (called your "attorney-in-fact") is the
+        same person as your successor Trustee (the manager for your Trust) and
+        your Personal Representative (the manager for your Will).
+      </p>
+      <h3 className="font-bold mt-5">
+        Do you want the attorney(s)-in-fact under your Durable Power of Attorney
+        to be the same as your successor trustee(s)
+      </h3>
+      <div className="space-x-2">
+        {data.preliminaryTrustInfo.question.options.map((item, i) => (
+          <label key={i} className="inline-block">
+            <input
+              type="radio"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-radio ml-2 h-5 w-5 text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      <p className="mt-2">
+        Having the same attorney-in-fact and trustee makes logical sense and is
+        rarely a different person.
+      </p>
+      {data.preliminaryTrustInfo.question.options[1].value && (
+        <div>
+          {data.preliminaryTrustInfo.attorneyInFacts.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">Attorney-in-Fact {i + 1}</span>
+              </div>
+              <h3 className="mb-1 mt-3 font-bold">Name</h3>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <p>
+                    <strong>First Name:</strong>&nbsp;{item?.firstName}
+                  </p>
+                </div>
+                <div className="w-[50%]">
+                  <p>
+                    <strong>Last Name:</strong>&nbsp;{item?.lastName}
+                  </p>
+                </div>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <h3 className="mb-1 font-bold">Email</h3>
+                  <p>
+                    <strong>Email:</strong>&nbsp;{item?.email}
+                  </p>
+                </div>
+                <div className="w-[50%]">
+                  <h3 className="mb-1 font-bold">Phone</h3>
+                  <p>
+                    <strong>Phone:</strong>&nbsp;{item?.phone}
+                  </p>
+                </div>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <h3 className="mb-1 font-bold">Relationship</h3>
+                  <p>
+                    <strong>Relationship:</strong>&nbsp;{item?.relationship}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {/* <Step41
         step={step}
         setStep={setStep}
         data={data}
         setData={setData}
         notActionBtns
-      />
-      <br />
-      <br />
-      <Step51
+      /> */}
+      <h1 className="font-bold text-2xl text-center">
+        ADVANCE HEALTH CARE DIRECTIVE
+      </h1>
+      <p className="text-center mt-3">
+        This is where you will nomiate a "health care agent" to make medical
+        decisions on your behalf including decisions regarding medical consents,
+        life support issues, and nursing home admission if you were unable to
+        make these decisions yourself.
+      </p>
+      <p className="text-center mt-3 mb-3">
+        It is not necessary to appoint the same person who is your successor
+        trustee or personal representative as your health care agent.
+      </p>
+      <div>
+        {data.familyInfo.healthCareAgents.map((item, i) => (
+          <div
+            key={i}
+            className={`${
+              i % 2 === 0 ? 'bg-slate-200' : ''
+            } p-5 rounded-lg mb-3`}
+          >
+            <div>
+              <span className="font-bold">Health Care Agent {i + 1}</span>
+            </div>
+            <h3 className="mb-1 mt-3 font-bold">Name</h3>
+            <div className="mb-2 flex">
+              <div className="w-[50%] mr-2">
+                <p>
+                  <strong>First Name:</strong>&nbsp;{item?.firstName}
+                </p>
+              </div>
+              <div className="w-[50%]">
+                <p>
+                  <strong>Last Name:</strong>&nbsp;{item?.lastName}
+                </p>
+              </div>
+            </div>
+            <div className="mb-2 flex">
+              <div className="w-[50%] mr-2">
+                <h3 className="mb-1 font-bold">Email</h3>
+                <p>
+                  <strong>Email:</strong>&nbsp;{item?.email}
+                </p>
+              </div>
+              <div className="w-[50%]">
+                <h3 className="mb-1 font-bold">Phone</h3>
+                <p>
+                  <strong>Phone:</strong>&nbsp;{item?.phone}
+                </p>
+              </div>
+            </div>
+            <div className="mb-2 flex">
+              <div className="w-[50%] mr-2">
+                <h3 className="mb-1 font-bold">Relationship</h3>
+                <p>
+                  <strong>Relationship:</strong>&nbsp;{item?.relationship}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* <Step51
         step={step}
         setStep={setStep}
         data={data}
         setData={setData}
         notActionBtns
-      />
-      <br />
-      <br />
-      <Step61
+        /> */}
+      <h1 className="font-bold text-2xl text-center">
+        HIPAA AUTHORIZATION AND WAIVER
+      </h1>
+      <p className="text-center mt-3">
+        The individuals that you identify in this document (called HIPAA
+        Agents), will be able to receive what is otherwise federally protected
+        health care information about you. This can be as simple as what your
+        prognosis is, or what room you are in at the hospital, etc.
+      </p>
+      <h3 className="font-bold mt-5">
+        Are there individuals that you want to identify as your HIPAA agents?
+      </h3>
+      <div className="space-x-2">
+        {data.successorTrustees.question.options.map((item, i) => (
+          <label key={i} className="inline-block">
+            <input
+              type="radio"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-radio ml-2 h-5 w-5 text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      {data.successorTrustees.question.options[0].value && (
+        <div>
+          <h3 className="font-bold mt-5 mb-3">HIPAA Agents</h3>
+          {data.successorTrustees.hIPAAAgents.map((item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">HIPAA Agent {i + 1}</span>
+              </div>
+              <h3 className="mb-1 mt-3 font-bold">Name</h3>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <p>
+                    <strong>First Name: </strong>
+                    {item?.firstName}
+                  </p>
+                </div>
+                <div className="w-[50%]">
+                  <p>
+                    <strong>First Name: </strong>
+                    {item?.lastName}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {/* <Step61
         step={step}
         setStep={setStep}
         data={data}
         setData={setData}
         notActionBtns
-      />
-      <br />
-      <br />
-      <Step71
+      /> */}
+      <h1 className="font-bold text-2xl text-center">
+        GUARDIAN FOR MINOR CHILDREN
+      </h1>
+      <h3 className="font-bold mt-5">
+        Do you have any children under 18 years of age?
+      </h3>
+      <div className="space-x-2">
+        {data.specialDistributions.question1.options.map((item, i) => (
+          <label key={i} className="inline-block">
+            <input
+              type="radio"
+              checked={item.value}
+              onChange={() => {}}
+              className="form-radio ml-2 h-5 w-5 text-blue-500"
+            />
+            <span className="ml-1 text-gray-700 relative top-[-3px]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      {data.specialDistributions.question1.options[0].value && (
+        <div>
+          <h1 className="text-xl mt-5 font-bold text-center">
+            If you have any children under the age of 18 you should name a
+            guardian (or co-Guardians) to take care of them if you cannot.
+            Failure to make arrangements in this regard will leave the decision
+            up to the government.
+          </h1>
+          <h3 className="font-bold mt-5">
+            Do you want to name a guardian for your minor child or minor
+            children?
+          </h3>
+          <div className="space-x-2">
+            {data.specialDistributions.question2.options.map((item, i) => (
+              <label key={i} className="inline-block">
+                <input
+                  type="radio"
+                  checked={item.value}
+                  onChange={() => {}}
+                  className="form-radio ml-2 h-5 w-5 text-blue-500"
+                />
+                <span className="ml-1 text-gray-700 relative top-[-3px]">
+                  {item.label}
+                </span>
+              </label>
+            ))}
+          </div>
+          {data.specialDistributions.question2.options[0].value && (
+            <div>
+              <h3 className="font-bold mt-5">
+                Do you want to nominate an individual or a couple as Guardian of
+                your minor child or children?
+              </h3>
+              <div className="space-x-2">
+                {data.specialDistributions.question3.options.map((item, i) => (
+                  <label key={i} className="inline-block">
+                    <input
+                      type="radio"
+                      checked={item.value}
+                      onChange={() => {}}
+                      className="form-radio ml-2 h-5 w-5 text-blue-500"
+                    />
+                    <span className="ml-1 text-gray-700 relative top-[-3px]">
+                      {item.label}
+                    </span>
+                  </label>
+                ))}
+              </div>
+              {data.specialDistributions.question3.options[0].value && (
+                <div>
+                  <h1 className="text-xl text-center font-bold mt-5">
+                    SINGLE GUARDIANS
+                  </h1>
+                  <p className="mt-3 mb-5">
+                    Name as many guardians as you want. Each one named will act
+                    in succession if the prior guardian cannot or will not
+                    serve.
+                  </p>
+                  <div>
+                    {data.specialDistributions.guardians.map((item, i) => (
+                      <div
+                        key={i}
+                        className={`${
+                          i % 2 === 0 ? 'bg-slate-200' : ''
+                        } p-5 rounded-lg mb-3`}
+                      >
+                        <div>
+                          <span className="font-bold">Guardian {i + 1}</span>
+                        </div>
+                        <h3 className="mb-1 mt-3 font-bold">Name</h3>
+                        <div className="mb-2 flex">
+                          <div className="w-[50%] mr-2">
+                            <p>
+                              <strong>First Name: </strong>
+                              {item?.firstName}
+                            </p>
+                          </div>
+                          <div className="w-[50%]">
+                            <p>
+                              <strong>Last Name: </strong>
+                              {item?.lastName}
+                            </p>
+                          </div>
+                        </div>
+                        <h3 className="mb-1 mt-3 font-bold">
+                          Relationship of Guardian to you
+                        </h3>
+                        <div className="mb-2">
+                          <div className="w-full">
+                            <p>{item?.relationship_of_Guardian_to_you}</p>
+                          </div>
+                        </div>
+                        <h3 className="mb-1 mt-3 font-bold">
+                          Guardian's Address
+                        </h3>
+                        <div className="mb-2">
+                          <div className="w-full">
+                            <p>
+                              <strong>Address Line 1:</strong>
+                              {item?.addressLine1}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="mb-2">
+                          <div className="w-full">
+                            <p>
+                              <strong>Address Line 2:</strong>
+                              {item?.addressLine2}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="mb-2 flex">
+                          <p>
+                            <strong>City:</strong>
+                            {item?.city}
+                          </p>
+                          <p>
+                            <strong>State:</strong>
+                            {item?.state?.label}
+                          </p>
+                          <p>
+                            <strong>zipCode:</strong>
+                            {item?.zipCode}
+                          </p>
+                        </div>
+                        <div className="mb-2 flex">
+                          <div className="w-[50%] mr-2">
+                            <h3 className="mb-1 font-bold">Email</h3>
+                            <p>{item?.email}</p>
+                          </div>
+                          <div className="w-[50%]">
+                            <h3 className="mb-1 font-bold">Phone</h3>
+                            <p>{item?.phone}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {data.specialDistributions.question3.options[1].value && (
+                <div>
+                  <h3 className="font-bold mt-5">Co-Guardian Informations</h3>
+                  <h3 className="mb-1 mt-3 font-bold">Co Guardian One</h3>
+                  <div className="mb-2 flex">
+                    <div className="w-[50%] mr-2">
+                      <p>
+                        <strong>First Name:</strong>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.co_Guardian_One_First_Name
+                        }
+                      </p>
+                    </div>
+                    <div className="w-[50%]">
+                      <p>
+                        <strong>Last Name:</strong>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.co_Guardian_One_Last_Name
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mb-2">
+                    <h3 className="mb-1 font-bold">
+                      Relationship of co-Guardian One to you
+                    </h3>
+                    <div className="w-full">
+                      <p>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.relationship_of_co_Guardian_One_to_you
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <h3 className="mb-1 mt-3 font-bold">Co-Guardian Two</h3>
+                  <div className="mb-2 flex">
+                    <div className="w-[50%] mr-2">
+                      <p>
+                        <strong>First Name:</strong>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.co_Guardian_Two_First_Name
+                        }
+                      </p>
+                    </div>
+                    <div className="w-[50%]">
+                      <p>
+                        <strong>Last Name:</strong>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.co_Guardian_Two_Last_Name
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mb-2">
+                    <h3 className="mb-1 font-bold">
+                      Relationship of co-Guardian Two to you
+                    </h3>
+                    <div className="w-full">
+                      <p>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.relationship_of_co_Guardian_Two_to_you
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <h3 className="mb-1 mt-3 font-bold">Co Guardian's Address</h3>
+                  <div className="mb-2">
+                    <div className="w-full">
+                      <p>
+                        <strong>Address Line 1:</strong>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.addressLine1
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mb-2">
+                    <div className="w-full">
+                      <p>
+                        <strong>Address Line 2:</strong>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.addressLine2
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mb-2 flex">
+                    <p>
+                      <strong>City:</strong>
+                      {data.specialDistributions.co_GuardianInformation?.city}
+                    </p>
+                    <p>
+                      <strong>State:</strong>
+                      {
+                        data.specialDistributions.co_GuardianInformation?.state
+                          ?.label
+                      }
+                    </p>
+                    <p>
+                      <strong>zipCode:</strong>
+                      {
+                        data.specialDistributions.co_GuardianInformation
+                          ?.zipCode
+                      }
+                    </p>
+                  </div>
+                  <div className="mb-2 flex">
+                    <div className="w-[50%] mr-2">
+                      <h3 className="mb-1 font-bold">Email</h3>
+                      <p>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.email
+                        }
+                      </p>
+                    </div>
+                    <div className="w-[50%]">
+                      <h3 className="mb-1 font-bold">Phone</h3>
+                      <p>
+                        {
+                          data.specialDistributions.co_GuardianInformation
+                            ?.phone
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <h3 className="font-bold mt-5">
+                    Which co Guardian has priority should the couple divorce or
+                    otherwise split up?
+                  </h3>
+                  <div className="space-x-2">
+                    {data.specialDistributions.question4.options.map(
+                      (item, i) => (
+                        <label key={i} className="inline-block">
+                          <input
+                            type="radio"
+                            checked={item.value}
+                            onChange={() => {}}
+                            className="form-radio ml-2 h-5 w-5 text-blue-500"
+                          />
+                          <span className="ml-1 text-gray-700 relative top-[-3px]">
+                            {item.label}
+                          </span>
+                        </label>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+      {/* <Step71
         step={step}
         setStep={setStep}
         data={data}
         setData={setData}
         setPreviewOpen={setPreviewOpen}
         notActionBtns
-      />
+      /> */}
+      <h1 className="font-bold text-2xl text-center">
+        LAST WILL AND TESTAMENT
+      </h1>
+      <p className="text-center mt-3">
+        A last will and testament would be in lieu of a Living Trust.. There are
+        some fairly significant differences however.
+      </p>
+      <h3 className="text-center font-bold mt-3 mb-3">
+        INSERT TABLE SHOWING DIFFERENCES
+      </h3>
+      <h2 className="text-center font-bold mt-5 mb-3">
+        Personal Representatives
+      </h2>
+      <p className="mt-5 mb-3">
+        Your Personal representative is the individual who will probate your
+        estate upon your death. You can name as many as you want, each of whom
+        will act in succession if the predecessor cannot serve.{' '}
+      </p>
+      <div>
+        {data?.remainingDistributions?.personalRepresentatives.map(
+          (item, i) => (
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 ? 'bg-slate-200' : ''
+              } p-5 rounded-lg mb-3`}
+            >
+              <div>
+                <span className="font-bold">
+                  Personal Representative {i + 1}
+                </span>
+              </div>
+              <h3 className="mb-1 mt-3 font-bold">Name</h3>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <p>
+                    <strong>First Name: </strong>
+                    {item?.firstName}
+                  </p>
+                </div>
+                <div className="w-[50%]">
+                  <p>
+                    <strong>Last Name: </strong>
+                    {item?.lastName}
+                  </p>
+                </div>
+              </div>
+              <div className="mb-2 flex">
+                <div className="w-[50%] mr-2">
+                  <h3 className="mb-1 font-bold">Email</h3>
+                  <p>{item?.email}</p>
+                </div>
+                <div className="w-[50%]">
+                  <h3 className="mb-1 font-bold">Phone</h3>
+                  <p>{item?.phone}</p>
+                </div>
+              </div>
+            </div>
+          )
+        )}
+      </div>
       <div className="flex justify-end">
         <button
           class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
