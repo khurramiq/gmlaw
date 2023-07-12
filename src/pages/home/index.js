@@ -12,7 +12,7 @@ import Step11 from './components/step11';
 import Preview from './components/Preview';
 const Home = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [data, setData] = useState({
     personalInfo: {
       yourInfo: {
@@ -1015,7 +1015,7 @@ const Home = () => {
     } else if (!validate5()) {
       alert('Some fields are required in step 5.');
     } else {
-      setStep(5);
+      setStep(6);
     }
   };
   const validate6 = () => {
@@ -1044,7 +1044,7 @@ const Home = () => {
     } else if (!validate6()) {
       alert('Some fields are required in step 6.');
     } else {
-      setStep(5);
+      setStep(7);
     }
   };
   const validate7 = () => {
@@ -1115,7 +1115,7 @@ const Home = () => {
     } else if (!validate7()) {
       alert('Some fields are required in step 7.');
     } else {
-      setStep(5);
+      setStep(8);
     }
   };
   return (

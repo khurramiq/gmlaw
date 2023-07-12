@@ -1151,11 +1151,7 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
         i++
       ) {
         const element = data.personalInfo.livingChildrenInformation[i];
-        if (
-          element.firstName === '' ||
-          element.middleName === '' ||
-          element.lastName === ''
-        ) {
+        if (element.firstName === '' || element.lastName === '') {
           return false;
         }
       }
@@ -1167,11 +1163,7 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
         i++
       ) {
         const element = data.personalInfo.deceasedChildrenInformation[i];
-        if (
-          element.firstName === '' ||
-          element.middleName === '' ||
-          element.lastName === ''
-        ) {
+        if (element.firstName === '' || element.lastName === '') {
           return false;
         }
       }
@@ -1455,7 +1447,6 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
                       }
                       className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                       placeholder="Middle"
-                      required
                     />
                     <input
                       type="text"
@@ -1543,7 +1534,6 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
                       }
                       className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-[33%]"
                       placeholder="Middle"
-                      required
                     />
                     <input
                       type="text"
