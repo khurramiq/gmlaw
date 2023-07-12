@@ -90,31 +90,9 @@ const FormDataPreview = ({
         {data.personalInfo.estatePlanningPackages.question}
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.estatePlanningPackages.options.map((item, i) => (
-          <label key={i} className="w-[33%]">
-            <input
-              type="checkbox"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-checkbox h-5 w-[30px] text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
-        <p>
-          Documents needed to transfer title of property you own to your Trust.{' '}
-        </p>
-      </div>
-      <p>Only select one. The package will determine the documents created.</p>
-      <h3 className="mb-1 font-bold">
-        {/* INDIVIDUAL ESTATE PLANNING DOCUMENTS */}
-        {data.personalInfo.individualEstatePlanningDocuments.question}
-      </h3>
-      <div className="space-y-2">
-        {data.personalInfo.individualEstatePlanningDocuments.options.map(
-          (item, i) => (
+        {data.personalInfo.estatePlanningPackages.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
             <label key={i} className="w-[33%]">
               <input
                 type="checkbox"
@@ -126,8 +104,32 @@ const FormDataPreview = ({
                 {item.label}
               </span>
             </label>
-          )
-        )}
+          ))}
+        <p>
+          Documents needed to transfer title of property you own to your Trust.{' '}
+        </p>
+      </div>
+      <p>Only select one. The package will determine the documents created.</p>
+      <h3 className="mb-1 font-bold">
+        {/* INDIVIDUAL ESTATE PLANNING DOCUMENTS */}
+        {data.personalInfo.individualEstatePlanningDocuments.question}
+      </h3>
+      <div className="space-y-2">
+        {data.personalInfo.individualEstatePlanningDocuments.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="w-[33%]">
+              <input
+                type="checkbox"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-checkbox h-5 w-[30px] text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
         <p>
           Documents needed to transfer title of property you own to your Trust.{' '}
         </p>
@@ -145,19 +147,21 @@ const FormDataPreview = ({
         {data.personalInfo.specialIrrevocableTrusts.question}
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.specialIrrevocableTrusts.options.map((item, i) => (
-          <label key={i} className="w-[33%]">
-            <input
-              type="checkbox"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-checkbox h-5 w-[30px] text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.personalInfo.specialIrrevocableTrusts.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="w-[33%]">
+              <input
+                type="checkbox"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-checkbox h-5 w-[30px] text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
         <p>
           Documents needed to transfer title of property you own to your Trust.{' '}
         </p>
@@ -167,19 +171,21 @@ const FormDataPreview = ({
         {data.personalInfo.trustTransferDocuments.question}
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.trustTransferDocuments.options.map((item, i) => (
-          <label key={i} className="w-[33%]">
-            <input
-              type="checkbox"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-checkbox h-5 w-[30px] text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.personalInfo.trustTransferDocuments.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="w-[33%]">
+              <input
+                type="checkbox"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-checkbox h-5 w-[30px] text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
         <p>
           Documents needed to transfer title of property you own to your Trust.{' '}
         </p>
@@ -226,19 +232,21 @@ const FormDataPreview = ({
         {data.personalInfo.creatingTrustType.question}
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.creatingTrustType.options.map((item, i) => (
-          <label key={i} className="w-[33%]">
-            <input
-              type="checkbox"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-checkbox h-5 w-[30px] text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.personalInfo.creatingTrustType.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="w-[33%]">
+              <input
+                type="checkbox"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-checkbox h-5 w-[30px] text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
 
       {data.personalInfo.creatingTrustType.options[1].value && (
@@ -272,8 +280,9 @@ const FormDataPreview = ({
             After you signed your trust, did you ever amend it?
           </h3>
           <div className="flex space-x-4">
-            {data?.personalInfo?.first_we_need_to_collect_some_information_about_your_existing_trust.after_you_signed_your_trust_did_you_ever_amend_it.map(
-              (item, i) => (
+            {data?.personalInfo?.first_we_need_to_collect_some_information_about_your_existing_trust.after_you_signed_your_trust_did_you_ever_amend_it
+              .filter((item) => item.value === true)
+              .map((item, i) => (
                 <label key={i} className="flex items-center">
                   <input
                     type="radio"
@@ -283,8 +292,7 @@ const FormDataPreview = ({
                   />
                   <span className="ml-2 text-gray-700">{item.label}</span>
                 </label>
-              )
-            )}
+              ))}
           </div>
           <h3 className="mb-1 mt-3 font-bold">
             Locate the paragraph or section number in your existing trust
@@ -303,8 +311,9 @@ const FormDataPreview = ({
             Have you amended your Trust before?
           </h3>
           <div className="flex space-x-4">
-            {data?.personalInfo?.first_we_need_to_collect_some_information_about_your_existing_trust.have_you_amended_your_Trust_before.map(
-              (item, i) => (
+            {data?.personalInfo?.first_we_need_to_collect_some_information_about_your_existing_trust.have_you_amended_your_Trust_before
+              .filter((item) => item.value === true)
+              .map((item, i) => (
                 <label className="flex items-center">
                   <input
                     type="radio"
@@ -314,8 +323,7 @@ const FormDataPreview = ({
                   />
                   <span className="ml-2 text-gray-700">{item.label}</span>
                 </label>
-              )
-            )}
+              ))}
           </div>
           <h3 className="mb-1 font-bold">
             What month you will sign the document(s) you are creating?
@@ -351,8 +359,9 @@ const FormDataPreview = ({
             {data.personalInfo.what_do_you_want_to_name_your_trust.question}
           </h3>
           <div className="space-y-2">
-            {data.personalInfo.what_do_you_want_to_name_your_trust.options.map(
-              (item, i) => (
+            {data.personalInfo.what_do_you_want_to_name_your_trust.options
+              .filter((item) => item.value === true)
+              .map((item, i) => (
                 <label key={i} className="inline-blog">
                   <input
                     type="radio"
@@ -366,8 +375,7 @@ const FormDataPreview = ({
                     {item.label}
                   </span>
                 </label>
-              )
-            )}
+              ))}
           </div>
         </>
       )}
@@ -378,21 +386,23 @@ const FormDataPreview = ({
         {data.personalInfo.initialTrustee.question}
       </h3>
       <div className="space-y-2 mb-5">
-        {data.personalInfo.initialTrustee.options.map((item, i) => (
-          <label key={i} className="inline-blog">
-            <input
-              type="radio"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-radio ml-2 h-5 w-5 text-blue-500"
-              name="radio-option"
-              value="option1"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.personalInfo.initialTrustee.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="inline-blog">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+                name="radio-option"
+                value="option1"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
       {data.personalInfo.initialTrustee.options[1].value && (
         <>
@@ -453,21 +463,23 @@ const FormDataPreview = ({
         {data.personalInfo.maritalStatus.question}
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.maritalStatus.options.map((item, i) => (
-          <label key={i} className="inline-block">
-            <input
-              type="radio"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-radio ml-2 h-5 w-5 text-blue-500"
-              name="radio-option"
-              value="option1"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.personalInfo.maritalStatus.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+                name="radio-option"
+                value="option1"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
 
       <h3 className="mb-1 font-bold">
@@ -475,38 +487,42 @@ const FormDataPreview = ({
         {data.personalInfo.livingChildren.question}
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.livingChildren.options.map((item, i) => (
-          <label key={i} className="inline-block">
-            <input
-              type="checkbox"
-              checked={item.value}
-              onChange={() => {}}
-              className="ml-2 form-checkbox h-5 w-5 text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.personalInfo.livingChildren.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="inline-block">
+              <input
+                type="checkbox"
+                checked={item.value}
+                onChange={() => {}}
+                className="ml-2 form-checkbox h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
       <h3 className="mb-1 font-bold">
         {/* Do you have any deceased children? */}
         {data.personalInfo.deceasedChildren.question}
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.deceasedChildren.options.map((item, i) => (
-          <label key={i} className="inline-block">
-            <input
-              type="checkbox"
-              checked={item.value}
-              onChange={() => {}}
-              className="ml-2 form-checkbox h-5 w-5 text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.personalInfo.deceasedChildren.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="inline-block">
+              <input
+                type="checkbox"
+                checked={item.value}
+                onChange={() => {}}
+                className="ml-2 form-checkbox h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
       {!data.personalInfo.livingChildren.options[0].value && (
         <div>
@@ -577,8 +593,9 @@ const FormDataPreview = ({
                 }
               </h3>
               <div className="space-x-2">
-                {item.did_this_child_die_leaving_any_children_or_grandchildren.options.map(
-                  (item, i) => (
+                {item.did_this_child_die_leaving_any_children_or_grandchildren.options
+                  .filter((item) => item.value === true)
+                  .map((item, i) => (
                     <label key={i} className="inline-block">
                       <input
                         type="radio"
@@ -590,8 +607,7 @@ const FormDataPreview = ({
                         {item.label}
                       </span>
                     </label>
-                  )
-                )}
+                  ))}
               </div>
             </div>
           ))}
@@ -617,19 +633,21 @@ const FormDataPreview = ({
         }
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.deceasedChildren.options.map((item, i) => (
-          <label className="inline-block">
-            <input
-              type="radio"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-radio ml-2 h-5 w-5 text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.personalInfo.deceasedChildren.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
 
       {data.personalInfo.how_many_successor_Trustees_do_you_want_to_name
@@ -705,8 +723,9 @@ const FormDataPreview = ({
         }
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.is_there_anyone_that_you_do_not_want_serving_as_a_successor_Trustee.options.map(
-          (item, i) => (
+        {data.personalInfo.is_there_anyone_that_you_do_not_want_serving_as_a_successor_Trustee.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
             <label className="inline-block">
               <input
                 type="radio"
@@ -718,8 +737,7 @@ const FormDataPreview = ({
                 {item.label}
               </span>
             </label>
-          )
-        )}
+          ))}
       </div>
       <h1 className="m-y-2 text-3xl text-center font-bold">
         TRUST ADMINISTRATION ON YOUR DEATH
@@ -748,8 +766,9 @@ const FormDataPreview = ({
         {data.personalInfo.do_you_want_to_make_any_specific_gifts.question}
       </h3>
       <div className="space-y-2">
-        {data.personalInfo.do_you_want_to_make_any_specific_gifts.options.map(
-          (item, i) => (
+        {data.personalInfo.do_you_want_to_make_any_specific_gifts.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
             <label className="inline-block">
               <input
                 type="radio"
@@ -761,8 +780,7 @@ const FormDataPreview = ({
                 {item.label}
               </span>
             </label>
-          )
-        )}
+          ))}
       </div>
       {data.personalInfo.do_you_want_to_make_any_specific_gifts.options[0]
         .value && (
@@ -857,8 +875,9 @@ const FormDataPreview = ({
         }
       </h3>
       <div className="space-x-2">
-        {data.personalInfo.first_do_you_want_to_make_any_charitable_donations.options.map(
-          (item, i) => (
+        {data.personalInfo.first_do_you_want_to_make_any_charitable_donations.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
             <label className="inline-block">
               <input
                 type="radio"
@@ -870,8 +889,7 @@ const FormDataPreview = ({
                 {item.label}
               </span>
             </label>
-          )
-        )}
+          ))}
       </div>
       {data.personalInfo.first_do_you_want_to_make_any_charitable_donations
         .options[0].value && (
@@ -983,8 +1001,9 @@ const FormDataPreview = ({
                   What happens if this person predeceases you?
                 </h3>
                 <div className="space-x-2">
-                  {item.what_happens_if_this_person_predeceases_you.map(
-                    (item, i) => (
+                  {item.what_happens_if_this_person_predeceases_you
+                    .filter((item) => item.value === true)
+                    .map((item, i) => (
                       <label className="inline-block">
                         <input
                           type="radio"
@@ -996,8 +1015,7 @@ const FormDataPreview = ({
                           {item.label}
                         </span>
                       </label>
-                    )
-                  )}
+                    ))}
                 </div>
               </div>
             </div>
@@ -1041,19 +1059,21 @@ const FormDataPreview = ({
       </p>
       <h3 className="mt-5 font-bold">Contingent Residue Distribution</h3>
       <div className="space-x-2">
-        {data.personalInfo.contingent_Residue_Distribution.map((item, i) => (
-          <label className="inline-block">
-            <input
-              type="radio"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-radio ml-2 h-5 w-5 text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.personalInfo.contingent_Residue_Distribution
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
       {data.personalInfo.contingent_Residue_Distribution[1].value && (
         <div className="mt-3">
@@ -1180,19 +1200,21 @@ const FormDataPreview = ({
         be the same as your successor trustee(s)
       </h3>
       <div className="space-x-2">
-        {data.documentMenu.personalRepresentativeQ.options.map((item, i) => (
-          <label className="inline-block">
-            <input
-              type="radio"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-radio ml-2 h-5 w-5 text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.documentMenu.personalRepresentativeQ.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
       <p className="mt-2">
         Having the same personal representative and trustee makes logical sense
@@ -1273,19 +1295,21 @@ const FormDataPreview = ({
         to be the same as your successor trustee(s)
       </h3>
       <div className="space-x-2">
-        {data.preliminaryTrustInfo.question.options.map((item, i) => (
-          <label key={i} className="inline-block">
-            <input
-              type="radio"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-radio ml-2 h-5 w-5 text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.preliminaryTrustInfo.question.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
       <p className="mt-2">
         Having the same attorney-in-fact and trustee makes logical sense and is
@@ -1431,19 +1455,21 @@ const FormDataPreview = ({
         Are there individuals that you want to identify as your HIPAA agents?
       </h3>
       <div className="space-x-2">
-        {data.successorTrustees.question.options.map((item, i) => (
-          <label key={i} className="inline-block">
-            <input
-              type="radio"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-radio ml-2 h-5 w-5 text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.successorTrustees.question.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
       {data.successorTrustees.question.options[0].value && (
         <div>
@@ -1491,19 +1517,21 @@ const FormDataPreview = ({
         Do you have any children under 18 years of age?
       </h3>
       <div className="space-x-2">
-        {data.specialDistributions.question1.options.map((item, i) => (
-          <label key={i} className="inline-block">
-            <input
-              type="radio"
-              checked={item.value}
-              onChange={() => {}}
-              className="form-radio ml-2 h-5 w-5 text-blue-500"
-            />
-            <span className="ml-1 text-gray-700 relative top-[-3px]">
-              {item.label}
-            </span>
-          </label>
-        ))}
+        {data.specialDistributions.question1.options
+          .filter((item) => item.value === true)
+          .map((item, i) => (
+            <label key={i} className="inline-block">
+              <input
+                type="radio"
+                checked={item.value}
+                onChange={() => {}}
+                className="form-radio ml-2 h-5 w-5 text-blue-500"
+              />
+              <span className="ml-1 text-gray-700 relative top-[-3px]">
+                {item.label}
+              </span>
+            </label>
+          ))}
       </div>
       {data.specialDistributions.question1.options[0].value && (
         <div>
@@ -1518,19 +1546,21 @@ const FormDataPreview = ({
             children?
           </h3>
           <div className="space-x-2">
-            {data.specialDistributions.question2.options.map((item, i) => (
-              <label key={i} className="inline-block">
-                <input
-                  type="radio"
-                  checked={item.value}
-                  onChange={() => {}}
-                  className="form-radio ml-2 h-5 w-5 text-blue-500"
-                />
-                <span className="ml-1 text-gray-700 relative top-[-3px]">
-                  {item.label}
-                </span>
-              </label>
-            ))}
+            {data.specialDistributions.question2.options
+              .filter((item) => item.value === true)
+              .map((item, i) => (
+                <label key={i} className="inline-block">
+                  <input
+                    type="radio"
+                    checked={item.value}
+                    onChange={() => {}}
+                    className="form-radio ml-2 h-5 w-5 text-blue-500"
+                  />
+                  <span className="ml-1 text-gray-700 relative top-[-3px]">
+                    {item.label}
+                  </span>
+                </label>
+              ))}
           </div>
           {data.specialDistributions.question2.options[0].value && (
             <div>
@@ -1539,19 +1569,21 @@ const FormDataPreview = ({
                 your minor child or children?
               </h3>
               <div className="space-x-2">
-                {data.specialDistributions.question3.options.map((item, i) => (
-                  <label key={i} className="inline-block">
-                    <input
-                      type="radio"
-                      checked={item.value}
-                      onChange={() => {}}
-                      className="form-radio ml-2 h-5 w-5 text-blue-500"
-                    />
-                    <span className="ml-1 text-gray-700 relative top-[-3px]">
-                      {item.label}
-                    </span>
-                  </label>
-                ))}
+                {data.specialDistributions.question3.options
+                  .filter((item) => item.value === true)
+                  .map((item, i) => (
+                    <label key={i} className="inline-block">
+                      <input
+                        type="radio"
+                        checked={item.value}
+                        onChange={() => {}}
+                        className="form-radio ml-2 h-5 w-5 text-blue-500"
+                      />
+                      <span className="ml-1 text-gray-700 relative top-[-3px]">
+                        {item.label}
+                      </span>
+                    </label>
+                  ))}
               </div>
               {data.specialDistributions.question3.options[0].value && (
                 <div>
@@ -1784,8 +1816,9 @@ const FormDataPreview = ({
                     otherwise split up?
                   </h3>
                   <div className="space-x-2">
-                    {data.specialDistributions.question4.options.map(
-                      (item, i) => (
+                    {data.specialDistributions.question4.options
+                      .filter((item) => item.value === true)
+                      .map((item, i) => (
                         <label key={i} className="inline-block">
                           <input
                             type="radio"
@@ -1797,8 +1830,7 @@ const FormDataPreview = ({
                             {item.label}
                           </span>
                         </label>
-                      )
-                    )}
+                      ))}
                   </div>
                 </div>
               )}
@@ -1876,6 +1908,12 @@ const FormDataPreview = ({
         )}
       </div>
       <div className="flex justify-end">
+        <button
+          class={`bg-[#CCCCCC] text-white font-bold py-2 px-4 rounded disabled`}
+          onClick={() => setPreviewOpen(false)}
+        >
+          Back
+        </button>
         <button
           class="bg-[#6E66D4] ml-2 text-white font-bold py-2 px-4 rounded"
           onClick={() => handleSubmit()}

@@ -12,7 +12,7 @@ import Step11 from './components/step11';
 import Preview from './components/Preview';
 const Home = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
   const [data, setData] = useState({
     personalInfo: {
       yourInfo: {
@@ -352,12 +352,12 @@ const Home = () => {
         ],
       },
       livingChildrenInformation: [
-        {
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          dateOfBirth: new Date(),
-        },
+        // {
+        //   firstName: '',
+        //   middleName: '',
+        //   lastName: '',
+        //   dateOfBirth: new Date(),
+        // },
       ],
       deceasedChildren: {
         question: 'Do you have any deceased children?',
@@ -377,26 +377,26 @@ const Home = () => {
         ],
       },
       deceasedChildrenInformation: [
-        {
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          dateOfBirth: new Date(),
-          dateOfDeath: new Date(),
-          did_this_child_die_leaving_any_children_or_grandchildren: {
-            question: 'INDIVIDUAL ESTATE PLANNING DOCUMENTS',
-            options: [
-              {
-                label: 'Yes',
-                value: false,
-              },
-              {
-                label: 'No',
-                value: false,
-              },
-            ],
-          },
-        },
+        // {
+        //   firstName: '',
+        //   middleName: '',
+        //   lastName: '',
+        //   dateOfBirth: new Date(),
+        //   dateOfDeath: new Date(),
+        //   did_this_child_die_leaving_any_children_or_grandchildren: {
+        //     question: 'INDIVIDUAL ESTATE PLANNING DOCUMENTS',
+        //     options: [
+        //       {
+        //         label: 'Yes',
+        //         value: false,
+        //       },
+        //       {
+        //         label: 'No',
+        //         value: false,
+        //       },
+        //     ],
+        //   },
+        // },
       ],
       how_many_successor_Trustees_do_you_want_to_name: {
         question: 'How many successor Trustees do you want to name?',

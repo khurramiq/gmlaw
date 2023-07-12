@@ -5,8 +5,358 @@ import { Autocomplete, TextField } from '@mui/material';
 import stateList from '../../../../data/stateList';
 import { useState } from 'react';
 import FormStepper from '../../../../components/formStepper';
+import FormModal from './FormModal';
+
+const NewLivingChild = ({
+  handleLivingChildClose,
+  i,
+  addLivingChildrenInformation,
+}) => {
+  const [obj, setObj] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    dateOfBirth: new Date(),
+  });
+  const handleLivingChildrenInformation = (i, name, value) => {
+    setObj({
+      ...obj,
+      [name]: value,
+    });
+  };
+  return (
+    <>
+      <div className={`bg-slate-200 p-5 rounded-lg mb-3`}>
+        <div>
+          <i
+            className="far fa-times-circle cursor-pointer"
+            onClick={() => {
+              setObj({
+                firstName: '',
+                middleName: '',
+                lastName: '',
+                dateOfBirth: new Date(),
+              });
+              handleLivingChildClose();
+            }}
+          ></i>
+          <span className="font-bold ml-3">Child {i + 1}</span>
+        </div>
+        <h3 className="mb-1 font-bold">Name</h3>
+        <div className="mb-2 md:flex xs:block">
+          <input
+            type="text"
+            value={obj.firstName}
+            name={'firstName'}
+            onChange={(e) =>
+              handleLivingChildrenInformation(i, e.target.name, e.target.value)
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="First"
+            required
+          />
+          <input
+            type="text"
+            value={obj.middleName}
+            name={'middleName'}
+            onChange={(e) =>
+              handleLivingChildrenInformation(i, e.target.name, e.target.value)
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="Middle"
+            required
+          />
+          <input
+            type="text"
+            value={obj.lastName}
+            name={'lastName'}
+            onChange={(e) =>
+              handleLivingChildrenInformation(i, e.target.name, e.target.value)
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="Last"
+            required
+          />
+        </div>
+        <h3 className="mb-1 font-bold">Date of Birth</h3>
+        <DatePicker
+          className="border bg-white border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full outline-none"
+          value={obj.dateOfBirth}
+          name={'dateOfBirth'}
+          onChange={(date) =>
+            handleLivingChildrenInformation(i, 'dateOfBirth', date)
+          }
+        />
+      </div>
+      <div className="mt-2">
+        <button
+          className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
+          onClick={() => {
+            addLivingChildrenInformation(obj);
+            setObj({
+              firstName: '',
+              middleName: '',
+              lastName: '',
+              dateOfBirth: new Date(),
+            });
+            handleLivingChildClose();
+          }}
+        >
+          Add Living Child
+        </button>
+      </div>
+    </>
+  );
+};
+const NewDeceasedChild = ({
+  handleLivingChildClose,
+  i,
+  addLivingChildrenInformation,
+}) => {
+  const [obj, setObj] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    dateOfBirth: new Date(),
+    dateOfDeath: new Date(),
+    did_this_child_die_leaving_any_children_or_grandchildren: {
+      question: 'INDIVIDUAL ESTATE PLANNING DOCUMENTS',
+      options: [
+        {
+          label: 'Yes',
+          value: false,
+        },
+        {
+          label: 'No',
+          value: false,
+        },
+      ],
+    },
+  });
+  const handleDeceasedChildrenInformation = (i, name, value) => {
+    setObj({
+      ...obj,
+      [name]: value,
+    });
+  };
+  const handleDeceasedChildrenTrueFalse = (j) => {
+    setObj({
+      ...obj,
+      did_this_child_die_leaving_any_children_or_grandchildren: {
+        ...obj.did_this_child_die_leaving_any_children_or_grandchildren,
+        options:
+          obj.did_this_child_die_leaving_any_children_or_grandchildren.options.map(
+            (item, ind) => {
+              if (ind === j) {
+                return {
+                  label: item.label,
+                  value: true,
+                };
+              } else {
+                return {
+                  label: item.label,
+                  value: false,
+                };
+              }
+            }
+          ),
+      },
+    });
+  };
+  return (
+    <>
+      <div className={`bg-slate-200 p-5 rounded-lg mb-3`}>
+        <div>
+          <i
+            className="far fa-times-circle cursor-pointer"
+            onClick={() => {
+              setObj({
+                firstName: '',
+                middleName: '',
+                lastName: '',
+                dateOfBirth: new Date(),
+                dateOfDeath: new Date(),
+                did_this_child_die_leaving_any_children_or_grandchildren: {
+                  question: 'INDIVIDUAL ESTATE PLANNING DOCUMENTS',
+                  options: [
+                    {
+                      label: 'Yes',
+                      value: false,
+                    },
+                    {
+                      label: 'No',
+                      value: false,
+                    },
+                  ],
+                },
+              });
+              handleLivingChildClose();
+            }}
+          ></i>
+          <span className="font-bold ml-3">Child {i + 1}</span>
+        </div>
+        <h3 className="mb-1 font-bold">Name</h3>
+        <div className="mb-2 md:flex xs:block">
+          <input
+            type="text"
+            value={obj.firstName}
+            name={'firstName'}
+            onChange={(e) =>
+              handleDeceasedChildrenInformation(
+                i,
+                e.target.name,
+                e.target.value
+              )
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="First"
+            required
+          />
+          <input
+            type="text"
+            value={obj.middleName}
+            name={'middleName'}
+            onChange={(e) =>
+              handleDeceasedChildrenInformation(
+                i,
+                e.target.name,
+                e.target.value
+              )
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="Middle"
+            required
+          />
+          <input
+            type="text"
+            value={obj.lastName}
+            name={'lastName'}
+            onChange={(e) =>
+              handleDeceasedChildrenInformation(
+                i,
+                e.target.name,
+                e.target.value
+              )
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="Last"
+            required
+          />
+        </div>
+        <div className="mb-2 md:flex xs:block">
+          <div className="md:w-[50%] xs:w-full">
+            <h3 className="mb-1 font-bold">Date of Birth</h3>
+            <DatePicker
+              className="border bg-white border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full outline-none"
+              value={obj.dateOfBirth}
+              name={'dateOfBirth'}
+              onChange={(date) =>
+                handleDeceasedChildrenInformation(i, 'dateOfBirth', date)
+              }
+            />
+          </div>
+          <div className="md:w-[50%] xs:w-full md:ml-2 xs:ml-0">
+            <h3 className="mb-1 font-bold">Date of Death</h3>
+            <DatePicker
+              className="border bg-white border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full outline-none"
+              value={obj.dateOfDeath}
+              name={'dateOfDeath'}
+              onChange={(date) =>
+                handleDeceasedChildrenInformation(i, 'dateOfDeath', date)
+              }
+            />
+          </div>
+        </div>
+        <h3 className="mb-1 mt-2 font-bold">
+          {/* Did this child die leaving any children or grandchildren? */}
+          {
+            obj.did_this_child_die_leaving_any_children_or_grandchildren
+              .question
+          }
+        </h3>
+        <div className="flex space-x-4">
+          <label className="flex items-center">
+            <input
+              type="radio"
+              checked={
+                obj.did_this_child_die_leaving_any_children_or_grandchildren
+                  .options[0].value
+              }
+              onChange={() => handleDeceasedChildrenTrueFalse(0)}
+              className="form-radio h-5 w-5 text-blue-500"
+              name="radio-option"
+              value="option1"
+            />
+            <span className="ml-2 text-gray-700">
+              {
+                obj.did_this_child_die_leaving_any_children_or_grandchildren
+                  .options[0].label
+              }
+            </span>
+          </label>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              checked={
+                obj.did_this_child_die_leaving_any_children_or_grandchildren
+                  .options[1].value
+              }
+              onChange={() => handleDeceasedChildrenTrueFalse(1)}
+              className="form-radio h-5 w-5 text-blue-500"
+              name="radio-option"
+              value="option2"
+            />
+            <span className="ml-2 text-gray-700">
+              {
+                obj.did_this_child_die_leaving_any_children_or_grandchildren
+                  .options[1].label
+              }
+            </span>
+          </label>
+        </div>
+      </div>
+      <div className="mt-2">
+        <button
+          className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
+          onClick={() => {
+            addLivingChildrenInformation(obj);
+            setObj({
+              firstName: '',
+              middleName: '',
+              lastName: '',
+              dateOfBirth: new Date(),
+              dateOfDeath: new Date(),
+              did_this_child_die_leaving_any_children_or_grandchildren: {
+                question: 'INDIVIDUAL ESTATE PLANNING DOCUMENTS',
+                options: [
+                  {
+                    label: 'Yes',
+                    value: false,
+                  },
+                  {
+                    label: 'No',
+                    value: false,
+                  },
+                ],
+              },
+            });
+            handleLivingChildClose();
+          }}
+        >
+          Add a Deceased Child
+        </button>
+      </div>
+    </>
+  );
+};
 
 const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
+  const [livingChildFormOpen, setLivingChildFormOpen] = useState(false);
+  const handleLivingChildOpen = () => setLivingChildFormOpen(true);
+  const handleLivingChildClose = () => setLivingChildFormOpen(false);
+  const [deceasedChildFormOpen, setDeceasedChildFormOpen] = useState(false);
+  const handleDeceasedChildOpen = () => setDeceasedChildFormOpen(true);
+  const handleDeceasedChildClose = () => setDeceasedChildFormOpen(false);
   const [activeStep, setActiveStep] = useState(0);
   const steps = ['Family', 'Beneficiary info'];
   const maritalStatus = (i) => {
@@ -100,19 +450,20 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
       },
     });
   };
-  const addLivingChildrenInformation = () => {
+  const addLivingChildrenInformation = (obj) => {
     setData({
       ...data,
       personalInfo: {
         ...data.personalInfo,
         livingChildrenInformation: [
           ...data.personalInfo.livingChildrenInformation,
-          {
-            firstName: '',
-            middleName: '',
-            lastName: '',
-            dateOfBirth: new Date(),
-          },
+          obj,
+          // {
+          //   firstName: '',
+          //   middleName: '',
+          //   lastName: '',
+          //   dateOfBirth: new Date(),
+          // },
         ],
       },
     });
@@ -148,33 +499,34 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
       },
     });
   };
-  const addDeceasedChildrenInformation = () => {
+  const addDeceasedChildrenInformation = (obj) => {
     setData({
       ...data,
       personalInfo: {
         ...data.personalInfo,
         deceasedChildrenInformation: [
           ...data.personalInfo.deceasedChildrenInformation,
-          {
-            firstName: '',
-            middleName: '',
-            lastName: '',
-            dateOfBirth: new Date(),
-            dateOfDeath: new Date(),
-            did_this_child_die_leaving_any_children_or_grandchildren: {
-              question: 'INDIVIDUAL ESTATE PLANNING DOCUMENTS',
-              options: [
-                {
-                  label: 'Yes',
-                  value: false,
-                },
-                {
-                  label: 'No',
-                  value: false,
-                },
-              ],
-            },
-          },
+          obj,
+          // {
+          //   firstName: '',
+          //   middleName: '',
+          //   lastName: '',
+          //   dateOfBirth: new Date(),
+          //   dateOfDeath: new Date(),
+          //   did_this_child_die_leaving_any_children_or_grandchildren: {
+          //     question: 'INDIVIDUAL ESTATE PLANNING DOCUMENTS',
+          //     options: [
+          //       {
+          //         label: 'Yes',
+          //         value: false,
+          //       },
+          //       {
+          //         label: 'No',
+          //         value: false,
+          //       },
+          //     ],
+          //   },
+          // },
         ],
       },
     });
@@ -1135,7 +1487,7 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
               <div className="mt-2">
                 <button
                   className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
-                  onClick={() => addLivingChildrenInformation()}
+                  onClick={() => handleLivingChildOpen()}
                 >
                   Add Living Child
                 </button>
@@ -1298,7 +1650,7 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
               <div className="mt-2">
                 <button
                   className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
-                  onClick={() => addDeceasedChildrenInformation()}
+                  onClick={() => handleDeceasedChildOpen()}
                 >
                   Add a Deceased Child
                 </button>
@@ -2776,6 +3128,26 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
           </button>
         </div>
       )}
+      <FormModal
+        open={livingChildFormOpen}
+        handleClose={handleLivingChildClose}
+      >
+        <NewLivingChild
+          handleLivingChildClose={handleLivingChildClose}
+          i={data?.personalInfo?.livingChildrenInformation?.length}
+          addLivingChildrenInformation={addLivingChildrenInformation}
+        />
+      </FormModal>
+      <FormModal
+        open={deceasedChildFormOpen}
+        handleClose={handleDeceasedChildClose}
+      >
+        <NewDeceasedChild
+          handleLivingChildClose={handleDeceasedChildClose}
+          i={data?.personalInfo?.livingChildrenInformation?.length}
+          addLivingChildrenInformation={addDeceasedChildrenInformation}
+        />
+      </FormModal>
     </div>
   );
 };
