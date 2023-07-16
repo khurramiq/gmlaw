@@ -6,6 +6,8 @@ import stateList from '../../../../data/stateList';
 import { useState } from 'react';
 import FormStepper from '../../../../components/formStepper';
 import FormModal from './FormModal';
+import LivingChildList from './LivingChildList';
+import DeceasedChildList from './DeceasedChildList';
 
 const NewLivingChild = ({
   handleLivingChildClose,
@@ -23,6 +25,22 @@ const NewLivingChild = ({
       ...obj,
       [name]: value,
     });
+  };
+  const handleAdd = () => {
+    if (obj.firstName === '') {
+      alert('First Name is Missing?');
+    } else if (obj.lastName === '') {
+      alert('Last Name is Missing?');
+    } else {
+      addLivingChildrenInformation(obj);
+      setObj({
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        dateOfBirth: new Date(),
+      });
+      handleLivingChildClose();
+    }
   };
   return (
     <>
@@ -91,18 +109,115 @@ const NewLivingChild = ({
       <div className="mt-2">
         <button
           className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
-          onClick={() => {
-            addLivingChildrenInformation(obj);
-            setObj({
-              firstName: '',
-              middleName: '',
-              lastName: '',
-              dateOfBirth: new Date(),
-            });
-            handleLivingChildClose();
-          }}
+          onClick={() => handleAdd()}
         >
           Add Living Child
+        </button>
+      </div>
+    </>
+  );
+};
+const UpdateLivingChild = ({
+  handleLivingChildClose,
+  i,
+  setEditLivingChildIndex,
+  data,
+  setData,
+}) => {
+  const handleLivingChildrenInformation = (i, name, value) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        livingChildrenInformation:
+          data.personalInfo.livingChildrenInformation.map((item, index) => {
+            if (i === index) {
+              return {
+                ...item,
+                [name]: value,
+              };
+            } else {
+              return item;
+            }
+          }),
+      },
+    });
+  };
+  const handleUpdate = () => {
+    if (data.personalInfo.livingChildrenInformation[i].firstName === '') {
+      alert('First Name is Missing?');
+    } else if (data.personalInfo.livingChildrenInformation[i].lastName === '') {
+      alert('Last Name is Missing?');
+    } else {
+      handleLivingChildClose();
+      setEditLivingChildIndex(-1);
+    }
+  };
+  return (
+    <>
+      <div className={`bg-slate-200 p-5 rounded-lg mb-3`}>
+        <div>
+          <i
+            className="far fa-times-circle cursor-pointer"
+            onClick={() => {
+              setEditLivingChildIndex(-1);
+              handleLivingChildClose();
+            }}
+          ></i>
+          <span className="font-bold ml-3">Child {i + 1}</span>
+        </div>
+        <h3 className="mb-1 font-bold">Name</h3>
+        <div className="mb-2 md:flex xs:block">
+          <input
+            type="text"
+            value={data.personalInfo.livingChildrenInformation[i].firstName}
+            name={'firstName'}
+            onChange={(e) =>
+              handleLivingChildrenInformation(i, e.target.name, e.target.value)
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="First"
+            required
+          />
+          <input
+            type="text"
+            value={data.personalInfo.livingChildrenInformation[i].middleName}
+            name={'middleName'}
+            onChange={(e) =>
+              handleLivingChildrenInformation(i, e.target.name, e.target.value)
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="Middle"
+            required
+          />
+          <input
+            type="text"
+            value={data.personalInfo.livingChildrenInformation[i].lastName}
+            name={'lastName'}
+            onChange={(e) =>
+              handleLivingChildrenInformation(i, e.target.name, e.target.value)
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="Last"
+            required
+          />
+        </div>
+        <h3 className="mb-1 font-bold">Date of Birth</h3>
+        <DatePicker
+          className="border bg-white border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full outline-none"
+          value={data.personalInfo.livingChildrenInformation[i].dateOfBirth}
+          name={'dateOfBirth'}
+          onChange={(date) =>
+            handleLivingChildrenInformation(i, 'dateOfBirth', date)
+          }
+        />
+      </div>
+      <div className="mt-2">
+        <button
+          className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
+          onClick={() => handleUpdate()}
+        >
+          Update Living Child
         </button>
       </div>
     </>
@@ -162,6 +277,22 @@ const NewDeceasedChild = ({
           ),
       },
     });
+  };
+  const handleAdd = () => {
+    if (obj.firstName === '') {
+      alert('First Name is Missing?');
+    } else if (obj.lastName === '') {
+      alert('Last Name is Missing?');
+    } else {
+      addLivingChildrenInformation(obj);
+      setObj({
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        dateOfBirth: new Date(),
+      });
+      handleLivingChildClose();
+    }
   };
   return (
     <>
@@ -318,32 +449,236 @@ const NewDeceasedChild = ({
       <div className="mt-2">
         <button
           className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
-          onClick={() => {
-            addLivingChildrenInformation(obj);
-            setObj({
-              firstName: '',
-              middleName: '',
-              lastName: '',
-              dateOfBirth: new Date(),
-              dateOfDeath: new Date(),
-              did_this_child_die_leaving_any_children_or_grandchildren: {
-                question: 'INDIVIDUAL ESTATE PLANNING DOCUMENTS',
-                options: [
-                  {
-                    label: 'Yes',
-                    value: false,
-                  },
-                  {
-                    label: 'No',
-                    value: false,
-                  },
-                ],
-              },
-            });
-            handleLivingChildClose();
-          }}
+          onClick={() => handleAdd()}
         >
           Add a Deceased Child
+        </button>
+      </div>
+    </>
+  );
+};
+const UpdateDeceasedChild = ({
+  handleDeceasedChildClose,
+  i,
+  setEditDeceasedChildIndex,
+  data,
+  setData,
+}) => {
+  const handleDeceasedChildrenInformation = (i, name, value) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        deceasedChildrenInformation:
+          data.personalInfo.deceasedChildrenInformation.map((item, index) => {
+            if (i === index) {
+              return {
+                ...item,
+                [name]: value,
+              };
+            } else {
+              return item;
+            }
+          }),
+      },
+    });
+  };
+  const handleDeceasedChildrenTrueFalse = (i, j) => {
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        deceasedChildrenInformation:
+          data.personalInfo.deceasedChildrenInformation.map((item, index) => {
+            if (i === index) {
+              return {
+                ...item,
+                did_this_child_die_leaving_any_children_or_grandchildren: {
+                  ...item.did_this_child_die_leaving_any_children_or_grandchildren,
+                  options:
+                    item.did_this_child_die_leaving_any_children_or_grandchildren.options.map(
+                      (item, ind) => {
+                        if (ind === j) {
+                          return {
+                            label: item.label,
+                            value: true,
+                          };
+                        } else {
+                          return {
+                            label: item.label,
+                            value: false,
+                          };
+                        }
+                      }
+                    ),
+                },
+              };
+            } else {
+              return item;
+            }
+          }),
+      },
+    });
+  };
+  const handleUpdate = () => {
+    if (data.personalInfo.deceasedChildrenInformation[i].firstName === '') {
+      alert('First Name is Missing?');
+    } else if (
+      data.personalInfo.deceasedChildrenInformation[i].lastName === ''
+    ) {
+      alert('Last Name is Missing?');
+    } else {
+      handleDeceasedChildClose();
+      setEditDeceasedChildIndex(-1);
+    }
+  };
+  return (
+    <>
+      <div className={`bg-slate-200 p-5 rounded-lg mb-3`}>
+        <div>
+          <i
+            className="far fa-times-circle cursor-pointer"
+            onClick={() => {
+              setEditDeceasedChildIndex(-1);
+              handleDeceasedChildClose();
+            }}
+          ></i>
+          <span className="font-bold ml-3">Child {i + 1}</span>
+        </div>
+        <h3 className="mb-1 font-bold">Name</h3>
+        <div className="mb-2 md:flex xs:block">
+          <input
+            type="text"
+            value={data.personalInfo.deceasedChildrenInformation[i].firstName}
+            name={'firstName'}
+            onChange={(e) =>
+              handleDeceasedChildrenInformation(
+                i,
+                e.target.name,
+                e.target.value
+              )
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="First"
+            required
+          />
+          <input
+            type="text"
+            value={data.personalInfo.deceasedChildrenInformation[i].middleName}
+            name={'middleName'}
+            onChange={(e) =>
+              handleDeceasedChildrenInformation(
+                i,
+                e.target.name,
+                e.target.value
+              )
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="Middle"
+            required
+          />
+          <input
+            type="text"
+            value={data.personalInfo.deceasedChildrenInformation[i].lastName}
+            name={'lastName'}
+            onChange={(e) =>
+              handleDeceasedChildrenInformation(
+                i,
+                e.target.name,
+                e.target.value
+              )
+            }
+            className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 md:w-[33%] xs:w-full xs:mb-2 md:mb-0"
+            placeholder="Last"
+            required
+          />
+        </div>
+        <div className="mb-2 md:flex xs:block">
+          <div className="md:w-[50%] xs:w-full">
+            <h3 className="mb-1 font-bold">Date of Birth</h3>
+            <DatePicker
+              className="border bg-white border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full outline-none"
+              value={
+                data.personalInfo.deceasedChildrenInformation[i].dateOfBirth
+              }
+              name={'dateOfBirth'}
+              onChange={(date) =>
+                handleDeceasedChildrenInformation(i, 'dateOfBirth', date)
+              }
+            />
+          </div>
+          <div className="md:w-[50%] xs:w-full md:ml-2 xs:ml-0">
+            <h3 className="mb-1 font-bold">Date of Death</h3>
+            <DatePicker
+              className="border bg-white border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 mr-2 w-full outline-none"
+              value={
+                data.personalInfo.deceasedChildrenInformation[i].dateOfDeath
+              }
+              name={'dateOfDeath'}
+              onChange={(date) =>
+                handleDeceasedChildrenInformation(i, 'dateOfDeath', date)
+              }
+            />
+          </div>
+        </div>
+        <h3 className="mb-1 mt-2 font-bold">
+          {/* Did this child die leaving any children or grandchildren? */}
+          {
+            data.personalInfo.deceasedChildrenInformation[i]
+              .did_this_child_die_leaving_any_children_or_grandchildren.question
+          }
+        </h3>
+        <div className="flex space-x-4">
+          <label className="flex items-center">
+            <input
+              type="radio"
+              checked={
+                data.personalInfo.deceasedChildrenInformation[i]
+                  .did_this_child_die_leaving_any_children_or_grandchildren
+                  .options[0].value
+              }
+              onChange={() => handleDeceasedChildrenTrueFalse(i, 0)}
+              className="form-radio h-5 w-5 text-blue-500"
+              name="radio-option"
+              value="option1"
+            />
+            <span className="ml-2 text-gray-700">
+              {
+                data.personalInfo.deceasedChildrenInformation[i]
+                  .did_this_child_die_leaving_any_children_or_grandchildren
+                  .options[0].label
+              }
+            </span>
+          </label>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              checked={
+                data.personalInfo.deceasedChildrenInformation[i]
+                  .did_this_child_die_leaving_any_children_or_grandchildren
+                  .options[1].value
+              }
+              onChange={() => handleDeceasedChildrenTrueFalse(i, 1)}
+              className="form-radio h-5 w-5 text-blue-500"
+              name="radio-option"
+              value="option2"
+            />
+            <span className="ml-2 text-gray-700">
+              {
+                data.personalInfo.deceasedChildrenInformation[i]
+                  .did_this_child_die_leaving_any_children_or_grandchildren
+                  .options[1].label
+              }
+            </span>
+          </label>
+        </div>
+      </div>
+      <div className="mt-2">
+        <button
+          className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
+          onClick={() => handleUpdate()}
+        >
+          Update Deceased Child
         </button>
       </div>
     </>
@@ -358,6 +693,8 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
   const handleDeceasedChildOpen = () => setDeceasedChildFormOpen(true);
   const handleDeceasedChildClose = () => setDeceasedChildFormOpen(false);
   const [activeStep, setActiveStep] = useState(0);
+  const [editLivingChildIndex, setEditLivingChildIndex] = useState(-1);
+  const [editDeceasedChildIndex, setEditDeceasedChildIndex] = useState(-1);
   const steps = ['Family', 'Beneficiary info'];
   const maritalStatus = (i) => {
     setData({
@@ -431,25 +768,6 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
       },
     });
   };
-  const handleLivingChildrenInformation = (i, name, value) => {
-    setData({
-      ...data,
-      personalInfo: {
-        ...data.personalInfo,
-        livingChildrenInformation:
-          data.personalInfo.livingChildrenInformation.map((item, index) => {
-            if (i === index) {
-              return {
-                ...item,
-                [name]: value,
-              };
-            } else {
-              return item;
-            }
-          }),
-      },
-    });
-  };
   const addLivingChildrenInformation = (obj) => {
     setData({
       ...data,
@@ -477,25 +795,6 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
           data.personalInfo.livingChildrenInformation.filter(
             (item, index) => i !== index
           ),
-      },
-    });
-  };
-  const handleDeceasedChildrenInformation = (i, name, value) => {
-    setData({
-      ...data,
-      personalInfo: {
-        ...data.personalInfo,
-        deceasedChildrenInformation:
-          data.personalInfo.deceasedChildrenInformation.map((item, index) => {
-            if (i === index) {
-              return {
-                ...item,
-                [name]: value,
-              };
-            } else {
-              return item;
-            }
-          }),
       },
     });
   };
@@ -540,43 +839,6 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
           data.personalInfo.deceasedChildrenInformation.filter(
             (item, index) => i !== index
           ),
-      },
-    });
-  };
-  const handleDeceasedChildrenTrueFalse = (i, j) => {
-    setData({
-      ...data,
-      personalInfo: {
-        ...data.personalInfo,
-        deceasedChildrenInformation:
-          data.personalInfo.deceasedChildrenInformation.map((item, index) => {
-            if (i === index) {
-              return {
-                ...item,
-                did_this_child_die_leaving_any_children_or_grandchildren: {
-                  ...item.did_this_child_die_leaving_any_children_or_grandchildren,
-                  options:
-                    item.did_this_child_die_leaving_any_children_or_grandchildren.options.map(
-                      (item, ind) => {
-                        if (ind === j) {
-                          return {
-                            label: item.label,
-                            value: true,
-                          };
-                        } else {
-                          return {
-                            label: item.label,
-                            value: false,
-                          };
-                        }
-                      }
-                    ),
-                },
-              };
-            } else {
-              return item;
-            }
-          }),
       },
     });
   };
@@ -1401,9 +1663,9 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
           {!data.personalInfo.livingChildren.options[0].value && (
             <div>
               <h3 className="mb-1 mt-3 font-bold">
-                Living Children Information
+                DeceasedLiving Children Information
               </h3>
-              {data.personalInfo.livingChildrenInformation.map((item, i) => (
+              {/* {data.personalInfo.livingChildrenInformation.map((item, i) => (
                 <div
                   key={i}
                   className={`${
@@ -1474,7 +1736,15 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
                     }
                   />
                 </div>
-              ))}
+              ))} */}
+              {data.personalInfo.livingChildrenInformation.length > 0 && (
+                <LivingChildList
+                  onDelete={removeLivingChildrenInformation}
+                  setEditLivingChildIndex={setEditLivingChildIndex}
+                  setLivingChildFormOpen={setLivingChildFormOpen}
+                  rows={data.personalInfo.livingChildrenInformation}
+                />
+              )}
               <div className="mt-2">
                 <button
                   className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
@@ -1490,7 +1760,7 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
               <h3 className="mb-1 mt-3 font-bold">
                 Deceased Children Information
               </h3>
-              {data.personalInfo.deceasedChildrenInformation.map((item, i) => (
+              {/* {data.personalInfo.deceasedChildrenInformation.map((item, i) => (
                 <div
                   key={i}
                   className={`${
@@ -1584,7 +1854,6 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
                     </div>
                   </div>
                   <h3 className="mb-1 mt-2 font-bold">
-                    {/* Did this child die leaving any children or grandchildren? */}
                     {
                       item
                         .did_this_child_die_leaving_any_children_or_grandchildren
@@ -1636,7 +1905,15 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
                     </label>
                   </div>
                 </div>
-              ))}
+              ))} */}
+              {data.personalInfo.deceasedChildrenInformation.length > 0 && (
+                <DeceasedChildList
+                  onDelete={removeDeceasedChildrenInformation}
+                  setEditDeceasedChildIndex={setEditDeceasedChildIndex}
+                  setDeceasedChildFormOpen={setDeceasedChildFormOpen}
+                  rows={data.personalInfo.deceasedChildrenInformation}
+                />
+              )}
               <div className="mt-2">
                 <button
                   className="border border-gray-500 text-gray-500 font-bold py-2 px-4 rounded"
@@ -1658,7 +1935,6 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
             Trustees.
           </p>
           <h3 className="mb-1 mt-2 font-bold">
-            {/* How many successor Trustees do you want to name? */}
             {
               data.personalInfo.how_many_successor_Trustees_do_you_want_to_name
                 .question
@@ -3122,21 +3398,41 @@ const Step11 = ({ notActionBtns, step, setStep, data, setData }) => {
         open={livingChildFormOpen}
         handleClose={handleLivingChildClose}
       >
-        <NewLivingChild
-          handleLivingChildClose={handleLivingChildClose}
-          i={data?.personalInfo?.livingChildrenInformation?.length}
-          addLivingChildrenInformation={addLivingChildrenInformation}
-        />
+        {editLivingChildIndex === -1 ? (
+          <NewLivingChild
+            handleLivingChildClose={handleLivingChildClose}
+            i={data?.personalInfo?.livingChildrenInformation?.length}
+            addLivingChildrenInformation={addLivingChildrenInformation}
+          />
+        ) : (
+          <UpdateLivingChild
+            handleLivingChildClose={handleLivingChildClose}
+            i={editLivingChildIndex}
+            setEditLivingChildIndex={setEditLivingChildIndex}
+            data={data}
+            setData={setData}
+          />
+        )}
       </FormModal>
       <FormModal
         open={deceasedChildFormOpen}
         handleClose={handleDeceasedChildClose}
       >
-        <NewDeceasedChild
-          handleLivingChildClose={handleDeceasedChildClose}
-          i={data?.personalInfo?.livingChildrenInformation?.length}
-          addLivingChildrenInformation={addDeceasedChildrenInformation}
-        />
+        {editDeceasedChildIndex === -1 ? (
+          <NewDeceasedChild
+            handleLivingChildClose={handleDeceasedChildClose}
+            i={data?.personalInfo?.livingChildrenInformation?.length}
+            addLivingChildrenInformation={addDeceasedChildrenInformation}
+          />
+        ) : (
+          <UpdateDeceasedChild
+            handleDeceasedChildClose={handleDeceasedChildClose}
+            i={editDeceasedChildIndex}
+            setEditDeceasedChildIndex={setEditDeceasedChildIndex}
+            data={data}
+            setData={setData}
+          />
+        )}
       </FormModal>
     </div>
   );
